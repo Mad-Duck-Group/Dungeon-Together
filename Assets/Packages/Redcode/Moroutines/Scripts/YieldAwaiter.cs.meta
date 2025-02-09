@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ffdd36e81fa37924c9e4ffbdfd74652e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 214820
+  packageName: Moroutines
+  packageVersion: 1.2.2
+  assetPath: Assets/Packages/Redcode/Moroutines/Scripts/YieldAwaiter.cs
+  uploadId: 548104

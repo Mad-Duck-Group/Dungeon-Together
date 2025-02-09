@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 632e7ee53c03e1b42acf695bf5905445
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 214820
+  packageName: Moroutines
+  packageVersion: 1.2.2
+  assetPath: Assets/Packages/Redcode/Moroutines/Scripts/MoroutinesOwner.cs
+  uploadId: 548104

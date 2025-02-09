@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 6939b1aed07834d46bdec4ae0dbaa9a8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 214820
+  packageName: Moroutines
+  packageVersion: 1.2.2
+  assetPath: Assets/Packages/Redcode/Moroutines/Demo/Scripts/CheckingMoroutineState.cs
+  uploadId: 548104

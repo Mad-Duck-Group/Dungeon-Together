@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4ecf9e086f4ac904b9cb8b82a5ceb6d5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 214820
+  packageName: Moroutines
+  packageVersion: 1.2.2
+  assetPath: Assets/Packages/Redcode/Moroutines/Resources/Redcode/Moroutines/Settings.asset
+  uploadId: 548104

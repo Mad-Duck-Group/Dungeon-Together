@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 95c07d2f6750bbc46a5d4dfa7ea308fc
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 127006
+  packageName: Await Extensions
+  packageVersion: 1.1.1
+  assetPath: Assets/Redcode/AwaitExtensions/Demo/Scenes/AwaitEnumerator.unity
+  uploadId: 491651

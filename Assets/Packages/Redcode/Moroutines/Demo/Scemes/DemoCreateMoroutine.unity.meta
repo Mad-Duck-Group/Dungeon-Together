@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 461ce7ae19c2fb845abf9595b07e7a3f
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 214820
+  packageName: Moroutines
+  packageVersion: 1.2.2
+  assetPath: Assets/Packages/Redcode/Moroutines/Demo/Scemes/DemoCreateMoroutine.unity
+  uploadId: 548104

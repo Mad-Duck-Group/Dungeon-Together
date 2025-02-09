@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 441e8d928e38c8e46942dd1521f43117
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 214820
+  packageName: Moroutines
+  packageVersion: 1.2.2
+  assetPath: Assets/Packages/Redcode/Moroutines/Scripts/Editor/MoroutinesEditor.asmdef
+  uploadId: 548104

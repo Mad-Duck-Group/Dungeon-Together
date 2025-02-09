@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d24e900b7f4c0f14c816d3ea94ad84ec
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 214820
+  packageName: Moroutines
+  packageVersion: 1.2.2
+  assetPath: Assets/Packages/Redcode/Moroutines/Moroutines.asmdef
+  uploadId: 548104

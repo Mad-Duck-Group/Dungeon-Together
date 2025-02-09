@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c28934b0fd3dfe049818f190ca828a50
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 275638
+  packageName: UI Assistant
+  packageVersion: 2.2.2
+  assetPath: Assets/UI Assistant/Samples/Animations/Submenu Show.anim
+  uploadId: 730083
