@@ -94,7 +94,7 @@ namespace UIAssistant
         {
             if (IsRevealing || stringToReveal.Length == 0) return;
 
-            Text.text = stringToReveal.Replace("…", "...");
+            Text.text = stringToReveal.Replace("ï¿½", "...");
 
             CreateRevealSections();
 
