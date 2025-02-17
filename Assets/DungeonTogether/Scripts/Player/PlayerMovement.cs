@@ -22,7 +22,8 @@ public class PlayerMovement : NetworkBehaviour
         {
             return;
         }
-        Movement();
+        movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        movementInput.Normalize();    
     }
     
     private void FixedUpdate()
@@ -31,16 +32,7 @@ public class PlayerMovement : NetworkBehaviour
         {
             return;
         } 
-        rigidbody2D.linearVelocity = movementInput * movementSpeed;
-    }
-
-    private void Movement()
-    {
-        movementInput.x = Input.GetAxisRaw("Horizontal");
-        movementInput.y = Input.GetAxisRaw("Vertical");
-        movementInput.Normalize();
-        
-        playerTransform.position += (Vector3)movementInput * movementSpeed * Time.deltaTime;
+        rigidbody2D.velocity = movementInput * movementSpeed;
     }
     
     private void HandleMove(Vector2 movement)
