@@ -17,6 +17,20 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float movementSpeed = 4f;
 
     private Vector2 movementInput;
+    
+    private NetworkVariable<bool> isFlipped = new NetworkVariable<bool>(false, 
+        NetworkVariableReadPermission.Everyone, // ทุกคนสามารถอ่านค่าได้
+        NetworkVariableWritePermission.Server); // เฉพาะ Server เท่านั้นที่แก้ไขค่าได้
+
+
+    private void Start()
+    {
+        // ทุกครั้งที่ค่าเปลี่ยน จะเรียก Callback และอัปเดต SpriteRenderer
+        isFlipped.OnValueChanged += (oldValue, newValue) =>
+        {
+            spriteRenderer.flipX = newValue;
+        };
+    }
 
     // Update is called once per frame
     void Update()
@@ -26,23 +40,25 @@ public class PlayerMovement : NetworkBehaviour
             return;
         }
         movementInput.Normalize();
-        
-        FlipSprite();
+        Flip();
     }
     
-    private void FlipSprite()
+    [Rpc(SendTo.Server)]
+    private void FlipServerRpc(bool flipX)
     {
-        if (movementInput.x > 0)
+        
+        
+        isFlipped.Value = flipX;
+    }
+
+    private void Flip()
+    {
+        if (movementInput.x != 0)
         {
-            playerGameObject.transform.localScale = new Vector3(0.6375f, 1, 1);
-            Debug.Log("Flip false");
-        }
-        else if (movementInput.x < 0)
-        {
-            playerGameObject.transform.localScale = new Vector3(-0.6375f, 1, 1);
-            Debug.Log("Flip true");
+            FlipServerRpc(movementInput.x < 0);
         }
     }
+    
     
     void FixedUpdate()
     {
