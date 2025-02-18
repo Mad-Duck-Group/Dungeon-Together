@@ -17,21 +17,8 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float movementSpeed = 4f;
 
     private Vector2 movementInput;
-    
-    private NetworkVariable<bool> isFlipped = new NetworkVariable<bool>(false, 
-        NetworkVariableReadPermission.Everyone, // ทุกคนสามารถอ่านค่าได้
-        NetworkVariableWritePermission.Server); // เฉพาะ Server เท่านั้นที่แก้ไขค่าได้
 
-
-    private void Start()
-    {
-        // ทุกครั้งที่ค่าเปลี่ยน จะเรียก Callback และอัปเดต SpriteRenderer
-        isFlipped.OnValueChanged += (oldValue, newValue) =>
-        {
-            spriteRenderer.flipX = newValue;
-        };
-    }
-
+    private NetworkVariable<bool> isFlipped = new();
     // Update is called once per frame
     void Update()
     {
@@ -46,16 +33,17 @@ public class PlayerMovement : NetworkBehaviour
     [Rpc(SendTo.Server)]
     private void FlipServerRpc(bool flipX)
     {
-        
-        
         isFlipped.Value = flipX;
     }
 
+    
     private void Flip()
     {
         if (movementInput.x != 0)
-        {
-            FlipServerRpc(movementInput.x < 0);
+        { 
+            var shouldFlip = movementInput.x < 0;
+            FlipServerRpc(shouldFlip);
+            spriteRenderer.flipX = shouldFlip;
         }
     }
     
@@ -74,8 +62,10 @@ public class PlayerMovement : NetworkBehaviour
     
     public override void OnNetworkSpawn()
     {
+        isFlipped.OnValueChanged += OnSpriteFlip;
         if (!IsOwner)
         {
+            spriteRenderer.flipX = isFlipped.Value;
             return;
         }
         inputReader.MoveEvent += HandleMove;
@@ -83,10 +73,20 @@ public class PlayerMovement : NetworkBehaviour
     
     public override void OnNetworkDespawn()
     {
+        isFlipped.OnValueChanged -= OnSpriteFlip;
         if (!IsOwner)
         {
             return;
         }
         inputReader.MoveEvent -= HandleMove;
+    }
+    
+    private void OnSpriteFlip(bool oldValue, bool newValue)
+    {
+        if (IsOwner)
+        {
+            return;
+        }
+        spriteRenderer.flipX = newValue;
     }
 }
