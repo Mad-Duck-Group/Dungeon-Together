@@ -350,6 +350,7 @@ MonoBehaviour:
   inputReader: {fileID: 11400000, guid: 84f84286f28d83a409aa9d6bd2f8f7eb, type: 2}
   playerTransform: {fileID: 8881605798776199879}
   rb2d: {fileID: 2364346117521812172}
+  playerGameObject: {fileID: 7207912155587763137}
   spriteRenderer: {fileID: 1615418131069437540}
   movementSpeed: 4
 --- !u!50 &2364346117521812172
@@ -386,7 +387,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7207912155587763137}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}

@@ -31,6 +31,6 @@ public class InputReader : ScriptableObject, IPlayerActions
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        throw new NotImplementedException();
+        Debug.Log("Attack");
     }
 }

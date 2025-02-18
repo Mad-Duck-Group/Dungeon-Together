@@ -10,6 +10,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private InputReader inputReader;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Rigidbody2D rb2d;
+    [SerializeField] private GameObject playerGameObject;
     [SerializeField] private SpriteRenderer spriteRenderer;
     
     [Header("Settings")]
@@ -24,10 +25,23 @@ public class PlayerMovement : NetworkBehaviour
         {
             return;
         }
-        movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         movementInput.Normalize();
         
-        Debug.Log($"Movement Input: {movementInput}");
+        FlipSprite();
+    }
+    
+    private void FlipSprite()
+    {
+        if (movementInput.x > 0)
+        {
+            playerGameObject.transform.localScale = new Vector3(0.6375f, 1, 1);
+            Debug.Log("Flip false");
+        }
+        else if (movementInput.x < 0)
+        {
+            playerGameObject.transform.localScale = new Vector3(-0.6375f, 1, 1);
+            Debug.Log("Flip true");
+        }
     }
     
     void FixedUpdate()
