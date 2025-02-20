@@ -1,0 +1,1625 @@
+fileFormatVersion: 2
+guid: 033f6ff573aaf114ca332102c321a667
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6406562060182035380
+    second: Base Floor-export_0
+  - first:
+      213: -9070325148958692245
+    second: Base Floor-export_1
+  - first:
+      213: 9036659142519323972
+    second: Base Floor-export_2
+  - first:
+      213: -3438799166746356656
+    second: Base Floor-export_3
+  - first:
+      213: -3655486850636843018
+    second: Base Floor-export_4
+  - first:
+      213: 6082397321855560339
+    second: Base Floor-export_5
+  - first:
+      213: 2528765966945962428
+    second: Base Floor-export_6
+  - first:
+      213: -2134396015984087221
+    second: Base Floor-export_7
+  - first:
+      213: 4466113063949562238
+    second: Base Floor-export_8
+  - first:
+      213: 5964875005389288152
+    second: Base Floor-export_9
+  - first:
+      213: -649028464271337312
+    second: Base Floor-export_10
+  - first:
+      213: 6037938330027461610
+    second: Base Floor-export_11
+  - first:
+      213: -4804561955361081401
+    second: Base Floor-export_12
+  - first:
+      213: -5350951949162744880
+    second: Base Floor-export_13
+  - first:
+      213: -5296506647423707543
+    second: Base Floor-export_14
+  - first:
+      213: -6938364907658879475
+    second: Base Floor-export_15
+  - first:
+      213: -4943912119816832600
+    second: Base Floor-export_16
+  - first:
+      213: -3229202471894486117
+    second: Base Floor-export_17
+  - first:
+      213: 108083616148900811
+    second: Base Floor-export_18
+  - first:
+      213: 7651833771033869128
+    second: Base Floor-export_19
+  - first:
+      213: -2926875661829459314
+    second: Base Floor-export_20
+  - first:
+      213: 8294839736104873904
+    second: Base Floor-export_21
+  - first:
+      213: -8653292641378923671
+    second: Base Floor-export_22
+  - first:
+      213: -1162995939450364950
+    second: Base Floor-export_23
+  - first:
+      213: 4188605531348182949
+    second: Base Floor-export_24
+  - first:
+      213: 623819643100194710
+    second: Base Floor-export_25
+  - first:
+      213: 7989054269706784143
+    second: Base Floor-export_26
+  - first:
+      213: 2512282544557891711
+    second: Base Floor-export_27
+  - first:
+      213: -6022877096811622930
+    second: Base Floor-export_28
+  - first:
+      213: -7052459114295558737
+    second: Base Floor-export_29
+  - first:
+      213: 2716722254482255532
+    second: Base Floor-export_30
+  - first:
+      213: 4851387590397136398
+    second: Base Floor-export_31
+  - first:
+      213: -3510154722545695007
+    second: Base Floor-export_32
+  - first:
+      213: -8560477313518668756
+    second: Base Floor-export_33
+  - first:
+      213: 9117340084974721704
+    second: Base Floor-export_34
+  - first:
+      213: -6939083094572820683
+    second: Base Floor-export_35
+  - first:
+      213: -2686827363001525906
+    second: Base Floor-export_36
+  - first:
+      213: 8126102130056502154
+    second: Base Floor-export_37
+  - first:
+      213: 3815083192007802688
+    second: Base Floor-export_38
+  - first:
+      213: 5631391214213028117
+    second: Base Floor-export_39
+  - first:
+      213: -2831999667942961195
+    second: Base Floor-export_40
+  - first:
+      213: 6542188949881741869
+    second: Base Floor-export_41
+  - first:
+      213: -3799334451139087053
+    second: Base Floor-export_42
+  - first:
+      213: -6499173131576318724
+    second: Base Floor-export_43
+  - first:
+      213: -4611706420012722859
+    second: Base Floor-export_44
+  - first:
+      213: -2746819604810293749
+    second: Base Floor-export_45
+  - first:
+      213: -1943208819321142312
+    second: Base Floor-export_46
+  - first:
+      213: 6469694384709918909
+    second: Base Floor-export_47
+  - first:
+      213: 6965874456812836055
+    second: Base Floor-export_48
+  - first:
+      213: 7987333900773514148
+    second: Base Floor-export_49
+  - first:
+      213: 3117966885534738381
+    second: Base Floor-export_50
+  - first:
+      213: 4073181086061930282
+    second: Base Floor-export_51
+  - first:
+      213: 7257201738639619204
+    second: Base Floor-export_52
+  - first:
+      213: 7161665370651167685
+    second: Base Floor-export_53
+  - first:
+      213: -6008999161941069211
+    second: Base Floor-export_54
+  - first:
+      213: 3171376602306428935
+    second: Base Floor-export_55
+  - first:
+      213: -5482978660334724613
+    second: Base Floor-export_56
+  - first:
+      213: -8562730166833791790
+    second: Base Floor-export_57
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 96
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Base Floor-export_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 463
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bb15a4104ea8e850800000000000000
+      internalID: 6406562060182035380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_1
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 463
+        width: 34
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6c660b655bbf1280800000000000000
+      internalID: -9070325148958692245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_2
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 463
+        width: 34
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44d7622ac99a86d70800000000000000
+      internalID: 9036659142519323972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_3
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 463
+        width: 34
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0549c2c906ee640d0800000000000000
+      internalID: -3438799166746356656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_4
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 463
+        width: 34
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f7fda2b31a154dc0800000000000000
+      internalID: -3655486850636843018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_5
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 463
+        width: 34
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39aecf76324096450800000000000000
+      internalID: 6082397321855560339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_6
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 407
+        width: 98
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb949ebbf3bf71320800000000000000
+      internalID: 2528765966945962428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_7
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 407
+        width: 98
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4f6249c12a1162e0800000000000000
+      internalID: -2134396015984087221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_8
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 407
+        width: 98
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e71f17f4b22dafd30800000000000000
+      internalID: 4466113063949562238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_9
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 399
+        width: 98
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d2b5d1d63e77c250800000000000000
+      internalID: 5964875005389288152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 415
+        width: 33
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a85df9ec003ef6f0800000000000000
+      internalID: -649028464271337312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_11
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 415
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeb8009bbe01bc350800000000000000
+      internalID: 6037938330027461610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_12
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 415
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c7b8557b54c25db0800000000000000
+      internalID: -4804561955361081401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_13
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 415
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d378f38d899db5b0800000000000000
+      internalID: -5350951949162744880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_14
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 415
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96690d924470f76b0800000000000000
+      internalID: -5296506647423707543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_15
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 415
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0ed4f4a0e9f5bf90800000000000000
+      internalID: -6938364907658879475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 367
+        width: 33
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a9b199fe12b36bb0800000000000000
+      internalID: -4943912119816832600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_17
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 367
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b937aeaf5719f23d0800000000000000
+      internalID: -3229202471894486117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_18
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 335
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcb489ae97dff7100800000000000000
+      internalID: 108083616148900811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_19
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 335
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84bbfca0646c03a60800000000000000
+      internalID: 7651833771033869128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_20
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 335
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e823be2c716a167d0800000000000000
+      internalID: -2926875661829459314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_21
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 367
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bf6353cac03d1370800000000000000
+      internalID: 8294839736104873904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_22
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 367
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96b8b15903459e780800000000000000
+      internalID: -8653292641378923671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_23
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 271
+        width: 98
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aebd6d9da553cdfe0800000000000000
+      internalID: -1162995939450364950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_24
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 335
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a7ae30e98ae02a30800000000000000
+      internalID: 4188605531348182949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_25
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 335
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 697e5e609a048a800800000000000000
+      internalID: 623819643100194710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_26
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 335
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8dc03dc782dede60800000000000000
+      internalID: 7989054269706784143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_27
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 287
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f70a9c3e9ab6dd220800000000000000
+      internalID: 2512282544557891711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_28
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 287
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eed05b6e0317a6ca0800000000000000
+      internalID: -6022877096811622930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_29
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 287
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fad72731dc1a02e90800000000000000
+      internalID: -7052459114295558737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_30
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 287
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cae20d32f7cb3b520800000000000000
+      internalID: 2716722254482255532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_31
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 287
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0e0c594f47935340800000000000000
+      internalID: 4851387590397136398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_32
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 287
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e60100a0ec694fc0800000000000000
+      internalID: -3510154722545695007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_33
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 207
+        width: 33
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c24fdeb1d33133980800000000000000
+      internalID: -8560477313518668756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_34
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 207
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8aa1955608c478e70800000000000000
+      internalID: 9117340084974721704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_35
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 207
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5379119b0bc63bf90800000000000000
+      internalID: -6939083094572820683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_36
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 239
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e699e7fafb876bad0800000000000000
+      internalID: -2686827363001525906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_37
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 207
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8b109655d6b5c070800000000000000
+      internalID: 8126102130056502154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_38
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 207
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04f303033f5e1f430800000000000000
+      internalID: 3815083192007802688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_39
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 207
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5195c621978b62e40800000000000000
+      internalID: 5631391214213028117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_40
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 143
+        width: 98
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5df4c3c7e47b2b8d0800000000000000
+      internalID: -2831999667942961195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_41
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 143
+        width: 98
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d22ef2b10368aca50800000000000000
+      internalID: 6542188949881741869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_42
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 143
+        width: 98
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33573f8427d064bc0800000000000000
+      internalID: -3799334451139087053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_43
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 239
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf461ae887c4ec5a0800000000000000
+      internalID: -6499173131576318724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_44
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 239
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 555d0c2e17defffb0800000000000000
+      internalID: -4611706420012722859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_45
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 239
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0e14396f1651e9d0800000000000000
+      internalID: -2746819604810293749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_46
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 159
+        width: 33
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d305f7dfd55805e0800000000000000
+      internalID: -1943208819321142312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_47
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 159
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db069f5d3c8f8c950800000000000000
+      internalID: 6469694384709918909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_48
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 159
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d4db4469e1cba060800000000000000
+      internalID: 6965874456812836055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_49
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 159
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ab5a023dd5b8de60800000000000000
+      internalID: 7987333900773514148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_50
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 159
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc7aab9dc5e354b20800000000000000
+      internalID: 3117966885534738381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_51
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 159
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a27af8cfd98d68830800000000000000
+      internalID: 4073181086061930282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_52
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 111
+        width: 33
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48436fee782c6b460800000000000000
+      internalID: 7257201738639619204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_53
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 111
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cb01e1e5b8536360800000000000000
+      internalID: 7161665370651167685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_54
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 111
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 562f1e8691fbb9ca0800000000000000
+      internalID: -6008999161941069211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_55
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 111
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 700c575973ef20c20800000000000000
+      internalID: 3171376602306428935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_56
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 111
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf993bf55fb88e3b0800000000000000
+      internalID: -5482978660334724613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base Floor-export_57
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 111
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dcb952d7421b2980800000000000000
+      internalID: -8562730166833791790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Base Floor-export_0: 6406562060182035380
+      Base Floor-export_1: -9070325148958692245
+      Base Floor-export_10: -649028464271337312
+      Base Floor-export_11: 6037938330027461610
+      Base Floor-export_12: -4804561955361081401
+      Base Floor-export_13: -5350951949162744880
+      Base Floor-export_14: -5296506647423707543
+      Base Floor-export_15: -6938364907658879475
+      Base Floor-export_16: -4943912119816832600
+      Base Floor-export_17: -3229202471894486117
+      Base Floor-export_18: 108083616148900811
+      Base Floor-export_19: 7651833771033869128
+      Base Floor-export_2: 9036659142519323972
+      Base Floor-export_20: -2926875661829459314
+      Base Floor-export_21: 8294839736104873904
+      Base Floor-export_22: -8653292641378923671
+      Base Floor-export_23: -1162995939450364950
+      Base Floor-export_24: 4188605531348182949
+      Base Floor-export_25: 623819643100194710
+      Base Floor-export_26: 7989054269706784143
+      Base Floor-export_27: 2512282544557891711
+      Base Floor-export_28: -6022877096811622930
+      Base Floor-export_29: -7052459114295558737
+      Base Floor-export_3: -3438799166746356656
+      Base Floor-export_30: 2716722254482255532
+      Base Floor-export_31: 4851387590397136398
+      Base Floor-export_32: -3510154722545695007
+      Base Floor-export_33: -8560477313518668756
+      Base Floor-export_34: 9117340084974721704
+      Base Floor-export_35: -6939083094572820683
+      Base Floor-export_36: -2686827363001525906
+      Base Floor-export_37: 8126102130056502154
+      Base Floor-export_38: 3815083192007802688
+      Base Floor-export_39: 5631391214213028117
+      Base Floor-export_4: -3655486850636843018
+      Base Floor-export_40: -2831999667942961195
+      Base Floor-export_41: 6542188949881741869
+      Base Floor-export_42: -3799334451139087053
+      Base Floor-export_43: -6499173131576318724
+      Base Floor-export_44: -4611706420012722859
+      Base Floor-export_45: -2746819604810293749
+      Base Floor-export_46: -1943208819321142312
+      Base Floor-export_47: 6469694384709918909
+      Base Floor-export_48: 6965874456812836055
+      Base Floor-export_49: 7987333900773514148
+      Base Floor-export_5: 6082397321855560339
+      Base Floor-export_50: 3117966885534738381
+      Base Floor-export_51: 4073181086061930282
+      Base Floor-export_52: 7257201738639619204
+      Base Floor-export_53: 7161665370651167685
+      Base Floor-export_54: -6008999161941069211
+      Base Floor-export_55: 3171376602306428935
+      Base Floor-export_56: -5482978660334724613
+      Base Floor-export_57: -8562730166833791790
+      Base Floor-export_6: 2528765966945962428
+      Base Floor-export_7: -2134396015984087221
+      Base Floor-export_8: 4466113063949562238
+      Base Floor-export_9: 5964875005389288152
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
