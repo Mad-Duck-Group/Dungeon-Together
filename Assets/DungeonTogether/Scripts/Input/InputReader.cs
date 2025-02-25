@@ -8,8 +8,8 @@ using static Controls;
 [CreateAssetMenu(fileName = "InputReader", menuName = "Input/Input Reader")]
 public class InputReader : ScriptableObject, IPlayerActions
 {
-    
-    public event Action<Vector2> MoveEvent;
+    public event Action<InputAction.CallbackContext> MoveEvent;
+    public event Action<InputAction.CallbackContext> AttackEvent;
     
     private Controls _controls;
     
@@ -31,11 +31,11 @@ public class InputReader : ScriptableObject, IPlayerActions
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        MoveEvent?.Invoke(context.ReadValue<Vector2>());
+        MoveEvent?.Invoke(context);
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        Debug.Log("Attack");
+        AttackEvent?.Invoke(context);
     }
 }
