@@ -20,6 +20,9 @@ namespace DungeonTogether.Scripts.Character.Module
             serializer.SerializeValue(ref invincible);
         }
     }
+    /// <summary>
+    /// Module responsible for handling character health.
+    /// </summary>
     public class CharacterHealthModule : CharacterModule
     {
         [Title("Health Settings")] 

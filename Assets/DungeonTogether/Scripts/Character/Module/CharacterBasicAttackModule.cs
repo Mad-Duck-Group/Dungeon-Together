@@ -9,16 +9,23 @@ namespace DungeonTogether.Scripts.Character.Module
     [Serializable]
     public struct BasicAttackPattern
     {
-        [Required] public DamageArea damageArea;
-        public float damage;
-        public float delay;
-        public float duration;
-        public float interval;
-        public float resetComboTime;
+        [Group("Area"), Required] public DamageArea damageArea;
+        [Group("Damage"), Min(0)] public float damage;
+        [Group("Timing"), Min(0)] public float delay;
+        [Group("Timing"), Min(0)] public float duration;
+        [Group("Timing"), Min(0)] public float interval;
+        [Group("Timing"), Min(0)] public float resetComboTime;
     }
+    /// <summary>
+    /// Module responsible for handling basic attacks.
+    /// </summary>
     public class CharacterBasicAttackModule : CharacterModule
     {
         [Title("Settings")]
+        [TableList(Draggable = true,
+            HideAddButton = false,
+            HideRemoveButton = false,
+            AlwaysExpanded = false)]
         [SerializeField] private List<BasicAttackPattern> basicAttackPatterns;
         
         [Title("Debug")]
@@ -66,14 +73,18 @@ namespace DungeonTogether.Scripts.Character.Module
             });
         }
 
-        private void OnHit(Collider2D collider)
+        /// <summary>
+        /// Method called when the damage area hits a collider.
+        /// </summary>
+        /// <param name="collider">Collider that was hit.</param>
+        protected virtual void OnHit(Collider2D collider)
         {
             if (!collider.TryGetComponent(out CharacterHub characterHub)) return;
             var healthModule = characterHub.FindModuleOfType<CharacterHealthModule>();
             if (healthModule && CurrentPattern != null) 
                 healthModule.ChangeHealth(-CurrentPattern.Value.damage);
         }
-
+        
         protected override void HandleInput()
         {
             if (characterHub.CharacterType is not CharacterType.Player) return;
@@ -110,22 +121,34 @@ namespace DungeonTogether.Scripts.Character.Module
             currentInterval = 0;
         }
         
+        /// <summary>
+        /// Method that triggers the attack.
+        /// </summary>
         public virtual void Attack()
         {
             if (!ModulePermitted) return;
             if (!attackReady) return;
             if (attackCoroutine != null) return;
             attackCoroutine = StartCoroutine(AttackCoroutine());
+            
         }
 
+        /// <summary>
+        /// Coroutine that handles the timing of the attack.
+        /// </summary>
+        /// <returns></returns>
         protected IEnumerator AttackCoroutine()
         {
             if (CurrentPattern == null) yield break;
             currentComboTime = 0;
+            CharacterStates.ActionStateEvent.Invoke(characterHub, characterHub.ActionState,
+                CharacterStates.CharacterActionState.Basic);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
             CurrentPattern.Value.damageArea.SetActive(true);
             yield return new WaitForSeconds(CurrentPattern.Value.duration);
             CurrentPattern.Value.damageArea.SetActive(false);
+            CharacterStates.ActionStateEvent.Invoke(characterHub, characterHub.ActionState,
+                CharacterStates.CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
             currentPatternIndex = (currentPatternIndex + 1) % basicAttackPatterns.Count;
             attackReady = false;

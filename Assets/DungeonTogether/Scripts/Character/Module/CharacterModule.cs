@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace DungeonTogether.Scripts.Character.Module
 {
+    /// <summary>
+    /// Inheritable character module class
+    /// </summary>
     public abstract class CharacterModule : NetworkBehaviour
     {
         #region Inspector

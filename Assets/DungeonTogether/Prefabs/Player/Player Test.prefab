@@ -95,7 +95,7 @@ MonoBehaviour:
   moduleEnabled: 1
   blockedMovementStates: 
   blockedActionStates: 
-  blockedConditionStates: 
+  blockedConditionStates: 01000000
   rb2d: {fileID: 2364346117521812172}
   spriteRenderer: {fileID: 1615418131069437540}
   movementSpeed: 4
@@ -274,8 +274,8 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   moduleEnabled: 1
   blockedMovementStates: 
-  blockedActionStates: 
-  blockedConditionStates: 
+  blockedActionStates: 0200000003000000
+  blockedConditionStates: 01000000
   basicAttackPatterns:
   - damageArea: {fileID: 5774796055207627135}
     damage: 5

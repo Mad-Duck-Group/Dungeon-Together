@@ -15,12 +15,17 @@ namespace DungeonTogether.Scripts.Character
         Player,
         NPC
     }
+    
+    /// <summary>
+    ///  Character hub is the main class that manages the character and its modules.
+    /// </summary>
     [DeclareTabGroup("Debug Tab")]
     public class CharacterHub : NetworkBehaviour, 
         IEventBusHandler<CharacterStates.MovementStateEvent>,
         IEventBusHandler<CharacterStates.ActionStateEvent>,
         IEventBusHandler<CharacterStates.ConditionStateEvent>
     {
+        [InfoBox("Character Hub is the main class that manages the character and its modules.")]
         #region Inspector
         [Title("References")] 
         [SerializeField, 

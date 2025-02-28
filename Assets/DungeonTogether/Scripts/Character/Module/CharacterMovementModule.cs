@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace DungeonTogether.Scripts.Character.Module
 {
+    /// <summary>
+    /// Module responsible for handling character movement.
+    /// </summary>
     public class CharacterMovementModule : CharacterModule
     {
         [Title("References")]
@@ -37,6 +40,9 @@ namespace DungeonTogether.Scripts.Character.Module
             isFlipped.Value = flipX;
         }
     
+        /// <summary>
+        /// Flips the sprite based on the direction of movement.
+        /// </summary>
         private void Flip()
         {
             if (moveDirection.x != 0)
@@ -64,6 +70,10 @@ namespace DungeonTogether.Scripts.Character.Module
             
             Flip();
         }
+        /// <summary>
+        /// Sets the direction of movement.
+        /// </summary>
+        /// <param name="direction">Direction of movement.</param>
         public void SetDirection(Vector2 direction)
         {
             moveDirection = direction;
@@ -73,6 +83,7 @@ namespace DungeonTogether.Scripts.Character.Module
                     ? CharacterStates.CharacterMovementState.Walking
                     : CharacterStates.CharacterMovementState.Idle);
         }
+        
         protected override void HandleInput()
         {
             if (characterHub.CharacterType is not CharacterType.Player) return;

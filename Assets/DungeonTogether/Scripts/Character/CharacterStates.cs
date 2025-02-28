@@ -19,7 +19,7 @@ namespace DungeonTogether.Scripts.Character
             public CharacterMovementState newState;
 
             private static MovementStateEvent _eventData;
-
+            
             public static void Invoke(CharacterHub characterHub, CharacterMovementState previousState, CharacterMovementState newState)
             {
                 _eventData.characterHub = characterHub;

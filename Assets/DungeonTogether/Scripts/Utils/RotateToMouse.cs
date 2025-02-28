@@ -2,9 +2,11 @@ using UnityEngine;
 
 namespace DungeonTogether.Scripts.Utils
 {
+    /// <summary>
+    /// Rotates the object to face the mouse cursor.
+    /// </summary>
     public class RotateToMouse : MonoBehaviour
     {
-        // Update is called once per frame
         void Update()
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
