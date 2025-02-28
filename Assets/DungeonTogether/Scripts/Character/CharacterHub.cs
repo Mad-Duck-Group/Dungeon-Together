@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DungeonTogether.Scripts.Character.Module;
+using DungeonTogether.Scripts.Utils;
 using TriInspector;
 using Unity.Netcode;
 using UnityEngine;
@@ -13,30 +15,57 @@ namespace DungeonTogether.Scripts.Character
         Player,
         NPC
     }
-    public class CharacterHub : NetworkBehaviour
+    [DeclareTabGroup("Debug Tab")]
+    public class CharacterHub : NetworkBehaviour, 
+        IEventBusHandler<CharacterStates.MovementStateEvent>,
+        IEventBusHandler<CharacterStates.ActionStateEvent>,
+        IEventBusHandler<CharacterStates.ConditionStateEvent>
     {
-        [Header("References")] 
+        #region Inspector
+        [Title("References")] 
         [SerializeField, 
-         Tooltip("GameObject that contains the modules. Leave empty if the module is in the same object that this script is in.")]
+         PropertyTooltip("GameObject that contains the modules. Leave empty if the module is in the same object that this script is in.")]
         private GameObject moduleParent;
-        [field: SerializeField] public CharacterType CharacterType { get; private set; }
+        
+        [Title("Character Settings")] 
+        [field: SerializeField, 
+                PropertyTooltip("Character type, used to determine if this character is a player or an NPC.")]
+        public CharacterType CharacterType { get; private set; }
+        
+        [Title("Debug")] 
+        [SerializeField, DisplayAsString, HideLabel]
+        private string debugSeparator = string.Empty; //Ignore this, it's just to separate the debug properties
+        [SerializeField, ReadOnly, Group("Debug Tab"), Tab("Module"),
+         PropertyTooltip("List of active modules in this character.")]
+        private List<CharacterModule> modules = new();
+        [field: SerializeField, DisplayAsString, GroupNext("Debug Tab"), Tab("State"),
+                PropertyTooltip("Current movement state of the character.")] 
+        public CharacterStates.CharacterMovementState MovementState { get; private set; } = CharacterStates.CharacterMovementState.Idle;
+        [field: SerializeField, DisplayAsString, Tab("State"),
+                PropertyTooltip("Current action state of the character.")]
+        public CharacterStates.CharacterActionState ActionState { get; private set; } = CharacterStates.CharacterActionState.None;
+        [field: SerializeField, DisplayAsString, Tab("State"),
+                PropertyTooltip("Current condition state of the character.")] 
+        public CharacterStates.CharacterConditionState ConditionState { get; private set; } = CharacterStates.CharacterConditionState.Normal;
+        #endregion
+        
+        #region Properties
+        public PlayerInput PlayerInput { get; private set; }
+        #endregion
 
-        [SerializeField, ReadOnly] private List<CharacterModule> modules = new();
-        private PlayerInput _playerInput;
-        public PlayerInput PlayerInput => _playerInput;
-
+        #region Life Cycle
         public override void OnNetworkSpawn()
         {
             Initialize();
-        }
-        protected virtual void Start()
-        {
-            //Initialize();
+            Subscribe();
         }
 
+        /// <summary>
+        /// Initializes the character hub and its modules.
+        /// </summary>
         protected virtual void Initialize()
         {
-            if (!IsOwner) return;
+            //if (!IsOwner) return;
             if (!moduleParent)
             {
                 moduleParent = gameObject;
@@ -47,13 +76,27 @@ namespace DungeonTogether.Scripts.Character
                 module.Initialize(this);
                 this.modules.Add(module);
             }
-            _playerInput = GetComponent<PlayerInput>();
-            if (!_playerInput && CharacterType == CharacterType.Player)
+            PlayerInput = GetComponent<PlayerInput>();
+            if (!PlayerInput && CharacterType == CharacterType.Player)
             {
                 Debug.LogError($"{nameof(PlayerInput)} component not found in player object.");
             }
         }
+
+        /// <summary>
+        /// Subscribes to the events that the character hub needs to listen to.
+        /// </summary>
+        protected virtual void Subscribe()
+        {
+            if (!IsOwner) return;
+            this.Subscribe<CharacterStates.MovementStateEvent>();
+            this.Subscribe<CharacterStates.ActionStateEvent>();
+            this.Subscribe<CharacterStates.ConditionStateEvent>();
+        }
         
+        /// <summary>
+        /// Shuts down the character hub and its modules.
+        /// </summary>
         protected virtual void Shutdown()
         {
             if (!IsOwner) return;
@@ -63,15 +106,55 @@ namespace DungeonTogether.Scripts.Character
             }
         }
 
+        /// <summary>
+        /// Unsubscribes from the events that the character hub was listening to.
+        /// </summary>
+        protected virtual void Unsubscribe()
+        {
+            if (!IsOwner) return;
+            this.Unsubscribe<CharacterStates.MovementStateEvent>();
+            this.Unsubscribe<CharacterStates.ActionStateEvent>();
+            this.Unsubscribe<CharacterStates.ConditionStateEvent>();
+        }
+
         public override void OnDestroy()
         {
             base.OnDestroy();
             Shutdown();
+            Unsubscribe();
+        }
+        #endregion
+        
+        #region Event Handlers
+        public void OnHandleEvent(CharacterStates.MovementStateEvent eventData)
+        {
+            if (!IsOwner || eventData.characterHub != this) return;
+            MovementState = eventData.newState;
         }
 
+        public void OnHandleEvent(CharacterStates.ActionStateEvent eventData)
+        {
+            if (!IsOwner || eventData.characterHub != this) return;
+            ActionState = eventData.newState;
+        }
+
+        public void OnHandleEvent(CharacterStates.ConditionStateEvent eventData)
+        {
+            if (!IsOwner || eventData.characterHub != this) return;
+            ConditionState = eventData.newState;
+        }
+        #endregion
+
+        #region Utility
+        /// <summary>
+        /// Finds a module of the specified type in the character hub.
+        /// </summary>
+        /// <typeparam name="T">Type of the module to find.</typeparam>
+        /// <returns>The module of the specified type if found, null otherwise.</returns>
         public T FindModuleOfType<T>() where T : CharacterModule
         {
             return modules.Where(module => module is T).Cast<T>().FirstOrDefault();
         }
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using DungeonTogether.Scripts.Utils;
 using MoreMountains.Tools;
 using TriInspector;
 using Unity.Netcode;
@@ -6,7 +7,6 @@ using UnityEngine;
 
 namespace DungeonTogether.Scripts.Character.Module
 {
-    
     [Serializable]
     public record HealthData : INetworkSerializable
     {
@@ -22,15 +22,21 @@ namespace DungeonTogether.Scripts.Character.Module
     }
     public class CharacterHealthModule : CharacterModule
     {
-        [Header("Settings")] [SerializeField] private NetworkVariable<HealthData> healthData =
+        [Title("Health Settings")] 
+        [SerializeField] 
+        private NetworkVariable<HealthData> healthData =
             new(default, NetworkVariableReadPermission.Everyone,
                 NetworkVariableWritePermission.Server);
-        [SerializeField] private float startingHealth = 100;
-        [SerializeField] private bool useMMHealthBar = true;
-        [SerializeField, ShowIf(nameof(useMMHealthBar))] private MMHealthBar healthBar;
+        [SerializeField] 
+        private float startingHealth = 100;
+        [SerializeField] 
+        private bool useMMHealthBar = true;
+        [SerializeField, ShowIf(nameof(useMMHealthBar))] 
+        private MMHealthBar healthBar;
 
-        [Header("Debug")] 
-        [SerializeField] private float testAmount;
+        [Title("Debug")] 
+        [SerializeField] 
+        private float testAmount;
         [Button("Test Change Health")] 
         private void TestChangeHealth() => ChangeHealth(testAmount);
 
@@ -41,6 +47,7 @@ namespace DungeonTogether.Scripts.Character.Module
             if (!IsOwner)
             {
                 UpdateHealthBar();
+                return;
             }
             HealthDataInitServerRpc();
         }
@@ -65,7 +72,7 @@ namespace DungeonTogether.Scripts.Character.Module
 
         public virtual void ChangeHealth(float amount)
         {
-            if (!moduleEnabled) return;
+            if (!ModulePermitted) return;
             if (healthData.Value.invincible) return;
             ChangeHealthServerRpc(amount);
             if (healthData.Value.currentHealth <= 0)
@@ -87,7 +94,7 @@ namespace DungeonTogether.Scripts.Character.Module
 
         public virtual void UpdateHealthBar()
         {
-            if (!moduleEnabled) return;
+            if (!ModulePermitted) return;
             if (useMMHealthBar)
             {
                 healthBar.UpdateBar(healthData.Value.currentHealth, 0, healthData.Value.maxHealth, true);
@@ -100,8 +107,9 @@ namespace DungeonTogether.Scripts.Character.Module
         
         protected virtual void Die()
         {
-            if (!moduleEnabled) return;
-            Debug.Log("Character died.");
+            if (!ModulePermitted) return;
+            CharacterStates.ConditionStateEvent.Invoke(characterHub, characterHub.ConditionState,
+                CharacterStates.CharacterConditionState.Dead);
         }
     }
 }

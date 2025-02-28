@@ -1,3 +1,4 @@
+using TriInspector;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -5,11 +6,11 @@ namespace DungeonTogether.Scripts.Character.Module
 {
     public class CharacterMovementModule : CharacterModule
     {
-        [Header("References")]
+        [Title("References")]
         [SerializeField] private Rigidbody2D rb2d;
         [SerializeField] private SpriteRenderer spriteRenderer;
     
-        [Header("Settings")]
+        [Title("Movement Settings")]
         [SerializeField] private float movementSpeed = 4f;
 
         private Vector2 moveDirection;
@@ -60,12 +61,17 @@ namespace DungeonTogether.Scripts.Character.Module
             if (!IsOwner) return;
             base.UpdateModule();
             rb2d.linearVelocity = moveDirection * movementSpeed;
+            
             Flip();
         }
         public void SetDirection(Vector2 direction)
         {
             moveDirection = direction;
             moveDirection.Normalize();
+            CharacterStates.MovementStateEvent.Invoke(characterHub, characterHub.MovementState,
+                moveDirection.magnitude > 0
+                    ? CharacterStates.CharacterMovementState.Walking
+                    : CharacterStates.CharacterMovementState.Idle);
         }
         protected override void HandleInput()
         {
