@@ -272,11 +272,12 @@ MonoBehaviour:
   - firePoint: {fileID: 6739368199471239660}
     bulletPrefab: {fileID: 6223688861620892961, guid: 7c9b7ecb849b3e246ba17305993aea8e,
       type: 3}
-    rangeAttack: {fileID: -4834336959574245418, guid: 7c9b7ecb849b3e246ba17305993aea8e,
+    rangeAttackPrefab: {fileID: -4834336959574245418, guid: 7c9b7ecb849b3e246ba17305993aea8e,
       type: 3}
     damage: 10
     projectileSpeed: 10
     delay: 0
+    hasDuration: 0
     duration: 0
     interval: 0.1
     resetComboTime: 0.1

@@ -5,6 +5,7 @@ using DungeonTogether.Scripts.Utils;
 using TriInspector;
 using UnityEditor.Tilemaps;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DungeonTogether.Scripts.Character.Module
 {
@@ -13,11 +14,12 @@ namespace DungeonTogether.Scripts.Character.Module
     {
         [Group("FirePoint"), Required] public Transform firePoint;
         [Group("BulletPrefab"), Required] public GameObject bulletPrefab;
-        [Group("RangeArea"), Required] public RangeAttack rangeAttack;
+        [FormerlySerializedAs("rangeAttack")] [Group("RangeArea"), Required] public RangeAttack rangeAttackPrefab;
         [Group("Damage"), Min(0)] public float damage;
         [Group("Speed"), Min(0)] public float projectileSpeed;
         [Group("Timing"), Min(0)] public float delay;
-        [Group("Timing"), Min(0)] public float duration;
+        [Group("Timing"), Min(0)] public bool hasDuration;
+        [Group("Timing"), Min(0), ShowIf(nameof(hasDuration))] public float duration;
         [Group("Timing"), Min(0)] public float interval;
         [Group("Timing"), Min(0)] public float resetComboTime;
     }
@@ -55,10 +57,14 @@ namespace DungeonTogether.Scripts.Character.Module
             currentPatternIndex = 0;
             currentInterval = 0;
             previousPatternIndex = -1;
-            rangeAttackPatterns.ForEach(pattern =>
-            {
-                pattern.rangeAttack.OnRangeHitEvent += OnRangeHit;
-            });
+        }
+        
+        public override void Shutdown()
+        {
+            base.Shutdown();
+            currentPatternIndex = 0;
+            currentInterval = 0;
+            previousPatternIndex = -1;
         }
 
         /// <summary>
@@ -71,7 +77,6 @@ namespace DungeonTogether.Scripts.Character.Module
             var healthModule = characterHub.FindModuleOfType<CharacterHealthModule>();
             if (healthModule && CurrentPattern != null) 
                 healthModule.ChangeHealth(-CurrentPattern.Value.damage);
-            Destroy(gameObject);
         }
         
         // Input
@@ -134,17 +139,17 @@ namespace DungeonTogether.Scripts.Character.Module
             CharacterStates.ActionStateEvent.Invoke(characterHub, characterHub.ActionState,
                 CharacterStates.CharacterActionState.Basic);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
-
-            CurrentPattern.Value.rangeAttack.SetActive(true);
             //Create bullet
             Debug.Log("Bullet has spawn");
-            GameObject projectile = Instantiate(CurrentPattern.Value.bulletPrefab , CurrentPattern.Value.firePoint.transform.position, Quaternion.identity);
-            RangeAttack proj = projectile.GetComponent<RangeAttack>();
-            proj.SetDirection(CurrentPattern.Value.firePoint.right, CurrentPattern.Value.projectileSpeed);
-            
-            yield return new WaitForSeconds(CurrentPattern.Value.duration);
-            
-
+            RangeAttack rangeAttack = Instantiate(CurrentPattern.Value.bulletPrefab , CurrentPattern.Value.firePoint.transform.position, Quaternion.identity).GetComponent<RangeAttack>();
+            rangeAttack.SetDirection(CurrentPattern.Value.firePoint.right, CurrentPattern.Value.projectileSpeed);
+            rangeAttack.OnHitEvent += OnRangeHit;
+            if (CurrentPattern.Value.hasDuration)
+            {
+                rangeAttack.SetActive(true);
+                yield return new WaitForSeconds(CurrentPattern.Value.duration);
+                rangeAttack.SetActive(false);
+            }
             CharacterStates.ActionStateEvent.Invoke(characterHub, characterHub.ActionState,
                 CharacterStates.CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
