@@ -15,6 +15,7 @@ namespace DungeonTogether.Scripts.Character.Module
         [Group("BulletPrefab"), Required] public GameObject bulletPrefab;
         [Group("RangeArea"), Required] public RangeAttack rangeAttack;
         [Group("Damage"), Min(0)] public float damage;
+        [Group("Speed"), Min(0)] public float projectileSpeed;
         [Group("Timing"), Min(0)] public float delay;
         [Group("Timing"), Min(0)] public float duration;
         [Group("Timing"), Min(0)] public float interval;
@@ -136,7 +137,11 @@ namespace DungeonTogether.Scripts.Character.Module
 
             CurrentPattern.Value.rangeAttack.SetActive(true);
             //Create bullet
-            Instantiate(CurrentPattern.Value.bulletPrefab , CurrentPattern.Value.firePoint.transform.position, Quaternion.identity);
+            Debug.Log("Bullet has spawn");
+            GameObject projectile = Instantiate(CurrentPattern.Value.bulletPrefab , CurrentPattern.Value.firePoint.transform.position, Quaternion.identity);
+            RangeAttack proj = projectile.GetComponent<RangeAttack>();
+            proj.SetDirection(CurrentPattern.Value.firePoint.right, CurrentPattern.Value.projectileSpeed);
+            
             yield return new WaitForSeconds(CurrentPattern.Value.duration);
             
 

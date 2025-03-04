@@ -5,14 +5,17 @@ using TriInspector;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class RangeAttack : CharacterModule
+public class RangeAttack : MonoBehaviour
 {
     [SerializeField] private LayerMask targetLayer;
     
     private Collider2D damageCollider;
     
     private int damage;
-    
+
+    private float speed;
+
+    private Vector3 direction;
     public delegate void OnRangeHit(Collider2D collider);
     public event OnRangeHit OnRangeHitEvent;
     
@@ -20,6 +23,11 @@ public class RangeAttack : CharacterModule
     {
         damageCollider = GetComponent<Collider2D>();
         damageCollider.isTrigger = true;
+    }
+
+    void Update()
+    {
+        transform.position += direction * speed * Time.deltaTime;
     }
     
     public void SetActive(bool active)
@@ -31,11 +39,14 @@ public class RangeAttack : CharacterModule
     {
         if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer))
         {
-            
-            Destroy(gameObject);
-            
             OnRangeHitEvent?.Invoke(other);
-            
         }
+    }
+
+    public void SetDirection(Vector3 dir, float projectileSpeed)
+    {
+        direction = dir.normalized;
+        speed = projectileSpeed;
+        Debug.Log($"Direction : {direction}, Speed : {speed}");
     }
 }
