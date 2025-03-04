@@ -390,7 +390,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3924217345497714389, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1515412868}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6906e0ecd1b77c42a18d64c414dd4b9, type: 3}
 --- !u!1 &519420028
@@ -1250,6 +1254,61 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1326390021}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1515412867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1515412868}
+  - component: {fileID: 1515412869}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1515412868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515412867}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2037757827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1515412869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515412867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be19c0da55f3b6441832c4e5046f46e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  moduleEnabled: 1
+  blockedMovementStates: 
+  blockedActionStates: 
+  blockedConditionStates: 
+  basicAttackPatterns: []
+  currentPatternIndex: 0
+  previousPatternIndex: -1
+  attackReady: 0
+  currentInterval: 0
+  currentComboTime: 0
 --- !u!1 &1568649683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,7 +1372,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1568649684}
-    PlayerPrefab: {fileID: 7207912155587763137, guid: dc72b3c417c94a24180223a9fe7e3f91,
+    PlayerPrefab: {fileID: 7207912155587763137, guid: 472485b26aa49c84f8afb112375f542b,
       type: 3}
     Prefabs:
       NetworkPrefabsLists:
@@ -1492,6 +1551,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1938502120}
   m_CullTransparentMesh: 1
+--- !u!4 &2037757827 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3924217345497714389, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 457109398}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2068121597
 GameObject:
   m_ObjectHideFlags: 0
