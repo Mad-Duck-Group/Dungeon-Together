@@ -64,7 +64,7 @@ namespace DungeonTogether.Scripts.Character.Module
         /// <summary>
         /// Unity fixed update method. Note: It is not recommended to override this method. Use FixedUpdateModule instead.
         /// </summary>
-        protected void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             if (!IsOwner) return;
             if (!ModulePermitted) return;
@@ -74,7 +74,7 @@ namespace DungeonTogether.Scripts.Character.Module
         /// <summary>
         /// Unity late update method. Note: It is not recommended to override this method. Use LateUpdateModule instead.
         /// </summary>
-        protected void LateUpdate()
+        protected virtual void LateUpdate()
         {
             if (!IsOwner) return;
             if (!ModulePermitted) return;
@@ -133,6 +133,14 @@ namespace DungeonTogether.Scripts.Character.Module
         /// Update module using late update rate
         /// </summary>
         protected virtual void LateUpdateModule()
+        {
+            UpdateAnimator();
+        }
+
+        /// <summary>
+        /// Update animator
+        /// </summary>
+        protected virtual void UpdateAnimator()
         {
             
         }

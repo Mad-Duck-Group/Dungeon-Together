@@ -1,3 +1,4 @@
+using DungeonTogether.Scripts.Utils;
 using TriInspector;
 using Unity.Netcode;
 using UnityEngine;
@@ -12,26 +13,38 @@ namespace DungeonTogether.Scripts.Character.Module
         [Title("References")]
         [SerializeField] private Rigidbody2D rb2d;
         [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private Animator animator;
     
         [Title("Movement Settings")]
         [SerializeField] private float movementSpeed = 4f;
-
-        private Vector2 moveDirection;
+        [SerializeField, ReadOnly] private Vector2 moveDirection;
 
         private NetworkVariable<bool> isFlipped = new();
-  
+        private static readonly int IsMoving = Animator.StringToHash("IsMoving");
+
         public override void OnNetworkSpawn()
         {
             isFlipped.OnValueChanged += OnSpriteFlip;
+            EventBus<CharacterStates.ConditionStateEvent>.Event += OnConditionStateChange;
             if (!IsOwner)
             {
                 spriteRenderer.flipX = isFlipped.Value;
             }
+            
         }
-    
+        private void OnConditionStateChange(CharacterStates.ConditionStateEvent eventData)
+        {
+            if (eventData.characterHub != characterHub) return;
+            if (eventData.newState != CharacterStates.CharacterConditionState.Dead) return;
+            rb2d.linearVelocity = Vector2.zero;
+            moveDirection = Vector2.zero;
+            characterHub.ChangeMovementState(CharacterStates.CharacterMovementState.Idle);
+        }
+
         public override void OnNetworkDespawn()
         {
             isFlipped.OnValueChanged -= OnSpriteFlip;
+            EventBus<CharacterStates.ConditionStateEvent>.Event -= OnConditionStateChange;
         }
 
         [Rpc(SendTo.Server)]
@@ -69,12 +82,28 @@ namespace DungeonTogether.Scripts.Character.Module
             rb2d.linearVelocity = moveDirection * movementSpeed;
             Flip();
         }
+
+        protected override void LateUpdate()
+        {
+            if (!IsOwner) return;
+            LateUpdateModule();
+        }
+
+        protected override void LateUpdateModule()
+        {
+            if (moveDirection.magnitude <= 0)
+            {
+                rb2d.linearVelocity = Vector2.zero;
+            }
+            base.LateUpdateModule();
+        }
         /// <summary>
         /// Sets the direction of movement.
         /// </summary>
         /// <param name="direction">Direction of movement.</param>
         public void SetDirection(Vector2 direction)
         {
+            if (!ModulePermitted) return;
             moveDirection = direction;
             moveDirection.Normalize();
             var state = moveDirection.magnitude > 0
@@ -82,12 +111,19 @@ namespace DungeonTogether.Scripts.Character.Module
                 : CharacterStates.CharacterMovementState.Idle;
             characterHub.ChangeMovementState(state);
         }
-        
+
         protected override void HandleInput()
         {
             if (characterHub.CharacterType is not CharacterType.Player) return;
             base.HandleInput();
             SetDirection(PlayerInput.MovementInput);
+        }
+
+        protected override void UpdateAnimator()
+        {
+            if (!IsOwner) return;
+            base.UpdateAnimator();
+            animator.SetBool(IsMoving, moveDirection.magnitude > 0);
         }
     }
 }
