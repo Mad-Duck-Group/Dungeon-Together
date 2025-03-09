@@ -163,6 +163,7 @@ namespace DungeonTogether.Scripts.Character.Module
             SpawnProjectileRPC();
 
             ProjectileDamageArea projectileDamageArea = Instantiate(CurrentPattern.Value.bulletPrefab, CurrentPattern.Value.firePoint.transform.position, Quaternion.identity).GetComponent<ProjectileDamageArea>();
+            projectileDamageArea.SetPassThroughLayer(CurrentPattern.Value.passThroughLayer);
             projectileDamageArea.SetDirection(CurrentPattern.Value.firePoint.right, CurrentPattern.Value.projectileSpeed);
             projectileDamageArea.OnHitEvent += OnRangeHit;
             if (CurrentPattern.Value.hasDuration)
