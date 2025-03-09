@@ -26,7 +26,6 @@ public class RangeAttack : DamageArea
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")) return;
         Destroy(gameObject);
-
     }
     
     public void SetDirection(Vector3 dir, float projectileSpeed)
