@@ -25,7 +25,7 @@ namespace DungeonTogether.Scripts.Character
                 _eventData.characterHub = characterHub;
                 _eventData.previousState = previousState;
                 _eventData.newState = newState;
-                _eventData.Invoke();
+                EventBus<MovementStateEvent>.Invoke(_eventData);
             }
         }
     
@@ -50,7 +50,7 @@ namespace DungeonTogether.Scripts.Character
                 _eventData.characterHub = characterHub;
                 _eventData.previousState = previousState;
                 _eventData.newState = newState;
-                _eventData.Invoke();
+                EventBus<ActionStateEvent>.Invoke(_eventData);
             }
         }
         
@@ -73,7 +73,7 @@ namespace DungeonTogether.Scripts.Character
                 _eventData.characterHub = characterHub;
                 _eventData.previousState = previousState;
                 _eventData.newState = newState;
-                _eventData.Invoke();
+                EventBus<ConditionStateEvent>.Invoke(_eventData);
             }
         }
     }

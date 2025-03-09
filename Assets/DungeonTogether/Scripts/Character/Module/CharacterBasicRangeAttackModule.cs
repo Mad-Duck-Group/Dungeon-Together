@@ -15,8 +15,9 @@ namespace DungeonTogether.Scripts.Character.Module
     {
         [Group("FirePoint"), Required] public Transform firePoint;
         [Group("BulletPrefab"), Required] public GameObject bulletPrefab;
-        [FormerlySerializedAs("rangeAttack")] [Group("RangeArea"), Required] public RangeAttack rangeAttackPrefab;
+        [FormerlySerializedAs("rangeAttackPrefab")] [FormerlySerializedAs("rangeAttack")] [Group("RangeArea"), Required] public ProjectileDamageArea projectileDamageAreaPrefab;
         [Group("Damage"), Min(0)] public float damage;
+        [Group("Damage"), Min(0)] public LayerMask passThroughLayer;
         [Group("Speed"), Min(0)] public float projectileSpeed;
         [Group("Timing"), Min(0)] public float delay;
         [Group("Timing"), Min(0)] public bool hasDuration;
@@ -128,17 +129,6 @@ namespace DungeonTogether.Scripts.Character.Module
             attackCoroutine = StartCoroutine(AttackCoroutine());
             
         }
-        
-        /*
-        [Rpc(SendTo.Server)]
-        private void PrimaryFireServerRpc()
-        {
-            RangeAttack rangeAttack = Instantiate(CurrentPattern.Value.bulletPrefab, CurrentPattern.Value.firePoint.transform.position, Quaternion.identity).GetComponent<RangeAttack>();
-            rangeAttack.SetDirection(CurrentPattern.Value.firePoint.right, CurrentPattern.Value.projectileSpeed);
-            
-            SpawnProjectileRPC();
-        }
-        */
 
         [Rpc(SendTo.ClientsAndHost)]
         private void SpawnProjectileRPC()
@@ -151,8 +141,10 @@ namespace DungeonTogether.Scripts.Character.Module
         
         private void SpawnProjectile()
         {
-            RangeAttack rangeAttack = Instantiate(CurrentPattern.Value.bulletPrefab, CurrentPattern.Value.firePoint.transform.position, Quaternion.identity).GetComponent<RangeAttack>();
-            rangeAttack.SetDirection(CurrentPattern.Value.firePoint.right, CurrentPattern.Value.projectileSpeed);
+            ProjectileDamageArea projectileDamageArea = 
+                Instantiate(CurrentPattern.Value.bulletPrefab, CurrentPattern.Value.firePoint.transform.position, Quaternion.identity).GetComponent<ProjectileDamageArea>();
+            projectileDamageArea.SetPassThroughLayer(CurrentPattern.Value.passThroughLayer);
+            projectileDamageArea.SetDirection(CurrentPattern.Value.firePoint.right, CurrentPattern.Value.projectileSpeed);
         }
 
         /// <summary>
@@ -163,26 +155,24 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             if (CurrentPattern == null) yield break;
             currentComboTime = 0;
-            CharacterStates.ActionStateEvent.Invoke(characterHub, characterHub.ActionState,
-                CharacterStates.CharacterActionState.Basic);
+            characterHub.ChangeActionState(CharacterStates.CharacterActionState.Basic);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
             //Create bullet
             Debug.Log("Bullet has spawn");
             
             SpawnProjectileRPC();
 
-            RangeAttack rangeAttack = Instantiate(CurrentPattern.Value.bulletPrefab, CurrentPattern.Value.firePoint.transform.position, Quaternion.identity).GetComponent<RangeAttack>();
-            rangeAttack.SetDirection(CurrentPattern.Value.firePoint.right, CurrentPattern.Value.projectileSpeed);
-            rangeAttack.OnHitEvent += OnRangeHit;
+            ProjectileDamageArea projectileDamageArea = Instantiate(CurrentPattern.Value.bulletPrefab, CurrentPattern.Value.firePoint.transform.position, Quaternion.identity).GetComponent<ProjectileDamageArea>();
+            projectileDamageArea.SetDirection(CurrentPattern.Value.firePoint.right, CurrentPattern.Value.projectileSpeed);
+            projectileDamageArea.OnHitEvent += OnRangeHit;
             if (CurrentPattern.Value.hasDuration)
             {
-                rangeAttack.SetActive(true);
+                projectileDamageArea.SetActive(true);
                 yield return new WaitForSeconds(CurrentPattern.Value.duration);
-                rangeAttack.SetActive(false);
+                projectileDamageArea.SetActive(false);
             }
             
-            CharacterStates.ActionStateEvent.Invoke(characterHub, characterHub.ActionState,
-                CharacterStates.CharacterActionState.None);
+            characterHub.ChangeActionState(CharacterStates.CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
             currentPatternIndex = (currentPatternIndex + 1) % rangeAttackPatterns.Count;
             attackReady = false;

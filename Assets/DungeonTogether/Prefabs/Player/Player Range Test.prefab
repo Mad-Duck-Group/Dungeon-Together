@@ -310,9 +310,12 @@ MonoBehaviour:
   - firePoint: {fileID: 6739368199471239660}
     bulletPrefab: {fileID: 6223688861620892961, guid: 7c9b7ecb849b3e246ba17305993aea8e,
       type: 3}
-    rangeAttackPrefab: {fileID: -4834336959574245418, guid: 7c9b7ecb849b3e246ba17305993aea8e,
+    projectileDamageAreaPrefab: {fileID: -4834336959574245418, guid: 7c9b7ecb849b3e246ba17305993aea8e,
       type: 3}
     damage: 10
+    passThroughLayer:
+      serializedVersion: 2
+      m_Bits: 64
     projectileSpeed: 10
     delay: 0
     hasDuration: 0

@@ -20,10 +20,7 @@ namespace DungeonTogether.Scripts.Character
     ///  Character hub is the main class that manages the character and its modules.
     /// </summary>
     [DeclareTabGroup("Debug Tab")]
-    public class CharacterHub : NetworkBehaviour, 
-        IEventBusHandler<CharacterStates.MovementStateEvent>,
-        IEventBusHandler<CharacterStates.ActionStateEvent>,
-        IEventBusHandler<CharacterStates.ConditionStateEvent>
+    public class CharacterHub : NetworkBehaviour
     {
         [InfoBox("Character Hub is the main class that manages the character and its modules.")]
         #region Inspector
@@ -94,9 +91,6 @@ namespace DungeonTogether.Scripts.Character
         protected virtual void Subscribe()
         {
             if (!IsOwner) return;
-            this.Subscribe<CharacterStates.MovementStateEvent>();
-            this.Subscribe<CharacterStates.ActionStateEvent>();
-            this.Subscribe<CharacterStates.ConditionStateEvent>();
         }
         
         /// <summary>
@@ -117,9 +111,6 @@ namespace DungeonTogether.Scripts.Character
         protected virtual void Unsubscribe()
         {
             if (!IsOwner) return;
-            this.Unsubscribe<CharacterStates.MovementStateEvent>();
-            this.Unsubscribe<CharacterStates.ActionStateEvent>();
-            this.Unsubscribe<CharacterStates.ConditionStateEvent>();
         }
 
         public override void OnDestroy()
@@ -131,22 +122,29 @@ namespace DungeonTogether.Scripts.Character
         #endregion
         
         #region Event Handlers
-        public void OnHandleEvent(CharacterStates.MovementStateEvent eventData)
+        
+        #endregion
+        
+        #region States
+        public void ChangeMovementState(CharacterStates.CharacterMovementState newState)
         {
-            if (!IsOwner || eventData.characterHub != this) return;
-            MovementState = eventData.newState;
+            if (newState == MovementState) return;
+            CharacterStates.MovementStateEvent.Invoke(this, MovementState, newState);
+            MovementState = newState;
         }
-
-        public void OnHandleEvent(CharacterStates.ActionStateEvent eventData)
+        
+        public void ChangeActionState(CharacterStates.CharacterActionState newState)
         {
-            if (!IsOwner || eventData.characterHub != this) return;
-            ActionState = eventData.newState;
+            if (newState == ActionState) return;
+            CharacterStates.ActionStateEvent.Invoke(this, ActionState, newState);
+            ActionState = newState;
         }
-
-        public void OnHandleEvent(CharacterStates.ConditionStateEvent eventData)
+        
+        public void ChangeConditionState(CharacterStates.CharacterConditionState newState)
         {
-            if (!IsOwner || eventData.characterHub != this) return;
-            ConditionState = eventData.newState;
+            if (newState == ConditionState) return;
+            CharacterStates.ConditionStateEvent.Invoke(this, ConditionState, newState);
+            ConditionState = newState;
         }
         #endregion
 

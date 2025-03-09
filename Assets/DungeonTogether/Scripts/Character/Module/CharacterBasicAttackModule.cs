@@ -141,14 +141,12 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             if (CurrentPattern == null) yield break;
             currentComboTime = 0;
-            CharacterStates.ActionStateEvent.Invoke(characterHub, characterHub.ActionState,
-                CharacterStates.CharacterActionState.Basic);
+            characterHub.ChangeActionState(CharacterStates.CharacterActionState.Basic);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
             CurrentPattern.Value.damageArea.SetActive(true);
             yield return new WaitForSeconds(CurrentPattern.Value.duration);
             CurrentPattern.Value.damageArea.SetActive(false);
-            CharacterStates.ActionStateEvent.Invoke(characterHub, characterHub.ActionState,
-                CharacterStates.CharacterActionState.None);
+            characterHub.ChangeActionState(CharacterStates.CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
             currentPatternIndex = (currentPatternIndex + 1) % basicAttackPatterns.Count;
             attackReady = false;

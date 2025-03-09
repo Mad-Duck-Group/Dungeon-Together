@@ -111,8 +111,7 @@ namespace DungeonTogether.Scripts.Character.Module
         protected virtual void Die()
         {
             if (!ModulePermitted) return;
-            CharacterStates.ConditionStateEvent.Invoke(characterHub, characterHub.ConditionState,
-                CharacterStates.CharacterConditionState.Dead);
+            characterHub.ChangeConditionState(CharacterStates.CharacterConditionState.Dead);
         }
     }
 }

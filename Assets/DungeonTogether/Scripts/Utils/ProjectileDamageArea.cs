@@ -5,26 +5,31 @@ using TriInspector;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class RangeAttack : DamageArea
+public class ProjectileDamageArea : DamageArea
 {
     private float speed;
     private Vector3 direction;
+    private LayerMask passThroughLayer;
 
     private void Update()
     {
         transform.position += direction * (speed * Time.deltaTime); 
     }
-    
+
     public override void SetActive(bool active)
     {
         if (!damageCollider) damageCollider = GetComponent<Collider2D>();
     }
     
+    public void SetPassThroughLayer(LayerMask layer)
+    {
+        passThroughLayer = layer;
+    }
+
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
-
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player")) return;
+        if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, passThroughLayer)) return;
         Destroy(gameObject);
     }
     

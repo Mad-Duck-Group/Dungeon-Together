@@ -67,7 +67,6 @@ namespace DungeonTogether.Scripts.Character.Module
             if (!IsOwner) return;
             base.UpdateModule();
             rb2d.linearVelocity = moveDirection * movementSpeed;
-            
             Flip();
         }
         /// <summary>
@@ -78,10 +77,10 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             moveDirection = direction;
             moveDirection.Normalize();
-            CharacterStates.MovementStateEvent.Invoke(characterHub, characterHub.MovementState,
-                moveDirection.magnitude > 0
-                    ? CharacterStates.CharacterMovementState.Walking
-                    : CharacterStates.CharacterMovementState.Idle);
+            var state = moveDirection.magnitude > 0
+                ? CharacterStates.CharacterMovementState.Walking
+                : CharacterStates.CharacterMovementState.Idle;
+            characterHub.ChangeMovementState(state);
         }
         
         protected override void HandleInput()
