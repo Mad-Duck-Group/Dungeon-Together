@@ -12,7 +12,7 @@ public class RangeAttack : DamageArea
 
     private void Update()
     {
-        transform.position += direction * (speed * Time.deltaTime);
+        transform.position += direction * (speed * Time.deltaTime); 
     }
     
     public override void SetActive(bool active)
@@ -23,7 +23,10 @@ public class RangeAttack : DamageArea
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player")) return;
         Destroy(gameObject);
+
     }
     
     public void SetDirection(Vector3 dir, float projectileSpeed)

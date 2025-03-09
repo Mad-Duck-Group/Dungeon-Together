@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DungeonTogether.Scripts.Utils;
 using TriInspector;
+using Unity.Netcode;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -50,7 +51,7 @@ namespace DungeonTogether.Scripts.Character.Module
         }
         
         private Coroutine attackCoroutine;
-        
+
         public override void Initialize(CharacterHub characterHub)
         {
             base.Initialize(characterHub);
@@ -127,6 +128,32 @@ namespace DungeonTogether.Scripts.Character.Module
             attackCoroutine = StartCoroutine(AttackCoroutine());
             
         }
+        
+        /*
+        [Rpc(SendTo.Server)]
+        private void PrimaryFireServerRpc()
+        {
+            RangeAttack rangeAttack = Instantiate(CurrentPattern.Value.bulletPrefab, CurrentPattern.Value.firePoint.transform.position, Quaternion.identity).GetComponent<RangeAttack>();
+            rangeAttack.SetDirection(CurrentPattern.Value.firePoint.right, CurrentPattern.Value.projectileSpeed);
+            
+            SpawnProjectileRPC();
+        }
+        */
+
+        [Rpc(SendTo.ClientsAndHost)]
+        private void SpawnProjectileRPC()
+        {
+            if (IsOwner)
+            { return; }
+        
+            SpawnProjectile();
+        }
+        
+        private void SpawnProjectile()
+        {
+            RangeAttack rangeAttack = Instantiate(CurrentPattern.Value.bulletPrefab, CurrentPattern.Value.firePoint.transform.position, Quaternion.identity).GetComponent<RangeAttack>();
+            rangeAttack.SetDirection(CurrentPattern.Value.firePoint.right, CurrentPattern.Value.projectileSpeed);
+        }
 
         /// <summary>
         /// Coroutine that handles the timing of the attack.
@@ -141,7 +168,10 @@ namespace DungeonTogether.Scripts.Character.Module
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
             //Create bullet
             Debug.Log("Bullet has spawn");
-            RangeAttack rangeAttack = Instantiate(CurrentPattern.Value.bulletPrefab , CurrentPattern.Value.firePoint.transform.position, Quaternion.identity).GetComponent<RangeAttack>();
+            
+            SpawnProjectileRPC();
+
+            RangeAttack rangeAttack = Instantiate(CurrentPattern.Value.bulletPrefab, CurrentPattern.Value.firePoint.transform.position, Quaternion.identity).GetComponent<RangeAttack>();
             rangeAttack.SetDirection(CurrentPattern.Value.firePoint.right, CurrentPattern.Value.projectileSpeed);
             rangeAttack.OnHitEvent += OnRangeHit;
             if (CurrentPattern.Value.hasDuration)
@@ -150,6 +180,7 @@ namespace DungeonTogether.Scripts.Character.Module
                 yield return new WaitForSeconds(CurrentPattern.Value.duration);
                 rangeAttack.SetActive(false);
             }
+            
             CharacterStates.ActionStateEvent.Invoke(characterHub, characterHub.ActionState,
                 CharacterStates.CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;

@@ -7,6 +7,7 @@ using UnityEngine;
 public class DamageArea : MonoBehaviour
 {
     [SerializeField] protected LayerMask targetLayer;
+    [SerializeField] protected LayerMask ignoreLayer;
 
     protected Collider2D damageCollider;
     public delegate void OnHit(Collider2D collider);
