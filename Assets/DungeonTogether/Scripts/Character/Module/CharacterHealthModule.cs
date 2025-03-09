@@ -1,4 +1,5 @@
 using System;
+using DungeonTogether.Scripts.Manangers;
 using DungeonTogether.Scripts.Utils;
 using MoreMountains.Tools;
 using TriInspector;
@@ -26,12 +27,12 @@ namespace DungeonTogether.Scripts.Character.Module
     public class CharacterHealthModule : CharacterModule
     {
         [Title("Health Settings")] 
-        [SerializeField] 
-        private NetworkVariable<HealthData> healthData =
-            new(default, NetworkVariableReadPermission.Everyone,
-                NetworkVariableWritePermission.Server);
+        [SerializeField]
+        private NetworkVariable<HealthData> healthData = new();
         [SerializeField] 
         private float startingHealth = 100;
+        [SerializeField]
+        private float bumpThreshold = 10f;
         [SerializeField] 
         private bool useMMHealthBar = true;
         [SerializeField, ShowIf(nameof(useMMHealthBar))] 
@@ -42,16 +43,12 @@ namespace DungeonTogether.Scripts.Character.Module
         private float testAmount;
         [Button("Test Change Health")] 
         private void TestChangeHealth() => ChangeHealth(testAmount);
+        private float _previousChange;
 
         public override void OnNetworkSpawn()
         {
             healthData.OnValueChanged += OnHealthDataChanged;
             base.OnNetworkSpawn();
-            if (!IsOwner)
-            {
-                UpdateHealthBar();
-                return;
-            }
             HealthDataInitServerRpc();
         }
         
@@ -70,6 +67,7 @@ namespace DungeonTogether.Scripts.Character.Module
 
         private void OnHealthDataChanged(HealthData previousvalue, HealthData newvalue)
         {
+            _previousChange = newvalue.currentHealth - previousvalue.currentHealth;
             UpdateHealthBar();
         }
 
@@ -77,13 +75,12 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             if (!ModulePermitted) return;
             if (healthData.Value.invincible) return;
+            _previousChange = amount;
             ChangeHealthServerRpc(amount);
             if (healthData.Value.currentHealth <= 0)
             {
-                healthData.Value.currentHealth = 0;
                 Die();
             }
-            
             UpdateHealthBar();
         }
 
@@ -97,10 +94,31 @@ namespace DungeonTogether.Scripts.Character.Module
 
         public virtual void UpdateHealthBar()
         {
+            if (!IsOwner && characterHub.CharacterType is CharacterType.Player) return;
             if (!ModulePermitted) return;
             if (useMMHealthBar)
             {
-                healthBar.UpdateBar(healthData.Value.currentHealth, 0, healthData.Value.maxHealth, true);
+                bool healthBarExists = healthBar;
+                var currentHealth = healthData.Value.currentHealth;
+                var maxHealth = healthData.Value.maxHealth;
+                var shouldBump = Mathf.Abs(_previousChange) >= bumpThreshold;
+                switch (healthBarExists)
+                {
+                    case true:
+                        var targetProgressBar = healthBar.TargetProgressBar;
+                        targetProgressBar.BumpScaleOnChange = shouldBump;
+                        targetProgressBar.LerpForegroundBar = shouldBump;
+                        targetProgressBar.LerpDecreasingDelayedBar = shouldBump;
+                        targetProgressBar.LerpIncreasingDelayedBar = shouldBump;
+                        healthBar.UpdateBar(currentHealth, 0, maxHealth, true);
+                        break;
+                    case false when characterHub.CharacterType is CharacterType.Player:
+                        PlayerCanvasManager.Instance.UpdateHealthBar(currentHealth, maxHealth, shouldBump);
+                        break;
+                    default:
+                        Debug.LogWarning("Character is NPC but has no health bar.");
+                        break;
+                }
             }
             else
             {

@@ -34,7 +34,8 @@ namespace DungeonTogether.Scripts.Character.Module
             get
             {
                 if (!characterHub) return false;
-                return !blockedMovementStates.Contains(characterHub.MovementState) &&
+                return characterHub.Initialized &&
+                       !blockedMovementStates.Contains(characterHub.MovementState) &&
                        !blockedActionStates.Contains(characterHub.ActionState) &&
                        !blockedConditionStates.Contains(characterHub.ConditionState) &&
                        moduleEnabled;

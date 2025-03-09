@@ -53,6 +53,8 @@ namespace DungeonTogether.Scripts.Character
         
         #region Properties
         public PlayerInput PlayerInput { get; private set; }
+        protected bool initialized;
+        public bool Initialized => initialized;
         #endregion
 
         #region Life Cycle
@@ -83,6 +85,7 @@ namespace DungeonTogether.Scripts.Character
             {
                 Debug.LogError($"{nameof(PlayerInput)} component not found in player object.");
             }
+            initialized = true;
         }
 
         /// <summary>
@@ -103,6 +106,7 @@ namespace DungeonTogether.Scripts.Character
             {
                 module.Shutdown();
             }
+            initialized = false;
         }
 
         /// <summary>
