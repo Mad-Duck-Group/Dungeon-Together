@@ -1,3 +1,4 @@
+using System;
 using DungeonTogether.Scripts.Utils;
 using TriInspector;
 using UnityEngine;
@@ -5,22 +6,29 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class DamageArea : MonoBehaviour
 {
-    [SerializeField] private LayerMask targetLayer;
-    
-    private Collider2D damageCollider;
+    [SerializeField] protected LayerMask targetLayer;
+
+    protected Collider2D damageCollider;
     public delegate void OnHit(Collider2D collider);
     public event OnHit OnHitEvent;
-    private void Start()
+
+    protected virtual void Start()
     {
         damageCollider = GetComponent<Collider2D>();
         damageCollider.isTrigger = true;
     }
-    public void SetActive(bool active)
+
+    protected virtual void OnDisable()
+    {
+        OnHitEvent = null;
+    }
+
+    public virtual void SetActive(bool active)
     {
         if (!damageCollider) damageCollider = GetComponent<Collider2D>();
         damageCollider.enabled = active;
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer))
         {
