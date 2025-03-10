@@ -37,6 +37,5 @@ public class ProjectileDamageArea : DamageArea
     {
         direction = dir.normalized;
         speed = projectileSpeed;
-        Debug.Log($"Direction : {direction}, Speed : {speed}");
     }
 }

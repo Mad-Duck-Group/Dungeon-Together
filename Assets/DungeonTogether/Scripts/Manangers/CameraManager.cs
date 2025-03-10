@@ -10,17 +10,8 @@ namespace DungeonTogether.Scripts.Manangers
 
         private void Start()
         {
-            //NetworkManager.OnClientConnectedCallback += SingletonOnOnClientConnectedCallback;
             ClassSelector.OnCharacterSpawned += OnSpawnPlayer;
-
         }
-        // private void SingletonOnOnClientConnectedCallback(ulong id)
-        // {
-        //     var localPlayer = NetworkManager.Singleton.ConnectedClients[id].PlayerObject;
-        //     if (!localPlayer) return;
-        //     camera.transform.SetParent(localPlayer.transform);
-        //     camera.transform.localPosition = new Vector3(0, 0, -10);
-        // }
 
         private void OnSpawnPlayer(ulong clientId)
         {
@@ -34,7 +25,6 @@ namespace DungeonTogether.Scripts.Manangers
         {
             camera.transform.SetParent(null);
             ClassSelector.OnCharacterSpawned -= OnSpawnPlayer;
-            //NetworkManager.OnClientConnectedCallback -= SingletonOnOnClientConnectedCallback;
         }
     }
 }

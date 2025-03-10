@@ -1,12 +1,14 @@
 {
   "dependencies": {
     "com.codewriter.triinspector": "https://github.com/codewriter-packages/Tri-Inspector.git",
+    "com.h8man.2d.navmeshplus": "https://github.com/h8man/NavMeshPlus.git",
     "com.luca3317.tmpeffects": "https://github.com/Luca3317/TMPEffects.git?path=/Package",
     "com.mackysoft.serializereference-extensions": "https://github.com/mackysoft/Unity-SerializeReferenceExtensions.git?path=Assets/MackySoft/MackySoft.SerializeReferenceExtensions",
     "com.unity.2d.pixel-perfect": "5.0.3",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.2d.tilemap.extras": "4.1.0",
+    "com.unity.ai.navigation": "2.0.6",
     "com.unity.behavior": "1.0.8",
     "com.unity.cinemachine": "3.1.2",
     "com.unity.collab-proxy": "2.6.0",

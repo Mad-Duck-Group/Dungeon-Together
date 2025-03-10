@@ -16,7 +16,7 @@ namespace DungeonTogether.Scripts.Character.Module
         [SerializeField] private Animator animator;
     
         [Title("Movement Settings")]
-        [SerializeField] private float movementSpeed = 4f;
+        [field: SerializeField] public float MovementSpeed { get; private set; } = 4f;
         [SerializeField, ReadOnly] private Vector2 moveDirection;
 
         private NetworkVariable<bool> isFlipped = new();
@@ -79,7 +79,7 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             if (!IsOwner) return;
             base.UpdateModule();
-            rb2d.linearVelocity = moveDirection * movementSpeed;
+            rb2d.linearVelocity = moveDirection * MovementSpeed;
             Flip();
         }
 
@@ -110,6 +110,12 @@ namespace DungeonTogether.Scripts.Character.Module
                 ? CharacterStates.CharacterMovementState.Walking
                 : CharacterStates.CharacterMovementState.Idle;
             characterHub.ChangeMovementState(state);
+        }
+
+        public void SetPosition(Vector2 position)
+        {
+            if (!ModulePermitted) return;
+            rb2d.position = position;
         }
 
         protected override void HandleInput()

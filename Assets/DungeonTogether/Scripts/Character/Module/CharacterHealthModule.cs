@@ -79,7 +79,7 @@ namespace DungeonTogether.Scripts.Character.Module
             ChangeHealthServerRpc(amount);
             if (healthData.Value.currentHealth <= 0)
             {
-                Die();
+                DieRpc();
             }
             UpdateHealthBar();
         }
@@ -126,9 +126,9 @@ namespace DungeonTogether.Scripts.Character.Module
             }
         }
         
-        protected virtual void Die()
+        [Rpc(SendTo.Owner, DeferLocal = true)]
+        protected virtual void DieRpc()
         {
-            if (!ModulePermitted) return;
             characterHub.ChangeConditionState(CharacterStates.CharacterConditionState.Dead);
         }
     }

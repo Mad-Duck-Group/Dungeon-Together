@@ -28,6 +28,7 @@ namespace DungeonTogether.Scripts.Character.Module
     public class CharacterBasicRangeAttackModule : CharacterModule
     {
         [Title("Settings")]
+        [SerializeField] private Transform comboParent;
         [TableList(Draggable = true,
             HideAddButton = false,
             HideRemoveButton = false,
@@ -127,7 +128,17 @@ namespace DungeonTogether.Scripts.Character.Module
             if (!attackReady) return;
             if (attackCoroutine != null) return;
             attackCoroutine = StartCoroutine(AttackCoroutine());
-            
+        }
+        
+        /// <summary>
+        /// Sets the direction of the attack.
+        /// </summary>
+        /// <param name="direction">Direction of the attack.</param>
+        public virtual void SetAttackDirection(Vector2 direction)
+        {
+            if (!ModulePermitted) return;
+            direction.Normalize();
+            comboParent.right = direction;
         }
 
         [Rpc(SendTo.ClientsAndHost)]

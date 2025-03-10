@@ -91,6 +91,7 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             Debug.Log($"Initializing {GetType().Name} module for {characterHub.name}");
             this.characterHub = characterHub;
+            Subscribe();
         }
 
         /// <summary>
@@ -98,10 +99,20 @@ namespace DungeonTogether.Scripts.Character.Module
         /// </summary>
         public virtual void Shutdown()
         {
+            Unsubscribe();
+        }
+        
+        protected virtual void Subscribe()
+        {
+        
+        }
+        
+        protected virtual void Unsubscribe()
+        {
         
         }
         #endregion
-        
+
         #region Input
         /// <summary>
         /// Handle player input
