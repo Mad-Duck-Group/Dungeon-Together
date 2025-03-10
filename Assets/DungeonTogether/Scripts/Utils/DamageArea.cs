@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class DamageArea : MonoBehaviour
 {
+    [SerializeField] protected SpriteRenderer visualizer;
     [SerializeField] protected LayerMask targetLayer;
 
     protected Collider2D damageCollider;
@@ -27,6 +28,7 @@ public class DamageArea : MonoBehaviour
     {
         if (!damageCollider) damageCollider = GetComponent<Collider2D>();
         damageCollider.enabled = active;
+        if (visualizer) visualizer.enabled = active;
     }
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {

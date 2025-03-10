@@ -1,3 +1,4 @@
+using DungeonTogether.Scripts.Character;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -9,12 +10,22 @@ namespace DungeonTogether.Scripts.Manangers
 
         private void Start()
         {
-            NetworkManager.OnClientConnectedCallback += SingletonOnOnClientConnectedCallback;
+            //NetworkManager.OnClientConnectedCallback += SingletonOnOnClientConnectedCallback;
+            ClassSelector.OnCharacterSpawned += OnSpawnPlayer;
+
         }
-        private void SingletonOnOnClientConnectedCallback(ulong id)
+        // private void SingletonOnOnClientConnectedCallback(ulong id)
+        // {
+        //     var localPlayer = NetworkManager.Singleton.ConnectedClients[id].PlayerObject;
+        //     if (!localPlayer) return;
+        //     camera.transform.SetParent(localPlayer.transform);
+        //     camera.transform.localPosition = new Vector3(0, 0, -10);
+        // }
+
+        private void OnSpawnPlayer(ulong clientId)
         {
-            var localPlayer = NetworkManager.Singleton.ConnectedClients[id].PlayerObject;
-            if (!localPlayer) return;
+            var localPlayer = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
+            if (!localPlayer || !localPlayer.IsOwner) return;
             camera.transform.SetParent(localPlayer.transform);
             camera.transform.localPosition = new Vector3(0, 0, -10);
         }
@@ -22,7 +33,8 @@ namespace DungeonTogether.Scripts.Manangers
         public override void OnNetworkDespawn()
         {
             camera.transform.SetParent(null);
-            NetworkManager.OnClientConnectedCallback -= SingletonOnOnClientConnectedCallback;
+            ClassSelector.OnCharacterSpawned -= OnSpawnPlayer;
+            //NetworkManager.OnClientConnectedCallback -= SingletonOnOnClientConnectedCallback;
         }
     }
 }
