@@ -249,6 +249,7 @@ MonoBehaviour:
   blockedMovementStates: 
   blockedActionStates: 0200000003000000
   blockedConditionStates: 01000000
+  comboParent: {fileID: 0}
   basicAttackPatterns:
   - damageArea: {fileID: 1690298698063037514}
     damage: 5
@@ -603,6 +604,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fighter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779787673624174831, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.27157438
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779787673624174831, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.038199246
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779787673624174831, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.015825927
       objectReference: {fileID: 0}
     - target: {fileID: 8881605798776199879, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}

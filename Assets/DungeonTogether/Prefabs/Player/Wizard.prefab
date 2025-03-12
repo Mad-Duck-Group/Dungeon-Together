@@ -144,11 +144,11 @@ MonoBehaviour:
     passThroughLayer:
       serializedVersion: 2
       m_Bits: 64
-    projectileSpeed: 10
+    projectileSpeed: 5
     delay: 0
     hasDuration: 0
     duration: 0
-    interval: 0.1
+    interval: 0.5
     resetComboTime: 0.1
   currentPatternIndex: 0
   previousPatternIndex: -1
@@ -277,6 +277,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wizard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779787673624174831, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2983408
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779787673624174831, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0486914
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779787673624174831, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.015825927
       objectReference: {fileID: 0}
     - target: {fileID: 8881605798776199879, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
