@@ -210,9 +210,7 @@ MonoBehaviour:
   comboParent: {fileID: 5286397097068261834}
   rangeAttackPatterns:
   - firePoint: {fileID: 687556617816823674}
-    bulletPrefab: {fileID: 217745728609258213, guid: 0158c6fe27cc8854f8ada7e93a99d09b,
-      type: 3}
-    projectileDamageAreaPrefab: {fileID: -4834336959574245418, guid: 7c9b7ecb849b3e246ba17305993aea8e,
+    projectileDamageAreaPrefab: {fileID: 7616597127810121746, guid: 0158c6fe27cc8854f8ada7e93a99d09b,
       type: 3}
     damage: 1
     passThroughLayer:
@@ -386,7 +384,7 @@ PrefabInstance:
     - target: {fileID: 7207912155587763137, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
         type: 3}
       propertyPath: m_Name
-      value: RangeEnemy Variant
+      value: RangeEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 7866843109088977041, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
         type: 3}

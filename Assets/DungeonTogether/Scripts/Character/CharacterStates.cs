@@ -57,6 +57,7 @@ namespace DungeonTogether.Scripts.Character
         public enum CharacterConditionState
         {
             Normal,
+            Stunned,
             Dead
         }
         

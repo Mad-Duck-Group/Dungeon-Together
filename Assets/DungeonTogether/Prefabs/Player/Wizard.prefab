@@ -133,12 +133,10 @@ MonoBehaviour:
   blockedMovementStates: 
   blockedActionStates: 
   blockedConditionStates: 01000000
-  comboParent: {fileID: 0}
+  comboParent: {fileID: 7287208877223472281}
   rangeAttackPatterns:
   - firePoint: {fileID: 6185186844496633676}
-    bulletPrefab: {fileID: 5522248199174121944, guid: 6d1baab797fa59b42846708cfb61a00b,
-      type: 3}
-    projectileDamageAreaPrefab: {fileID: -4834336959574245418, guid: 7c9b7ecb849b3e246ba17305993aea8e,
+    projectileDamageAreaPrefab: {fileID: 2744090027019428655, guid: 6d1baab797fa59b42846708cfb61a00b,
       type: 3}
     damage: 10
     passThroughLayer:

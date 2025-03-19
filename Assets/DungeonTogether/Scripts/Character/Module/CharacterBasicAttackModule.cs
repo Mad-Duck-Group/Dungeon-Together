@@ -46,6 +46,7 @@ namespace DungeonTogether.Scripts.Character.Module
             }
         }
 
+        private CharacterCriticalModule criticalModule;
         private Coroutine attackCoroutine;
 
         public override void Initialize(CharacterHub characterHub)
@@ -59,6 +60,7 @@ namespace DungeonTogether.Scripts.Character.Module
                 pattern.damageArea.SetActive(false);
                 pattern.damageArea.OnHitEvent += OnHit;
             });
+            criticalModule = characterHub.FindModuleOfType<CharacterCriticalModule>();
         }
 
         public override void Shutdown()
@@ -82,8 +84,13 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             if (!collider.TryGetComponent(out CharacterHub characterHub)) return;
             var healthModule = characterHub.FindModuleOfType<CharacterHealthModule>();
-            if (healthModule && CurrentPattern != null) 
-                healthModule.ChangeHealth(-CurrentPattern.Value.damage);
+            if (!healthModule || CurrentPattern == null) return;
+            var damage = -CurrentPattern.Value.damage;
+            if (criticalModule)
+            {
+                criticalModule.CalculateCritical(ref damage);
+            }
+            healthModule.ChangeHealth(damage);
         }
         
         protected override void HandleInput()

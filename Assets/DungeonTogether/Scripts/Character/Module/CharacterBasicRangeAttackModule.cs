@@ -14,8 +14,7 @@ namespace DungeonTogether.Scripts.Character.Module
     public struct RangeAttackPattern 
     {
         [Group("FirePoint"), Required] public Transform firePoint;
-        [Group("BulletPrefab"), Required] public GameObject bulletPrefab;
-        [FormerlySerializedAs("rangeAttackPrefab")] [FormerlySerializedAs("rangeAttack")] [Group("RangeArea"), Required] public ProjectileDamageArea projectileDamageAreaPrefab;
+        [Group("RangeArea"), Required] public ProjectileDamageArea projectileDamageAreaPrefab;
         [Group("Damage"), Min(0)] public float damage;
         [Group("Damage"), Min(0)] public LayerMask passThroughLayer;
         [Group("Speed"), Min(0)] public float projectileSpeed;
@@ -52,6 +51,7 @@ namespace DungeonTogether.Scripts.Character.Module
             }
         }
         
+        private CharacterCriticalModule criticalModule;
         private Coroutine attackCoroutine;
 
         public override void Initialize(CharacterHub characterHub)
@@ -60,6 +60,7 @@ namespace DungeonTogether.Scripts.Character.Module
             currentPatternIndex = 0;
             currentInterval = 0;
             previousPatternIndex = -1;
+            criticalModule = characterHub.FindModuleOfType<CharacterCriticalModule>();
         }
         
         public override void Shutdown()
@@ -78,8 +79,13 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             if (!collider.TryGetComponent(out CharacterHub characterHub)) return;
             var healthModule = characterHub.FindModuleOfType<CharacterHealthModule>();
-            if (healthModule && CurrentPattern != null) 
-                healthModule.ChangeHealth(-CurrentPattern.Value.damage);
+            if (!healthModule || CurrentPattern == null) return;
+            var damage = -CurrentPattern.Value.damage;
+            if (criticalModule)
+            {
+                criticalModule.CalculateCritical(ref damage);
+            }
+            healthModule.ChangeHealth(damage);
         }
         
         // Input
@@ -153,7 +159,7 @@ namespace DungeonTogether.Scripts.Character.Module
         private void SpawnProjectile()
         {
             ProjectileDamageArea projectileDamageArea = 
-                Instantiate(CurrentPattern.Value.bulletPrefab, CurrentPattern.Value.firePoint.transform.position, Quaternion.identity).GetComponent<ProjectileDamageArea>();
+                Instantiate(CurrentPattern.Value.projectileDamageAreaPrefab, CurrentPattern.Value.firePoint.transform.position, Quaternion.identity);
             projectileDamageArea.SetPassThroughLayer(CurrentPattern.Value.passThroughLayer);
             projectileDamageArea.SetDirection(CurrentPattern.Value.firePoint.right, CurrentPattern.Value.projectileSpeed);
         }
@@ -173,7 +179,8 @@ namespace DungeonTogether.Scripts.Character.Module
             
             SpawnProjectileRPC();
 
-            ProjectileDamageArea projectileDamageArea = Instantiate(CurrentPattern.Value.bulletPrefab, CurrentPattern.Value.firePoint.transform.position, Quaternion.identity).GetComponent<ProjectileDamageArea>();
+            ProjectileDamageArea projectileDamageArea = Instantiate(CurrentPattern.Value.projectileDamageAreaPrefab,
+                CurrentPattern.Value.firePoint.transform.position, Quaternion.identity);
             projectileDamageArea.SetPassThroughLayer(CurrentPattern.Value.passThroughLayer);
             projectileDamageArea.SetDirection(CurrentPattern.Value.firePoint.right, CurrentPattern.Value.projectileSpeed);
             projectileDamageArea.OnHitEvent += OnRangeHit;
