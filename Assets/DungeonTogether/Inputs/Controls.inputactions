@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Skill",
+                    "type": "Button",
+                    "id": "0323ad70-6e56-4418-b506-7266b3ffb6b0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -220,6 +229,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5afcf848-e695-4e69-aec9-19ec440f58dd",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

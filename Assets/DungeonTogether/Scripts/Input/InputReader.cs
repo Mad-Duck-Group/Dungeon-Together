@@ -10,6 +10,7 @@ public class InputReader : ScriptableObject, IPlayerActions
 {
     public event Action<InputAction.CallbackContext> MoveEvent;
     public event Action<InputAction.CallbackContext> AttackEvent;
+    public event Action<InputAction.CallbackContext> SkillEvent;
     
     private Controls _controls;
     
@@ -37,5 +38,9 @@ public class InputReader : ScriptableObject, IPlayerActions
     public void OnAttack(InputAction.CallbackContext context)
     {
         AttackEvent?.Invoke(context);
+    }
+    public void OnSkill(InputAction.CallbackContext context)
+    {
+        SkillEvent?.Invoke(context);
     }
 }
