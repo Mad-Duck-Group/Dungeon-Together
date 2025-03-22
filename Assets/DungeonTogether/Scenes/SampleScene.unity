@@ -4526,6 +4526,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeleeEnemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3208499295320110902, guid: 395a10610d7ad2740895c34d4e42fb83,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3729131795891418672, guid: 395a10610d7ad2740895c34d4e42fb83,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5097,6 +5102,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RangeEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047289870157069733, guid: fe480d2c4c6539d45b1faf7744034c40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4012703352971650921, guid: fe480d2c4c6539d45b1faf7744034c40,
         type: 3}

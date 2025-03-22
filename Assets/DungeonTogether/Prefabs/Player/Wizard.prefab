@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3262718914230498521}
   - component: {fileID: 8863532635906112821}
+  - component: {fileID: 3047177613585625256}
   m_Layer: 0
   m_Name: Skill
   m_TagString: Untagged
@@ -72,7 +73,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1052891891446915131}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3032863e573569348aadc1f63f006e68, type: 3}
   m_Name: 
@@ -84,10 +85,41 @@ MonoBehaviour:
   blockedConditionStates: 
   comboParent: {fileID: 0}
   areaSkillPattern:
-  - areaSkill: {fileID: 9106803767007507929}
-    damage: 10
+  - areaSkill: {fileID: 3843576515461266439}
+    value: 0
     delay: 0.1
     duration: 1
+    cooldown: 0.1
+    resetComboTime: 0.1
+    mana: 10
+  currentPatternIndex: 0
+  previousPatternIndex: -1
+  skillReady: 0
+  currentCooldown: 0
+  currentComboTime: 0
+--- !u!114 &3047177613585625256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052891891446915131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68135414c8dd154687d0a5fcfa42a61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  moduleEnabled: 1
+  blockedMovementStates: 
+  blockedActionStates: 
+  blockedConditionStates: 
+  comboParent: {fileID: 0}
+  areaSkillPattern:
+  - areaSkill: {fileID: 3843576515461266439}
+    value: 20
+    delay: 0
+    duration: 10
     cooldown: 0.1
     resetComboTime: 0.1
     mana: 10
@@ -346,9 +378,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6662855609265814427}
-  - component: {fileID: 9106803767007507929}
   - component: {fileID: 576490909570891392}
   - component: {fileID: 2613349058630022638}
+  - component: {fileID: 3843576515461266439}
+  - component: {fileID: 8814914895875849431}
   m_Layer: 0
   m_Name: AreaSkill
   m_TagString: Untagged
@@ -371,22 +404,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8935530656480282439}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9106803767007507929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4170481348980399381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 025fe94b911002644885b569c9839a20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualizer: {fileID: 2613349058630022638}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!58 &576490909570891392
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -478,6 +495,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3843576515461266439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4170481348980399381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a05c91e27c661754a9fd11c78f97aafd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualizer: {fileID: 2613349058630022638}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &8814914895875849431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4170481348980399381}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30d7c74114bfe049b81355f3d45f4c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualizer: {fileID: 2613349058630022638}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1001 &67624127998009060
 PrefabInstance:
   m_ObjectHideFlags: 0

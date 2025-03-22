@@ -9,8 +9,8 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
     [Serializable]
     public struct AreaSkillPattern
     {
-        [Group("Area"), Required] public SkillAreaCircle areaSkill;
-        [Group("Damage"), Min(0)] public float damage;
+        [Group("Area"), Required] public DamageArea areaSkill;
+        [Group("Value"), Min(0)] public float value;
         [Group("Timing"), Min(0)] public float delay;
         [Group("Timing"), Min(0)] public float duration;
         [Group("Timing"), Min(0)] public float cooldown;
@@ -20,22 +20,22 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
     public class CharacterAreaSkillModule : CharacterModule
     {
         [Title("Settings")]
-        [SerializeField] private Transform comboParent;
+        [SerializeField] protected Transform comboParent;
         [TableList(Draggable = true,
             HideAddButton = false,
             HideRemoveButton = false,
             AlwaysExpanded = false)]
-        [SerializeField] private List<AreaSkillPattern> areaSkillPattern;
+        [SerializeField] protected List<AreaSkillPattern> areaSkillPattern;
         
         [Title("Debug")]
-        [SerializeField, DisplayAsString] private int currentPatternIndex;
-        [SerializeField, DisplayAsString] private int previousPatternIndex = -1;
-        [SerializeField, DisplayAsString] private bool skillReady;
-        [SerializeField, DisplayAsString] private float currentCooldown;
-        [SerializeField, DisplayAsString] private float currentComboTime;
+        [SerializeField, DisplayAsString] protected int currentPatternIndex;
+        [SerializeField, DisplayAsString] protected int previousPatternIndex = -1;
+        [SerializeField, DisplayAsString] protected bool skillReady;
+        [SerializeField, DisplayAsString] protected float currentCooldown;
+        [SerializeField, DisplayAsString] protected float currentComboTime;
         
-        private AreaSkillPattern? CurrentPattern => areaSkillPattern[currentPatternIndex];
-        private AreaSkillPattern? PreviousPattern
+        protected AreaSkillPattern? CurrentPattern => areaSkillPattern[currentPatternIndex];
+        protected AreaSkillPattern? PreviousPattern
         {
             get
             {
@@ -43,7 +43,7 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
                 return areaSkillPattern[previousPatternIndex];
             }
         }
-        private Coroutine skillCoroutine;
+        protected Coroutine skillCoroutine;
         
         public override void Initialize(CharacterHub characterHub)
         {
@@ -76,7 +76,7 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             if (!collider.TryGetComponent(out CharacterHub characterHub)) return;
             var healthModule = characterHub.FindModuleOfType<CharacterHealthModule>();
             if (healthModule && CurrentPattern != null) 
-                healthModule.ChangeHealth(-CurrentPattern.Value.damage);
+                healthModule.ChangeHealth(-CurrentPattern.Value.value);
         }
         
         protected override void HandleInput()
