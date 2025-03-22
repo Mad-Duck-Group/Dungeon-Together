@@ -24,7 +24,7 @@ namespace DungeonTogether.Scripts.Character.Module
     {
         [Title("Mana Settings")]
         [SerializeField]
-        private NetworkVariable<ManaData> manaData = new();
+        public NetworkVariable<ManaData> manaData = new();
         [SerializeField]
         private float startingMana = 100;
         [SerializeField]
