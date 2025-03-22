@@ -9,7 +9,7 @@ public class ProjectileDamageArea : DamageArea
 {
     private float speed;
     private Vector3 direction;
-    private LayerMask passThroughLayer;
+    [SerializeField] private LayerMask passThroughLayer;
 
     private void Update()
     {
@@ -29,8 +29,12 @@ public class ProjectileDamageArea : DamageArea
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         base.OnTriggerEnter2D(other);
+        
+        
         if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, passThroughLayer)) return;
-        Destroy(gameObject);
+        if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer))
+            Destroy(gameObject);
+        
     }
     
     public void SetDirection(Vector3 dir, float projectileSpeed)
