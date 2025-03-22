@@ -206,7 +206,7 @@ MonoBehaviour:
   moduleEnabled: 1
   blockedMovementStates: 
   blockedActionStates: 
-  blockedConditionStates: 01000000
+  blockedConditionStates: 02000000
   comboParent: {fileID: 5286397097068261834}
   rangeAttackPatterns:
   - firePoint: {fileID: 687556617816823674}

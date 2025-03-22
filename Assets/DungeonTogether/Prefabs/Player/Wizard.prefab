@@ -157,8 +157,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1472146885
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d309fbc0bde10064b814c844754bfedf, type: 3}
   m_Color: {r: 1, g: 0.28773582, b: 0.28773582, a: 0.12156863}
@@ -319,7 +319,7 @@ MonoBehaviour:
   moduleEnabled: 1
   blockedMovementStates: 
   blockedActionStates: 
-  blockedConditionStates: 01000000
+  blockedConditionStates: 0100000002000000
   comboParent: {fileID: 7287208877223472281}
   rangeAttackPatterns:
   - firePoint: {fileID: 6185186844496633676}
@@ -477,8 +477,8 @@ MonoBehaviour:
   moduleEnabled: 1
   blockedMovementStates: 
   blockedActionStates: 
-  blockedConditionStates: 01000000
-  comboParent: {fileID: 0}
+  blockedConditionStates: 0100000002000000
+  comboParent: {fileID: 6142064664045126092}
   wizardSkillPatterns:
   - damageArea: {fileID: 6368461269648145081}
     damage: 50
@@ -527,6 +527,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -402967865, guid: de8a6b8113ce5364e82ac0b90756cb88,
         type: 3}
+    - target: {fileID: 6869794699041368331, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7207912155587763137, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
       propertyPath: m_Name

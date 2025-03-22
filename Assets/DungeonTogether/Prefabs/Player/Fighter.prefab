@@ -248,7 +248,7 @@ MonoBehaviour:
   moduleEnabled: 1
   blockedMovementStates: 
   blockedActionStates: 0200000003000000
-  blockedConditionStates: 01000000
+  blockedConditionStates: 0100000002000000
   comboParent: {fileID: 0}
   basicAttackPatterns:
   - damageArea: {fileID: 1690298698063037514}

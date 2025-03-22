@@ -84,7 +84,7 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             if (characterHub.CharacterType is not CharacterType.Player) return;
             base.HandleInput();
-            if (PlayerInput.SkillButton.isDown )
+            if (PlayerInput.SkillButton.isDown)
             {
                 CastSkill();
             }
@@ -106,7 +106,7 @@ namespace DungeonTogether.Scripts.Character.Module
                     currentPatternIndex = 0;
                     previousPatternIndex = -1;
                 }
-                if (!skillReady && currentCooldown < PreviousPattern.Value.cooldown)
+                if (!skillReady && PreviousPattern != null &&currentCooldown < PreviousPattern.Value.cooldown)
                 {
                     currentCooldown += Time.deltaTime;
                     return;
@@ -143,7 +143,7 @@ namespace DungeonTogether.Scripts.Character.Module
         private void ConsumeMana(float amount)
         {
             var manaModule = characterHub.FindModuleOfType<CharacterManaModule>();
-            if (manaModule == null || manaModule.manaData.Value.currentMana < amount) return;
+            if (!manaModule || manaModule.manaData.Value.currentMana < amount) return;
             manaModule.ChangeMana(-amount);
         }
     }

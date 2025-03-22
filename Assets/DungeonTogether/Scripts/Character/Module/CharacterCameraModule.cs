@@ -16,7 +16,7 @@ namespace DungeonTogether.Scripts.Character.Module
             base.Initialize(characterHub);
             if (!IsOwner) return;
             SetPriority(startingPriority);
-            cinemachineCamera.transform.position = transform.position;
+            cinemachineCamera.ForceCameraPosition(transform.position, cinemachineCamera.transform.rotation);
         }
         
         public void SetPriority(int newPriority)

@@ -157,7 +157,7 @@ MonoBehaviour:
   moduleEnabled: 1
   blockedMovementStates: 
   blockedActionStates: 
-  blockedConditionStates: 01000000
+  blockedConditionStates: 0100000002000000
   rb2d: {fileID: 2364346117521812172}
   spriteRenderer: {fileID: 6869794699041368331}
   animator: {fileID: 1634689036434382716}
@@ -402,7 +402,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1472146885
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1146172791, guid: e6d42b550a45dd54d9621506b67f8002, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -753,6 +753,10 @@ MonoBehaviour:
   inputReader: {fileID: 11400000, guid: 84f84286f28d83a409aa9d6bd2f8f7eb, type: 2}
   movementInput: {x: 0, y: 0}
   attackButton:
+    isDown: 0
+    isUp: 0
+    isHeld: 0
+  skillButton:
     isDown: 0
     isUp: 0
     isHeld: 0
