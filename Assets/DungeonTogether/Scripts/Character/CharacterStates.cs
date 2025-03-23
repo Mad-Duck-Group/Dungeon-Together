@@ -77,5 +77,6 @@ namespace DungeonTogether.Scripts.Character
                 EventBus<ConditionStateEvent>.Invoke(_eventData);
             }
         }
+        
     }
 }

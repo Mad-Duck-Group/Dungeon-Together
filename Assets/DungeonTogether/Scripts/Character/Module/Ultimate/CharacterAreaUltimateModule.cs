@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TriInspector;
+using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -17,6 +19,8 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
         [Group("Timing"), Min(0)] public float cooldown;
         [Group("Timing"), Min(0)] public float resetComboTime;
         [Group("Cost"), Min(0)] public float energy;
+        [Group("Effect")] public bool hasEffect;
+        [Group("Effect"), ShowIf("hasEffect")] public float effectDuration;
     }
     public class CharacterAreaUltimateModule : CharacterModule
     {
@@ -45,6 +49,7 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             }
         }
         protected Coroutine ultimateCoroutine;
+        private  Coroutine effectCoroutine;
         
         public override void Initialize(CharacterHub characterHub)
         {
@@ -72,12 +77,23 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             });
         }
         
+        // another class come to override effect here
         protected virtual void OnHit(Collider2D collider)
         {
             if (!collider.TryGetComponent(out CharacterHub characterHub)) return;
             var healthModule = characterHub.FindModuleOfType<CharacterHealthModule>();
             if (healthModule && CurrentPattern != null) 
                 healthModule.ChangeHealth(-CurrentPattern.Value.value);
+
+            if (!CurrentPattern.Value.hasEffect) return;
+                effectCoroutine = StartCoroutine(EffectCoroutine(characterHub));
+        }
+        
+        private IEnumerator EffectCoroutine(CharacterHub otherCharacter)
+        {
+            otherCharacter.ChangeConditionState(CharacterStates.CharacterConditionState.Stunned);
+            yield return new WaitForSeconds(CurrentPattern.Value.effectDuration);
+            otherCharacter.ChangeConditionState(CharacterStates.CharacterConditionState.Normal);
         }
         
         protected override void HandleInput()
@@ -146,7 +162,6 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             if (!energyModule || energyModule.energyData.Value.currentEnergy < amount) return;
             energyModule.ChangeEnergy(-amount);
         }
-    
     }
 }
 
