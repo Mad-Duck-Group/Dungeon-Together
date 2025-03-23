@@ -22,7 +22,7 @@ namespace DungeonTogether.Scripts.Character.Module
     {
         [Title("Energy Settings")] 
         [SerializeField]
-        private NetworkVariable<EnergyData> energyData = new();
+        public NetworkVariable<EnergyData> energyData = new();
         [SerializeField] 
         private float startingEnergy = 0;
         [SerializeField]

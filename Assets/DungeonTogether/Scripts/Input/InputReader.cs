@@ -12,6 +12,8 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action<InputAction.CallbackContext> AttackEvent;
     public event Action<InputAction.CallbackContext> SkillEvent;
     
+    public event Action<InputAction.CallbackContext> UltimateEvent;
+    
     private Controls _controls;
     
     private void OnEnable()
@@ -42,5 +44,10 @@ public class InputReader : ScriptableObject, IPlayerActions
     public void OnSkill(InputAction.CallbackContext context)
     {
         SkillEvent?.Invoke(context);
+    }
+
+    public void OnUltimate(InputAction.CallbackContext context)
+    {
+        UltimateEvent?.Invoke(context);
     }
 }
