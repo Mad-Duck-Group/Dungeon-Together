@@ -172,7 +172,7 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             if (CurrentPattern == null) yield break;
             currentComboTime = 0;
-            characterHub.ChangeActionState(CharacterStates.CharacterActionState.Basic);
+            characterHub.ChangeActionState(CharacterActionState.Basic);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
             //Create bullet
             Debug.Log("Bullet has spawn");
@@ -191,7 +191,7 @@ namespace DungeonTogether.Scripts.Character.Module
                 projectileDamageArea.SetActive(false);
             }
             
-            characterHub.ChangeActionState(CharacterStates.CharacterActionState.None);
+            characterHub.ChangeActionState(CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
             currentPatternIndex = (currentPatternIndex + 1) % rangeAttackPatterns.Count;
             attackReady = false;

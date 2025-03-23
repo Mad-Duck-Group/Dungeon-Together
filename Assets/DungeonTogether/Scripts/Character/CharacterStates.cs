@@ -4,9 +4,7 @@ using UnityEditor.Timeline.Actions;
 
 namespace DungeonTogether.Scripts.Character
 {
-    public abstract class CharacterStates
-    {
-        public enum CharacterMovementState
+    public enum CharacterMovementState
         {
             Idle,
             Walking
@@ -77,5 +75,4 @@ namespace DungeonTogether.Scripts.Character
                 EventBus<ConditionStateEvent>.Invoke(_eventData);
             }
         }
-    }
 }

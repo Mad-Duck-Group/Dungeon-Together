@@ -25,26 +25,26 @@ namespace DungeonTogether.Scripts.Character.Module
         public override void OnNetworkSpawn()
         {
             isFlipped.OnValueChanged += OnSpriteFlip;
-            EventBus<CharacterStates.ConditionStateEvent>.Event += OnConditionStateChange;
+            EventBus<ConditionStateEvent>.Event += OnConditionStateChange;
             if (!IsOwner)
             {
                 spriteRenderer.flipX = isFlipped.Value;
             }
             
         }
-        private void OnConditionStateChange(CharacterStates.ConditionStateEvent eventData)
+        private void OnConditionStateChange(ConditionStateEvent eventData)
         {
             if (eventData.characterHub != characterHub) return;
-            if (eventData.newState != CharacterStates.CharacterConditionState.Dead) return;
+            if (eventData.newState != CharacterConditionState.Dead) return;
             rb2d.linearVelocity = Vector2.zero;
             moveDirection = Vector2.zero;
-            characterHub.ChangeMovementState(CharacterStates.CharacterMovementState.Idle);
+            characterHub.ChangeMovementState(CharacterMovementState.Idle);
         }
 
         public override void OnNetworkDespawn()
         {
             isFlipped.OnValueChanged -= OnSpriteFlip;
-            EventBus<CharacterStates.ConditionStateEvent>.Event -= OnConditionStateChange;
+            EventBus<ConditionStateEvent>.Event -= OnConditionStateChange;
         }
 
         [Rpc(SendTo.Server)]
@@ -107,8 +107,8 @@ namespace DungeonTogether.Scripts.Character.Module
             moveDirection = direction;
             moveDirection.Normalize();
             var state = moveDirection.magnitude > 0
-                ? CharacterStates.CharacterMovementState.Walking
-                : CharacterStates.CharacterMovementState.Idle;
+                ? CharacterMovementState.Walking
+                : CharacterMovementState.Idle;
             characterHub.ChangeMovementState(state);
         }
 

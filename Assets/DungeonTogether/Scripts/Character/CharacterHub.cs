@@ -15,7 +15,7 @@ namespace DungeonTogether.Scripts.Character
         Player,
         NPC
     }
-    
+
     /// <summary>
     ///  Character hub is the main class that manages the character and its modules.
     /// </summary>
@@ -42,18 +42,20 @@ namespace DungeonTogether.Scripts.Character
         private List<CharacterModule> modules = new();
         [field: SerializeField, DisplayAsString, GroupNext("Debug Tab"), Tab("State"),
                 PropertyTooltip("Current movement state of the character.")] 
-        public CharacterStates.CharacterMovementState MovementState { get; private set; } = CharacterStates.CharacterMovementState.Idle;
+        public CharacterMovementState MovementState { get; private set; } = CharacterMovementState.Idle;
         [field: SerializeField, DisplayAsString, Tab("State"),
                 PropertyTooltip("Current action state of the character.")]
-        public CharacterStates.CharacterActionState ActionState { get; private set; } = CharacterStates.CharacterActionState.None;
+        public CharacterActionState ActionState { get; private set; } = CharacterActionState.None;
         [field: SerializeField, DisplayAsString, Tab("State"),
                 PropertyTooltip("Current condition state of the character.")] 
-        public CharacterStates.CharacterConditionState ConditionState { get; private set; } = CharacterStates.CharacterConditionState.Normal;
+        public CharacterConditionState ConditionState { get; private set; } = CharacterConditionState.Normal;
         #endregion
         
         #region Properties
         public PlayerInput PlayerInput { get; private set; }
+        public CharacterPool CharacterPool { get; set; }
         protected bool initialized;
+        protected bool shutdown;
         public bool Initialized => initialized;
         #endregion
 
@@ -85,7 +87,11 @@ namespace DungeonTogether.Scripts.Character
             {
                 Debug.LogError($"{nameof(PlayerInput)} component not found in player object.");
             }
+            ChangeActionState(CharacterActionState.None);
+            ChangeConditionState(CharacterConditionState.Normal);
+            ChangeMovementState(CharacterMovementState.Idle);
             initialized = true;
+            shutdown = false;
         }
 
         /// <summary>
@@ -116,12 +122,38 @@ namespace DungeonTogether.Scripts.Character
         {
             if (!IsOwner) return;
         }
-
+        
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+            ShutdownProcedure();
+        }
+        
         public override void OnDestroy()
         {
             base.OnDestroy();
+            ShutdownProcedure();
+        }
+        
+        /// <summary>
+        /// Make the character hub shutdown instantly.
+        /// </summary>
+        public void ShutdownInstant()
+        {
+            ShutdownProcedure();
+        }
+
+        /// <summary>
+        /// Shuts down the character hub and its modules and returns the character to the pool if it has one.
+        /// </summary>
+        private void ShutdownProcedure()
+        {
+            if (shutdown) return;
+            shutdown = true;
             Shutdown();
             Unsubscribe();
+            if (CharacterPool) CharacterPool.BackToPool(this);
+            CharacterPool = null;
         }
         #endregion
         
@@ -130,24 +162,24 @@ namespace DungeonTogether.Scripts.Character
         #endregion
         
         #region States
-        public void ChangeMovementState(CharacterStates.CharacterMovementState newState)
+        public void ChangeMovementState(CharacterMovementState newState)
         {
             if (newState == MovementState) return;
-            CharacterStates.MovementStateEvent.Invoke(this, MovementState, newState);
+            MovementStateEvent.Invoke(this, MovementState, newState);
             MovementState = newState;
         }
         
-        public void ChangeActionState(CharacterStates.CharacterActionState newState)
+        public void ChangeActionState(CharacterActionState newState)
         {
             if (newState == ActionState) return;
-            CharacterStates.ActionStateEvent.Invoke(this, ActionState, newState);
+            ActionStateEvent.Invoke(this, ActionState, newState);
             ActionState = newState;
         }
         
-        public void ChangeConditionState(CharacterStates.CharacterConditionState newState)
+        public void ChangeConditionState(CharacterConditionState newState)
         {
             if (newState == ConditionState) return;
-            CharacterStates.ConditionStateEvent.Invoke(this, ConditionState, newState);
+            ConditionStateEvent.Invoke(this, ConditionState, newState);
             ConditionState = newState;
         }
         #endregion

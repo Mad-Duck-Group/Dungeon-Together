@@ -127,12 +127,12 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             if (CurrentPattern == null) yield break;
             currentComboTime = 0;
             ConsumeMana(CurrentPattern.Value.mana);
-            characterHub.ChangeActionState(CharacterStates.CharacterActionState.Skill);
+            characterHub.ChangeActionState(CharacterActionState.Skill);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
             CurrentPattern.Value.areaSkill.SetActive(true);
             yield return new WaitForSeconds(CurrentPattern.Value.duration);
             CurrentPattern.Value.areaSkill.SetActive(false);
-            characterHub.ChangeActionState(CharacterStates.CharacterActionState.None);
+            characterHub.ChangeActionState(CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
             currentPatternIndex = (currentPatternIndex + 1) % areaSkillPattern.Count;
             skillReady = false;
