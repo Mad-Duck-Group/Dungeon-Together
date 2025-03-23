@@ -104,7 +104,7 @@ MonoBehaviour:
     m_InternalValue:
       currentEnergy: 0
       maxEnergy: 100
-  startingEnergy: 0
+  startingEnergy: 100
   bumpThreshold: 10
   useMMEnergyBar: 1
   energyBar: {fileID: 0}
@@ -757,6 +757,10 @@ MonoBehaviour:
     isUp: 0
     isHeld: 0
   skillButton:
+    isDown: 0
+    isUp: 0
+    isHeld: 0
+  ultimateButton:
     isDown: 0
     isUp: 0
     isHeld: 0

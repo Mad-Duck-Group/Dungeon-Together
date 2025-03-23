@@ -35,7 +35,7 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
         [Title("Debug")]
         [SerializeField, DisplayAsString] protected int currentPatternIndex;
         [SerializeField, DisplayAsString] protected int previousPatternIndex = -1;
-        [FormerlySerializedAs("skillReady")] [SerializeField, DisplayAsString] protected bool ultimateReady;
+        [SerializeField, DisplayAsString] protected bool ultimateReady;
         [SerializeField, DisplayAsString] protected float currentCooldown;
         [SerializeField, DisplayAsString] protected float currentComboTime;
         
@@ -49,8 +49,7 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             }
         }
         protected Coroutine ultimateCoroutine;
-        private  Coroutine effectCoroutine;
-        
+
         public override void Initialize(CharacterHub characterHub)
         {
             base.Initialize(characterHub);
@@ -82,20 +81,13 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
         {
             if (!collider.TryGetComponent(out CharacterHub characterHub)) return;
             var healthModule = characterHub.FindModuleOfType<CharacterHealthModule>();
-            if (healthModule && CurrentPattern != null) 
+            if (CurrentPattern == null) return;
+            if (healthModule) 
                 healthModule.ChangeHealth(-CurrentPattern.Value.value);
-
             if (!CurrentPattern.Value.hasEffect) return;
-                effectCoroutine = StartCoroutine(EffectCoroutine(characterHub));
+                characterHub.ChangeConditionState(CharacterConditionState.Stunned, CurrentPattern.Value.effectDuration);
         }
-        
-        private IEnumerator EffectCoroutine(CharacterHub otherCharacter)
-        {
-            otherCharacter.ChangeConditionState(CharacterStates.CharacterConditionState.Stunned);
-            yield return new WaitForSeconds(CurrentPattern.Value.effectDuration);
-            otherCharacter.ChangeConditionState(CharacterStates.CharacterConditionState.Normal);
-        }
-        
+
         protected override void HandleInput()
         {
             if (characterHub.CharacterType is not CharacterType.Player) return;
@@ -122,7 +114,7 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
                     currentPatternIndex = 0;
                     previousPatternIndex = -1;
                 }
-                if (!ultimateReady && PreviousPattern != null &&currentCooldown < PreviousPattern.Value.cooldown)
+                if (!ultimateReady && PreviousPattern != null && currentCooldown < PreviousPattern.Value.cooldown)
                 {
                     currentCooldown += Time.deltaTime;
                     return;
@@ -143,24 +135,29 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
         {
             if (CurrentPattern == null) yield break;
             currentComboTime = 0;
-            ConsumeEnergy(CurrentPattern.Value.energy);
-            characterHub.ChangeActionState(CharacterStates.CharacterActionState.Ultimate);
+            if (!ConsumeEnergy(CurrentPattern.Value.energy))
+            {
+                ultimateCoroutine = null;
+                yield break;
+            }
+            characterHub.ChangeActionState(CharacterActionState.Ultimate);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
             CurrentPattern.Value.areaUltimate.SetActive(true);
             yield return new WaitForSeconds(CurrentPattern.Value.duration);
             CurrentPattern.Value.areaUltimate.SetActive(false);
-            characterHub.ChangeActionState(CharacterStates.CharacterActionState.None);
+            characterHub.ChangeActionState(CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
             currentPatternIndex = (currentPatternIndex + 1) % areaUltimatePattern.Count;
             ultimateReady = false;
             ultimateCoroutine = null;
             
         }
-        private void ConsumeEnergy(float amount)
+        private bool ConsumeEnergy(float amount)
         {
             var energyModule = characterHub.FindModuleOfType<CharacterEnergyModule>();
-            if (!energyModule || energyModule.energyData.Value.currentEnergy < amount) return;
+            if (!energyModule || energyModule.energyData.Value.currentEnergy < amount) return false;
             energyModule.ChangeEnergy(-amount);
+            return true;
         }
     }
 }

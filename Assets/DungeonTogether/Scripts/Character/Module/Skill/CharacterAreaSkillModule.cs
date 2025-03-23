@@ -126,7 +126,11 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         {
             if (CurrentPattern == null) yield break;
             currentComboTime = 0;
-            ConsumeMana(CurrentPattern.Value.mana);
+            if (!ConsumeMana(CurrentPattern.Value.mana))
+            {
+                skillCoroutine = null;
+                yield break;
+            }
             characterHub.ChangeActionState(CharacterActionState.Skill);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
             CurrentPattern.Value.areaSkill.SetActive(true);
@@ -139,11 +143,12 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             skillCoroutine = null;
             
         }
-        private void ConsumeMana(float amount)
+        private bool ConsumeMana(float amount)
         {
             var manaModule = characterHub.FindModuleOfType<CharacterManaModule>();
-            if (!manaModule || manaModule.manaData.Value.currentMana < amount) return;
+            if (!manaModule || manaModule.manaData.Value.currentMana < amount) return false;
             manaModule.ChangeMana(-amount);
+            return true;
         }
     }
 }

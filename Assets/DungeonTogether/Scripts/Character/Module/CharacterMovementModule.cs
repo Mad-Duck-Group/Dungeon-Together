@@ -97,13 +97,15 @@ namespace DungeonTogether.Scripts.Character.Module
             }
             base.LateUpdateModule();
         }
+
         /// <summary>
         /// Sets the direction of movement.
         /// </summary>
         /// <param name="direction">Direction of movement.</param>
-        public void SetDirection(Vector2 direction)
+        /// <param name="forceSet">Set even when the module is not permitted?</param>
+        public void SetDirection(Vector2 direction, bool forceSet = false)
         {
-            if (!ModulePermitted) return;
+            if (!ModulePermitted && !forceSet) return;
             moveDirection = direction;
             moveDirection.Normalize();
             var state = moveDirection.magnitude > 0

@@ -205,8 +205,8 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   moduleEnabled: 1
   blockedMovementStates: 
-  blockedActionStates: 
-  blockedConditionStates: 02000000
+  blockedActionStates: 0200000003000000
+  blockedConditionStates: 0100000002000000
   comboParent: {fileID: 5286397097068261834}
   rangeAttackPatterns:
   - firePoint: {fileID: 687556617816823674}

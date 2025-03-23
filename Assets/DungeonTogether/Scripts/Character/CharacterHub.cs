@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DungeonTogether.Scripts.Character.Module;
@@ -57,6 +58,9 @@ namespace DungeonTogether.Scripts.Character
         protected bool initialized;
         protected bool shutdown;
         public bool Initialized => initialized;
+        private Coroutine changeActionStateCoroutine;
+        private Coroutine changeConditionStateCoroutine;
+        private Coroutine changeMovementStateCoroutine;
         #endregion
 
         #region Life Cycle
@@ -111,6 +115,18 @@ namespace DungeonTogether.Scripts.Character
             foreach (var module in modules)
             {
                 module.Shutdown();
+            }
+            if (changeMovementStateCoroutine != null)
+            {
+                StopCoroutine(changeMovementStateCoroutine);
+            }
+            if (changeMovementStateCoroutine != null)
+            {
+                StopCoroutine(changeMovementStateCoroutine);
+            }
+            if (changeMovementStateCoroutine != null)
+            {
+                StopCoroutine(changeMovementStateCoroutine);
             }
             initialized = false;
         }
@@ -169,6 +185,15 @@ namespace DungeonTogether.Scripts.Character
             MovementState = newState;
         }
         
+        public void ChangeMovementState(CharacterMovementState newState, float duration)
+        {
+            if (changeMovementStateCoroutine != null)
+            {
+                StopCoroutine(changeMovementStateCoroutine);
+            }
+            changeMovementStateCoroutine = StartCoroutine(ChangeMovementStateCoroutine(MovementState, newState, duration));
+        }
+
         public void ChangeActionState(CharacterActionState newState)
         {
             if (newState == ActionState) return;
@@ -176,11 +201,50 @@ namespace DungeonTogether.Scripts.Character
             ActionState = newState;
         }
         
+        public void ChangeActionState(CharacterActionState newState, float duration)
+        {
+            if (changeActionStateCoroutine != null)
+            {
+                StopCoroutine(changeActionStateCoroutine);
+            }
+            changeActionStateCoroutine = StartCoroutine(ChangeActionStateCoroutine(ActionState, newState, duration));
+        }
+        
         public void ChangeConditionState(CharacterConditionState newState)
         {
             if (newState == ConditionState) return;
             ConditionStateEvent.Invoke(this, ConditionState, newState);
             ConditionState = newState;
+        }
+        
+        public void ChangeConditionState(CharacterConditionState newState, float duration)
+        {
+            if (changeConditionStateCoroutine != null)
+            {
+                StopCoroutine(changeConditionStateCoroutine);
+            }
+            changeConditionStateCoroutine = StartCoroutine(ChangeConditionStateCoroutine(ConditionState, newState, duration));
+        }
+        
+        private IEnumerator ChangeMovementStateCoroutine(CharacterMovementState oldState, CharacterMovementState newState, float duration)
+        {
+            ChangeMovementState(newState);
+            yield return new WaitForSeconds(duration);
+            ChangeMovementState(oldState);
+        }
+        
+        private IEnumerator ChangeActionStateCoroutine(CharacterActionState oldState, CharacterActionState newState, float duration)
+        {
+            ChangeActionState(newState);
+            yield return new WaitForSeconds(duration);
+            ChangeActionState(oldState);
+        }
+        
+        private IEnumerator ChangeConditionStateCoroutine(CharacterConditionState oldState, CharacterConditionState newState, float duration)
+        {
+            ChangeConditionState(newState);
+            yield return new WaitForSeconds(duration);
+            ChangeConditionState(oldState);
         }
         #endregion
 
