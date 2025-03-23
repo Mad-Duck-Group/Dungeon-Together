@@ -1,51 +1,49 @@
 using System;
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using TriInspector;
 using UnityEngine;
-using UnityEngine.Localization.SmartFormat.Utilities;
 
-namespace DungeonTogether.Scripts.Character.Module
+namespace DungeonTogether.Scripts.Character.Module.Skill
 {
     [Serializable]
-    public struct WizardSkillPattern
+    public struct AreaSkillPattern
     {
-        [Group("Area"), Required] public DamageArea damageArea;
-        [Group("Damage"), Min(0)] public float damage;
+        [Group("Area"), Required] public DamageArea areaSkill;
+        [Group("Value"), Min(0)] public float value;
         [Group("Timing"), Min(0)] public float delay;
         [Group("Timing"), Min(0)] public float duration;
         [Group("Timing"), Min(0)] public float cooldown;
         [Group("Timing"), Min(0)] public float resetComboTime;
         [Group("Cost"), Min(0)] public float mana;
     }
-    public class CharacterWizardSkillModule : CharacterModule
+    public class CharacterAreaSkillModule : CharacterModule
     {
         [Title("Settings")]
-        [SerializeField] private Transform comboParent;
+        [SerializeField] protected Transform comboParent;
         [TableList(Draggable = true,
             HideAddButton = false,
             HideRemoveButton = false,
             AlwaysExpanded = false)]
-        [SerializeField] private List<WizardSkillPattern> wizardSkillPatterns;
+        [SerializeField] protected List<AreaSkillPattern> areaSkillPattern;
         
         [Title("Debug")]
-        [SerializeField, DisplayAsString] private int currentPatternIndex;
-        [SerializeField, DisplayAsString] private int previousPatternIndex = -1;
-        [SerializeField, DisplayAsString] private bool skillReady;
-        [SerializeField, DisplayAsString] private float currentCooldown;
-        [SerializeField, DisplayAsString] private float currentComboTime;
+        [SerializeField, DisplayAsString] protected int currentPatternIndex;
+        [SerializeField, DisplayAsString] protected int previousPatternIndex = -1;
+        [SerializeField, DisplayAsString] protected bool skillReady;
+        [SerializeField, DisplayAsString] protected float currentCooldown;
+        [SerializeField, DisplayAsString] protected float currentComboTime;
         
-        private WizardSkillPattern? CurrentPattern => wizardSkillPatterns[currentPatternIndex];
-        private WizardSkillPattern? PreviousPattern
+        protected AreaSkillPattern? CurrentPattern => areaSkillPattern[currentPatternIndex];
+        protected AreaSkillPattern? PreviousPattern
         {
             get
             {
                 if (previousPatternIndex == -1) return null;
-                return wizardSkillPatterns[previousPatternIndex];
+                return areaSkillPattern[previousPatternIndex];
             }
         }
-        private Coroutine skillCoroutine;
+        protected Coroutine skillCoroutine;
         
         public override void Initialize(CharacterHub characterHub)
         {
@@ -53,10 +51,10 @@ namespace DungeonTogether.Scripts.Character.Module
             currentPatternIndex = 0;
             currentCooldown = 0;
             previousPatternIndex = -1;
-            wizardSkillPatterns.ForEach(pattern =>
+            areaSkillPattern.ForEach(pattern =>
             {
-                pattern.damageArea.SetActive(false);
-                pattern.damageArea.OnHitEvent += OnHit;
+                pattern.areaSkill.SetActive(false);
+                pattern.areaSkill.OnHitEvent += OnHit;
             });
         }
 
@@ -66,10 +64,10 @@ namespace DungeonTogether.Scripts.Character.Module
             currentPatternIndex = 0;
             currentCooldown = 0;
             previousPatternIndex = -1;
-            wizardSkillPatterns.ForEach(pattern =>
+            areaSkillPattern.ForEach(pattern =>
             {
-                pattern.damageArea.SetActive(false);
-                pattern.damageArea.OnHitEvent -= OnHit;
+                pattern.areaSkill.SetActive(false);
+                pattern.areaSkill.OnHitEvent -= OnHit;
             });
         }
         
@@ -78,8 +76,9 @@ namespace DungeonTogether.Scripts.Character.Module
             if (!collider.TryGetComponent(out CharacterHub characterHub)) return;
             var healthModule = characterHub.FindModuleOfType<CharacterHealthModule>();
             if (healthModule && CurrentPattern != null) 
-                healthModule.ChangeHealth(-CurrentPattern.Value.damage);
+                healthModule.ChangeHealth(-CurrentPattern.Value.value);
         }
+        
         protected override void HandleInput()
         {
             if (characterHub.CharacterType is not CharacterType.Player) return;
@@ -130,12 +129,12 @@ namespace DungeonTogether.Scripts.Character.Module
             ConsumeMana(CurrentPattern.Value.mana);
             characterHub.ChangeActionState(CharacterStates.CharacterActionState.Skill);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
-            CurrentPattern.Value.damageArea.SetActive(true);
+            CurrentPattern.Value.areaSkill.SetActive(true);
             yield return new WaitForSeconds(CurrentPattern.Value.duration);
-            CurrentPattern.Value.damageArea.SetActive(false);
+            CurrentPattern.Value.areaSkill.SetActive(false);
             characterHub.ChangeActionState(CharacterStates.CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
-            currentPatternIndex = (currentPatternIndex + 1) % wizardSkillPatterns.Count;
+            currentPatternIndex = (currentPatternIndex + 1) % areaSkillPattern.Count;
             skillReady = false;
             skillCoroutine = null;
             
