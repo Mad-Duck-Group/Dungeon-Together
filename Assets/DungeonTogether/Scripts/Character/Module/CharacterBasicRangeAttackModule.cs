@@ -23,6 +23,7 @@ namespace DungeonTogether.Scripts.Character.Module
         [Group("Timing"), Min(0), ShowIf(nameof(hasDuration))] public float duration;
         [Group("Timing"), Min(0)] public float interval;
         [Group("Timing"), Min(0)] public float resetComboTime;
+        [Group("Energy"), Min(0)] public float getEnergy;
     }
     public class CharacterBasicRangeAttackModule : CharacterModule
     {
@@ -86,6 +87,7 @@ namespace DungeonTogether.Scripts.Character.Module
                 criticalModule.CalculateCritical(ref damage);
             }
             healthModule.ChangeHealth(damage);
+            GetEnergy(CurrentPattern.Value.getEnergy);
         }
         
         // Input
@@ -196,6 +198,14 @@ namespace DungeonTogether.Scripts.Character.Module
             currentPatternIndex = (currentPatternIndex + 1) % rangeAttackPatterns.Count;
             attackReady = false;
             attackCoroutine = null;
+        }
+        
+        protected virtual void GetEnergy(float amount)
+        {
+            var energyModule = characterHub.FindModuleOfType<CharacterEnergyModule>();
+            if (!energyModule || energyModule.energyData.Value.currentEnergy > energyModule.energyData.Value.maxEnergy) return;
+            energyModule.ChangeEnergy(+amount);
+            return;
         }
     }
 }

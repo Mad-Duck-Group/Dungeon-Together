@@ -16,6 +16,7 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         [Group("Timing"), Min(0)] public float cooldown;
         [Group("Timing"), Min(0)] public float resetComboTime;
         [Group("Cost"), Min(0)] public float mana;
+        [Group("Energy"), Min(0)] public float getEnergy;
     }
     public class CharacterAreaSkillModule : CharacterModule
     {
@@ -77,6 +78,7 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             var healthModule = characterHub.FindModuleOfType<CharacterHealthModule>();
             if (healthModule && CurrentPattern != null) 
                 healthModule.ChangeHealth(-CurrentPattern.Value.value);
+            GetEnergy(CurrentPattern.Value.getEnergy);
         }
         
         protected override void HandleInput()
@@ -149,6 +151,14 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             if (!manaModule || manaModule.manaData.Value.currentMana < amount) return false;
             manaModule.ChangeMana(-amount);
             return true;
+        }
+        
+        protected virtual void GetEnergy(float amount)
+        {
+            var energyModule = characterHub.FindModuleOfType<CharacterEnergyModule>();
+            if (!energyModule || energyModule.energyData.Value.currentEnergy > energyModule.energyData.Value.maxEnergy) return;
+            energyModule.ChangeEnergy(+amount);
+            return;
         }
     }
 }
