@@ -257,18 +257,21 @@ MonoBehaviour:
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
+    getEnergy: 10
   - damageArea: {fileID: 388050585779726240}
     damage: 5
     delay: 0
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
+    getEnergy: 10
   - damageArea: {fileID: 540551778150867667}
     damage: 10
     delay: 0
     duration: 0.1
     interval: 0.5
     resetComboTime: 2
+    getEnergy: 10
   currentPatternIndex: 0
   previousPatternIndex: -1
   attackReady: 0
@@ -668,6 +671,11 @@ PrefabInstance:
     - target: {fileID: 8881605798776199879, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011816507531725563, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: startingEnergy
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
