@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DungeonTogether.Scripts.Manangers;
 using TriInspector;
 using Unity.Netcode;
 using Unity.VisualScripting;
@@ -36,6 +37,7 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
         [SerializeField, DisplayAsString] protected int currentPatternIndex;
         [SerializeField, DisplayAsString] protected int previousPatternIndex = -1;
         [SerializeField, DisplayAsString] protected bool ultimateReady;
+        [SerializeField, DisplayAsString] protected bool ultimateUsed;
         [SerializeField, DisplayAsString] protected float currentCooldown;
         [SerializeField, DisplayAsString] protected float currentComboTime;
         
@@ -48,19 +50,36 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
                 return areaUltimatePattern[previousPatternIndex];
             }
         }
+        private CharacterEnergyModule energyModule;
         protected Coroutine ultimateCoroutine;
 
         public override void Initialize(CharacterHub characterHub)
         {
             base.Initialize(characterHub);
             currentPatternIndex = 0;
-            currentCooldown = 0;
+            if (CurrentPattern != null)
+            {
+                currentCooldown = CurrentPattern.Value.cooldown;
+                UpdateUltimateActionIcon(true, CurrentPattern.Value);
+            }
+            else
+            {
+                UpdateUltimateActionIcon(false);
+            }
             previousPatternIndex = -1;
             areaUltimatePattern.ForEach(pattern =>
             {
+                pattern.areaUltimate.Initialize();
                 pattern.areaUltimate.SetActive(false);
                 pattern.areaUltimate.OnHitEvent += OnHit;
             });
+            
+        }
+        
+        public override void PostInitialize()
+        {
+            base.PostInitialize();
+            energyModule = characterHub.FindModuleOfType<CharacterEnergyModule>();
         }
 
         public override void Shutdown()
@@ -96,12 +115,31 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             {
                 CastUltimate();
             }
-            
         }
+        
+        protected override void Update()
+        {
+            if (!IsOwner) return;
+            if (ModulePermitted)
+            {
+                HandleInput();
+            }
+            UpdateModule();
+        }
+        
         protected override void UpdateModule()
         {
-            if (!ModulePermitted) return;
+            UpdateCooldown();
+            if (!ModulePermitted)
+            {
+                UpdateUltimateActionIcon(false);
+                return;
+            }
             base.UpdateModule();
+        }
+
+        private void UpdateCooldown()
+        {
             if (PreviousPattern != null)
             {
                 if (ultimateReady && currentComboTime < PreviousPattern.Value.resetComboTime)
@@ -114,14 +152,34 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
                     currentPatternIndex = 0;
                     previousPatternIndex = -1;
                 }
-                if (!ultimateReady && PreviousPattern != null && currentCooldown < PreviousPattern.Value.cooldown)
-                {
-                    currentCooldown += Time.deltaTime;
-                    return;
-                }
             }
-            ultimateReady = true;
-            currentCooldown = 0;
+            var pattern = PreviousPattern ?? CurrentPattern;
+            if (pattern == null) return;
+            bool hasEnergy = energyModule && energyModule.HasEnoughEnergy(pattern.Value.energy);
+            bool coolingDown = false;
+            if (!ultimateReady && currentCooldown < pattern.Value.cooldown)
+            {
+                currentCooldown += Time.deltaTime;
+                ultimateReady = false;
+                coolingDown = true;
+            }
+            else
+            {
+                ultimateReady = true;
+            }
+            bool available = (!ultimateUsed && ultimateReady && hasEnergy) || coolingDown;
+            UpdateUltimateActionIcon(available, pattern);
+        }
+        
+        private void UpdateUltimateActionIcon(bool available, AreaUltimatePattern? pattern = null)
+        {
+            if (characterHub.CharacterType is not CharacterType.Player) return;
+            if (pattern != null)
+            {
+                float max = pattern.Value.cooldown;
+                PlayerCanvasManager.Instance.UpdateUltimateIcon(currentCooldown, max);
+            }
+            PlayerCanvasManager.Instance.SetAvailableUltimate(available);
         }
         
         private void CastUltimate()
@@ -134,12 +192,13 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
         protected IEnumerator CastUltimateCoroutine()
         {
             if (CurrentPattern == null) yield break;
-            currentComboTime = 0;
             if (!ConsumeEnergy(CurrentPattern.Value.energy))
             {
                 ultimateCoroutine = null;
                 yield break;
             }
+            currentComboTime = 0;
+            ultimateUsed = true;
             characterHub.ChangeActionState(CharacterActionState.Ultimate);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
             CurrentPattern.Value.areaUltimate.SetActive(true);
@@ -148,14 +207,15 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             characterHub.ChangeActionState(CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
             currentPatternIndex = (currentPatternIndex + 1) % areaUltimatePattern.Count;
+            currentCooldown = 0;
             ultimateReady = false;
+            ultimateUsed = false;
             ultimateCoroutine = null;
             
         }
         private bool ConsumeEnergy(float amount)
         {
-            var energyModule = characterHub.FindModuleOfType<CharacterEnergyModule>();
-            if (!energyModule || energyModule.energyData.Value.currentEnergy < amount) return false;
+            if (!energyModule || !energyModule.HasEnoughEnergy(amount)) return false;
             energyModule.ChangeEnergy(-amount);
             return true;
         }

@@ -93,6 +93,14 @@ namespace DungeonTogether.Scripts.Character.Module
             this.characterHub = characterHub;
             Subscribe();
         }
+        
+        /// <summary>
+        /// Post initialize module, useful for getting modules from the character hub
+        /// </summary>
+        public virtual void PostInitialize()
+        {
+            
+        }
 
         /// <summary>
         /// Shutdown module

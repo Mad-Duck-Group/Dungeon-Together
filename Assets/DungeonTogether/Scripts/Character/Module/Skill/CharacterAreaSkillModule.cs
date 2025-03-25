@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DungeonTogether.Scripts.Manangers;
 using TriInspector;
 using UnityEngine;
 
@@ -32,6 +33,7 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         [SerializeField, DisplayAsString] protected int currentPatternIndex;
         [SerializeField, DisplayAsString] protected int previousPatternIndex = -1;
         [SerializeField, DisplayAsString] protected bool skillReady;
+        [SerializeField, DisplayAsString] protected bool skillUsed;
         [SerializeField, DisplayAsString] protected float currentCooldown;
         [SerializeField, DisplayAsString] protected float currentComboTime;
         
@@ -45,18 +47,34 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             }
         }
         protected Coroutine skillCoroutine;
+        private CharacterManaModule manaModule;
         
         public override void Initialize(CharacterHub characterHub)
         {
             base.Initialize(characterHub);
             currentPatternIndex = 0;
-            currentCooldown = 0;
+            if (CurrentPattern != null)
+            {
+                currentCooldown = CurrentPattern.Value.cooldown;
+                UpdateSkillActionIcon(true, CurrentPattern.Value);
+            }
+            else
+            {
+                UpdateSkillActionIcon(false);
+            }
             previousPatternIndex = -1;
             areaSkillPattern.ForEach(pattern =>
             {
+                pattern.areaSkill.Initialize();
                 pattern.areaSkill.SetActive(false);
                 pattern.areaSkill.OnHitEvent += OnHit;
             });
+        }
+        
+        public override void PostInitialize()
+        {
+            base.PostInitialize();
+            manaModule = characterHub.FindModuleOfType<CharacterManaModule>();
         }
 
         public override void Shutdown()
@@ -89,12 +107,30 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             {
                 CastSkill();
             }
-            
+        }
+        
+        protected override void Update()
+        {
+            if (!IsOwner) return;
+            if (ModulePermitted)
+            {
+                HandleInput();
+            }
+            UpdateModule();
         }
         protected override void UpdateModule()
         {
-            if (!ModulePermitted) return;
+            UpdateCooldown();
+            if (!ModulePermitted)
+            {
+                UpdateSkillActionIcon(false);
+                return;
+            }
             base.UpdateModule();
+        }
+
+        private void UpdateCooldown()
+        {
             if (PreviousPattern != null)
             {
                 if (skillReady && currentComboTime < PreviousPattern.Value.resetComboTime)
@@ -107,14 +143,35 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
                     currentPatternIndex = 0;
                     previousPatternIndex = -1;
                 }
-                if (!skillReady && PreviousPattern != null &&currentCooldown < PreviousPattern.Value.cooldown)
-                {
-                    currentCooldown += Time.deltaTime;
-                    return;
-                }
             }
-            skillReady = true;
-            currentCooldown = 0;
+            
+            var pattern = PreviousPattern ?? CurrentPattern;
+            if (pattern == null) return;
+            bool hasMana = manaModule && manaModule.HasEnoughMana(pattern.Value.mana);
+            bool coolingDown = false;
+            if (!skillReady && currentCooldown < pattern.Value.cooldown)
+            {
+                currentCooldown += Time.deltaTime;
+                skillReady = false;
+                coolingDown = true;
+            }
+            else
+            {
+                skillReady = true;
+            }
+            bool available = (!skillUsed && skillReady && hasMana) || coolingDown;
+            UpdateSkillActionIcon(available, pattern);
+        }
+
+        private void UpdateSkillActionIcon(bool available, AreaSkillPattern? pattern = null)
+        {
+            if (characterHub.CharacterType is not CharacterType.Player) return;
+            if (pattern != null)
+            {
+                float max = pattern.Value.cooldown;
+                PlayerCanvasManager.Instance.UpdateSkillIcon(currentCooldown, max);
+            }
+            PlayerCanvasManager.Instance.SetAvailableSkill(available);
         }
         
         private void CastSkill()
@@ -127,28 +184,31 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         protected IEnumerator CastSkillCoroutine()
         {
             if (CurrentPattern == null) yield break;
-            currentComboTime = 0;
             if (!ConsumeMana(CurrentPattern.Value.mana))
             {
                 skillCoroutine = null;
                 yield break;
             }
+            skillUsed = true;
+            currentComboTime = 0;
             characterHub.ChangeActionState(CharacterActionState.Skill);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
+            CurrentPattern.Value.areaSkill.Initialize();
             CurrentPattern.Value.areaSkill.SetActive(true);
             yield return new WaitForSeconds(CurrentPattern.Value.duration);
             CurrentPattern.Value.areaSkill.SetActive(false);
             characterHub.ChangeActionState(CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
             currentPatternIndex = (currentPatternIndex + 1) % areaSkillPattern.Count;
+            skillUsed = false;
+            currentCooldown = 0;
             skillReady = false;
             skillCoroutine = null;
             
         }
         private bool ConsumeMana(float amount)
         {
-            var manaModule = characterHub.FindModuleOfType<CharacterManaModule>();
-            if (!manaModule || manaModule.manaData.Value.currentMana < amount) return false;
+            if (!manaModule || !manaModule.HasEnoughMana(amount)) return false;
             manaModule.ChangeMana(-amount);
             return true;
         }

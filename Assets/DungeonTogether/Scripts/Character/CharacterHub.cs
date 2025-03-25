@@ -96,6 +96,10 @@ namespace DungeonTogether.Scripts.Character
             ChangeMovementState(CharacterMovementState.Idle);
             initialized = true;
             shutdown = false;
+            foreach (var module in modules)
+            {
+                module.PostInitialize();
+            }
         }
 
         /// <summary>

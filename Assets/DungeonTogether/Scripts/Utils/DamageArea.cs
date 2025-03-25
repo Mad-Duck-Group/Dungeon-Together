@@ -8,15 +8,19 @@ public class DamageArea : MonoBehaviour
 {
     [SerializeField] protected SpriteRenderer visualizer;
     [SerializeField] protected LayerMask targetLayer;
+    [SerializeField] protected bool includeSelf;
 
     protected Collider2D damageCollider;
+    protected Transform parent;
+    protected bool detached;
     public delegate void OnHit(Collider2D collider);
     public event OnHit OnHitEvent;
 
-    protected virtual void Start()
+    public void Initialize()
     {
         damageCollider = GetComponent<Collider2D>();
         damageCollider.isTrigger = true;
+        parent = transform.parent;
     }
 
     protected virtual void OnDisable()
@@ -26,9 +30,17 @@ public class DamageArea : MonoBehaviour
 
     public virtual void SetActive(bool active)
     {
-        if (!damageCollider) damageCollider = GetComponent<Collider2D>();
-        damageCollider.enabled = active;
         if (visualizer) visualizer.enabled = active;
+        switch (active)
+        {
+            case true when includeSelf:
+                Detach();
+                break;
+            case false when includeSelf:
+                Reattach();
+                break;
+        }
+        damageCollider.enabled = active;
     }
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
@@ -36,5 +48,25 @@ public class DamageArea : MonoBehaviour
         {
             OnHitEvent?.Invoke(other);
         }
+    }
+
+    private void Update()
+    {
+        if (detached)
+        {
+            transform.position = parent.position;
+        }
+    }
+
+    protected virtual void Detach()
+    {
+        transform.SetParent(null);
+        detached = true;
+    }
+    
+    protected virtual void Reattach()
+    {
+        transform.SetParent(parent);
+        detached = false;
     }
 }

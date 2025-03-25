@@ -119,14 +119,15 @@ MonoBehaviour:
   - areaSkill: {fileID: 3843576515461266439}
     value: 20
     delay: 0
-    duration: 10
+    duration: 5
     cooldown: 0.1
     resetComboTime: 0.1
     mana: 10
-    getEnergy: 0
+    getEnergy: 10
   currentPatternIndex: 0
   previousPatternIndex: -1
   skillReady: 0
+  skillUsed: 0
   currentCooldown: 0
   currentComboTime: 0
 --- !u!1 &2557288369049224955
@@ -276,6 +277,7 @@ MonoBehaviour:
   currentPatternIndex: 0
   previousPatternIndex: -1
   ultimateReady: 0
+  ultimateUsed: 0
   currentCooldown: 0
   currentComboTime: 0
 --- !u!1 &3861034430161017137
@@ -343,10 +345,11 @@ MonoBehaviour:
     duration: 0
     interval: 0.5
     resetComboTime: 0.1
-    getEnergy: 0
+    getEnergy: 10
   currentPatternIndex: 0
   previousPatternIndex: -1
   attackReady: 0
+  attackUsed: 0
   currentInterval: 0
   currentComboTime: 0
 --- !u!1 &4142583881008799104
@@ -578,6 +581,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
+  includeSelf: 1
 --- !u!1 &6970648848224451220
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,6 +723,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  includeSelf: 0
 --- !u!1001 &67624127998009060
 PrefabInstance:
   m_ObjectHideFlags: 0

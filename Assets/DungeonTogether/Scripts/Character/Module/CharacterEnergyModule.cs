@@ -65,6 +65,11 @@ namespace DungeonTogether.Scripts.Character.Module
             UpdateEnergyBar();
         }
 
+        public virtual bool HasEnoughEnergy(float amount)
+        {
+            return energyData.Value.currentEnergy >= amount;
+        }
+
         public virtual void ChangeEnergy(float amount)
         {
             if (!ModulePermitted) return;

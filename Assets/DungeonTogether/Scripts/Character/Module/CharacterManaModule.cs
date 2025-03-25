@@ -80,6 +80,11 @@ namespace DungeonTogether.Scripts.Character.Module
             if (manaData.Value.currentMana >= manaData.Value.maxMana) return;
             ChangeMana(manaData.Value.regenRate * Time.deltaTime);
         }
+        
+        public virtual bool HasEnoughMana(float amount)
+        {
+            return manaData.Value.currentMana >= amount;
+        }
 
         public virtual bool ChangeMana(float amount)
         {
