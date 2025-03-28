@@ -58,21 +58,25 @@ MonoBehaviour:
     duration: 0.1
     interval: 0.1
     resetComboTime: 2
+    getEnergy: 0
   - damageArea: {fileID: 7441971951104627759}
     damage: 5
     delay: 0
     duration: 0.1
     interval: 0.1
     resetComboTime: 2
+    getEnergy: 0
   - damageArea: {fileID: 3197672963707457870}
     damage: 10
     delay: 0
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
+    getEnergy: 0
   currentPatternIndex: 0
   previousPatternIndex: -1
   attackReady: 0
+  attackUsed: 0
   currentInterval: 0
   currentComboTime: 0
 --- !u!1 &3610433535158677856
@@ -226,6 +230,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  includeSelf: 0
 --- !u!1 &4720526613664024656
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,6 +382,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  includeSelf: 0
 --- !u!1 &5661009527329401129
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +534,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  includeSelf: 0
 --- !u!1 &7387688737661270413
 GameObject:
   m_ObjectHideFlags: 0
