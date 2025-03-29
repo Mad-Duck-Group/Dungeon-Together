@@ -97,6 +97,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   includeSelf: 0
+  DOT: 0
 --- !u!212 &7289516327200132667
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -294,6 +295,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   includeSelf: 0
+  DOT: 0
 --- !u!1 &2557288369049224955
 GameObject:
   m_ObjectHideFlags: 0
