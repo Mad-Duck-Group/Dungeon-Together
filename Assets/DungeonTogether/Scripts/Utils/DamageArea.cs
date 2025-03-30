@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DungeonTogether.Scripts.Utils;
 using TriInspector;
 using UnityEngine;
@@ -8,12 +9,15 @@ public class DamageArea : MonoBehaviour
 {
     [SerializeField] protected SpriteRenderer visualizer;
     [SerializeField] protected LayerMask targetLayer;
+    [SerializeField] protected bool allowReentry;
     [SerializeField] protected bool includeSelf;
     [SerializeField] protected bool DOT;
 
     protected Collider2D damageCollider;
     protected Transform parent;
     protected bool detached;
+    
+    protected HashSet<Collider2D> hitList = new HashSet<Collider2D>();
     public delegate void OnHit(Collider2D collider);
     public event OnHit OnHitEvent;
 
@@ -41,21 +45,26 @@ public class DamageArea : MonoBehaviour
                 Reattach();
                 break;
         }
+        if (!active) { hitList.Clear(); }
         damageCollider.enabled = active;
     }
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (DOT) { return; }
+        if (!allowReentry && hitList.Contains(other)) { return; }
         if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer))
         {
+            hitList.Add(other);
             OnHitEvent?.Invoke(other);
         }
     }
     protected virtual void OnTriggerStay2D(Collider2D other)
     {
         if (!DOT) { return; }
+        if (!allowReentry && hitList.Contains(other)) { return; }
         if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer))
         {
+            hitList.Add(other);
             OnHitEvent?.Invoke(other);
         }
     }

@@ -581,6 +581,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
+  allowReentry: 1
   includeSelf: 1
   DOT: 1
 --- !u!1 &6970648848224451220
@@ -724,6 +725,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  allowReentry: 0
   includeSelf: 0
   DOT: 0
 --- !u!1001 &67624127998009060
