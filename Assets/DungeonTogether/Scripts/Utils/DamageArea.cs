@@ -12,10 +12,12 @@ public class DamageArea : MonoBehaviour
     [SerializeField] protected bool allowReentry;
     [SerializeField] protected bool includeSelf;
     [SerializeField] protected bool DOT;
+    [SerializeField, ShowIf("DOT")] protected float DOTInterval;
 
     protected Collider2D damageCollider;
     protected Transform parent;
     protected bool detached;
+    protected Dictionary<Collider2D, float> lastDamageTime = new Dictionary<Collider2D, float>();
     
     protected HashSet<Collider2D> hitList = new HashSet<Collider2D>();
     public delegate void OnHit(Collider2D collider);
@@ -64,8 +66,28 @@ public class DamageArea : MonoBehaviour
         if (!allowReentry && hitList.Contains(other)) { return; }
         if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer))
         {
-            hitList.Add(other);
-            OnHitEvent?.Invoke(other);
+            float currentTime = Time.time;
+            
+            if (!lastDamageTime.ContainsKey(other))
+            {
+                lastDamageTime[other] = 0f;
+            }
+
+            if (currentTime >= lastDamageTime[other] + DOTInterval)
+            {
+                Debug.Log("DOT applied to: " + other.name);
+                lastDamageTime[other] = currentTime;
+                hitList.Add(other);
+                OnHitEvent?.Invoke(other);
+            }
+        }
+    }
+    
+    protected virtual void OnTriggerExit2D(Collider2D other)
+    {
+        if (lastDamageTime.ContainsKey(other))
+        {
+            lastDamageTime.Remove(other);
         }
     }
 

@@ -117,9 +117,9 @@ MonoBehaviour:
   comboParent: {fileID: 0}
   areaSkillPattern:
   - areaSkill: {fileID: 3843576515461266439}
-    value: 20
+    value: 5
     delay: 0
-    duration: 5
+    duration: 20
     cooldown: 0.1
     resetComboTime: 0.1
     mana: 10
@@ -584,6 +584,7 @@ MonoBehaviour:
   allowReentry: 1
   includeSelf: 1
   DOT: 1
+  DOTInterval: 1
 --- !u!1 &6970648848224451220
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +729,7 @@ MonoBehaviour:
   allowReentry: 0
   includeSelf: 0
   DOT: 0
+  DOTInterval: 0
 --- !u!1001 &67624127998009060
 PrefabInstance:
   m_ObjectHideFlags: 0
