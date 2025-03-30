@@ -199,6 +199,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  includeSelf: 0
 --- !u!1 &3451670464015168193
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,6 +276,7 @@ MonoBehaviour:
   currentPatternIndex: 0
   previousPatternIndex: -1
   attackReady: 0
+  attackUsed: 0
   currentInterval: 0
   currentComboTime: 0
 --- !u!1 &4147687166143858495
@@ -428,6 +430,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  includeSelf: 0
 --- !u!1 &6919397449590378388
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +582,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  includeSelf: 0
 --- !u!1001 &6351145548222199537
 PrefabInstance:
   m_ObjectHideFlags: 0

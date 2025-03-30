@@ -9,6 +9,7 @@ public class DamageArea : MonoBehaviour
     [SerializeField] protected SpriteRenderer visualizer;
     [SerializeField] protected LayerMask targetLayer;
     [SerializeField] protected bool includeSelf;
+    [SerializeField] protected bool DOT;
 
     protected Collider2D damageCollider;
     protected Transform parent;
@@ -44,6 +45,15 @@ public class DamageArea : MonoBehaviour
     }
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
+        if (DOT) { return; }
+        if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer))
+        {
+            OnHitEvent?.Invoke(other);
+        }
+    }
+    protected virtual void OnTriggerStay2D(Collider2D other)
+    {
+        if (!DOT) { return; }
         if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer))
         {
             OnHitEvent?.Invoke(other);

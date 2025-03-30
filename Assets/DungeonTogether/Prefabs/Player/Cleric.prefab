@@ -582,6 +582,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   includeSelf: 1
+  DOT: 1
 --- !u!1 &6970648848224451220
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,6 +725,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   includeSelf: 0
+  DOT: 0
 --- !u!1001 &67624127998009060
 PrefabInstance:
   m_ObjectHideFlags: 0
