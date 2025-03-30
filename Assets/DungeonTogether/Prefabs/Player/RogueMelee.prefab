@@ -276,7 +276,9 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  allowReentry: 0
   includeSelf: 0
+  DOT: 0
 --- !u!1 &4720526613664024656
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,7 +430,9 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  allowReentry: 0
   includeSelf: 0
+  DOT: 0
 --- !u!1 &5661009527329401129
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,7 +584,9 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  allowReentry: 0
   includeSelf: 0
+  DOT: 0
 --- !u!1 &6627582979943794056
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,7 +738,9 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  allowReentry: 0
   includeSelf: 0
+  DOT: 0
 --- !u!1 &7387688737661270413
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,7 +860,7 @@ MonoBehaviour:
   previousPatternIndex: -1
   skillReady: 0
   skillUsed: 0
-  currentInterval: 0
+  currentCooldown: 0
   currentComboTime: 0
 --- !u!1001 &6351145548222199537
 PrefabInstance:
@@ -866,7 +874,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 22100000, guid: 7e212d7e1d8e61f4295910f0c933f312,
+      objectReference: {fileID: 22100000, guid: c148a56c4285dab41bb5964094900c26,
         type: 2}
     - target: {fileID: 5746934870074196237, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
@@ -883,6 +891,12 @@ PrefabInstance:
       propertyPath: baseCriticalChance
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6869794699041368331, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5670413377606156604, guid: 9f320f0ed83145c4daefb89a9ac8bde3,
+        type: 3}
     - target: {fileID: 7207912155587763137, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
       propertyPath: m_Name
