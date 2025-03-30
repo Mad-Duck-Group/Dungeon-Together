@@ -64,23 +64,30 @@ public class DamageArea : MonoBehaviour
     {
         if (!DOT) { return; }
         if (!allowReentry && hitList.Contains(other)) { return; }
-        if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer)) // ตรวจสอบว่าเป็น Player หรือไม่
+        if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer))
         {
             float currentTime = Time.time;
-
-            // ถ้าไม่มีค่าใน Dictionary ให้ใส่ค่าเริ่มต้นเป็น 0
+            
             if (!lastDamageTime.ContainsKey(other))
             {
                 lastDamageTime[other] = 0f;
             }
 
-            if (currentTime >= lastDamageTime[other] + DOTInterval) // เช็คว่าผ่านไปพอหรือยัง
+            if (currentTime >= lastDamageTime[other] + DOTInterval)
             {
                 Debug.Log("DOT applied to: " + other.name);
-                lastDamageTime[other] = currentTime; // อัปเดตเวลาล่าสุดของเป้าหมายนี้
+                lastDamageTime[other] = currentTime;
                 hitList.Add(other);
                 OnHitEvent?.Invoke(other);
             }
+        }
+    }
+    
+    protected virtual void OnTriggerExit2D(Collider2D other)
+    {
+        if (lastDamageTime.ContainsKey(other))
+        {
+            lastDamageTime.Remove(other);
         }
     }
 
