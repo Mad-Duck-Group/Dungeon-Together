@@ -844,10 +844,10 @@ MonoBehaviour:
   - damageArea: {fileID: 8991907462433850559}
     damage: 20
     delay: 0
-    duration: 0.5
+    duration: 0.2
     cooldown: 3
     resetComboTime: 0
-    dashForce: 5
+    dashForce: 10
     ignoreLayer:
       serializedVersion: 2
       m_Bits: 128
