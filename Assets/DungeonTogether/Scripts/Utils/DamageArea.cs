@@ -12,10 +12,12 @@ public class DamageArea : MonoBehaviour
     [SerializeField] protected bool allowReentry;
     [SerializeField] protected bool includeSelf;
     [SerializeField] protected bool DOT;
+    [SerializeField, ShowIf("DOT")] protected float DOTInterval;
 
     protected Collider2D damageCollider;
     protected Transform parent;
     protected bool detached;
+    protected Dictionary<Collider2D, float> lastDamageTime = new Dictionary<Collider2D, float>();
     
     protected HashSet<Collider2D> hitList = new HashSet<Collider2D>();
     public delegate void OnHit(Collider2D collider);
@@ -62,10 +64,23 @@ public class DamageArea : MonoBehaviour
     {
         if (!DOT) { return; }
         if (!allowReentry && hitList.Contains(other)) { return; }
-        if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer))
+        if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer)) // ตรวจสอบว่าเป็น Player หรือไม่
         {
-            hitList.Add(other);
-            OnHitEvent?.Invoke(other);
+            float currentTime = Time.time;
+
+            // ถ้าไม่มีค่าใน Dictionary ให้ใส่ค่าเริ่มต้นเป็น 0
+            if (!lastDamageTime.ContainsKey(other))
+            {
+                lastDamageTime[other] = 0f;
+            }
+
+            if (currentTime >= lastDamageTime[other] + DOTInterval) // เช็คว่าผ่านไปพอหรือยัง
+            {
+                Debug.Log("DOT applied to: " + other.name);
+                lastDamageTime[other] = currentTime; // อัปเดตเวลาล่าสุดของเป้าหมายนี้
+                hitList.Add(other);
+                OnHitEvent?.Invoke(other);
+            }
         }
     }
 
