@@ -4,24 +4,28 @@ using System.Collections.Generic;
 using DungeonTogether.Scripts.Manangers;
 using TriInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace DungeonTogether.Scripts.Character.Module
+namespace DungeonTogether.Scripts.Character.Module.Skill
 {
     [Serializable]
-    public struct BasicAttackPattern
+    public struct RogueSkillPattern
     {
         [Group("Area"), Required] public DamageArea damageArea;
         [Group("Damage"), Min(0)] public float damage;
         [Group("Timing"), Min(0)] public float delay;
         [Group("Timing"), Min(0)] public float duration;
-        [Group("Timing"), Min(0)] public float interval;
+        [Group("Timing"), Min(0)] public float cooldown;
         [Group("Timing"), Min(0)] public float resetComboTime;
+        [Group("Dashing"), Min(0)] public float dashForce;
+        [Group("Dashing")] public LayerMask ignoreLayer;
+        [Group("Critical")] public float increaseCriticalChance;
+        [Group("Critical")] public float increaseCriticalDamage;
+        [Group("Critical")] public float increaseDuration;
+        [Group("Cost"), Min(0)] public float mana;
         [Group("Energy"), Min(0)] public float getEnergy;
     }
-    /// <summary>
-    /// Module responsible for handling basic attacks.
-    /// </summary>
-    public class CharacterBasicAttackModule : CharacterModule
+    public class CharacterRogueMeleeSkill : CharacterModule
     {
         [Title("Settings")]
         [SerializeField] private Transform comboParent;
@@ -29,48 +33,52 @@ namespace DungeonTogether.Scripts.Character.Module
             HideAddButton = false,
             HideRemoveButton = false,
             AlwaysExpanded = false)]
-        [SerializeField] private List<BasicAttackPattern> basicAttackPatterns;
+        [SerializeField] private List<RogueSkillPattern> rougeAttackPatterns;
         
         [Title("Debug")]
         [SerializeField, DisplayAsString] private int currentPatternIndex;
         [SerializeField, DisplayAsString] private int previousPatternIndex = -1;
-        [SerializeField, DisplayAsString] private bool attackReady;
-        [SerializeField, DisplayAsString] private bool attackUsed;
-        [SerializeField, DisplayAsString] private float currentInterval;
+        [SerializeField, DisplayAsString] private bool skillReady;
+        [SerializeField, DisplayAsString] private bool skillUsed;
+        [SerializeField, DisplayAsString] private float currentCooldown;
         [SerializeField, DisplayAsString] private float currentComboTime;
         
-        private BasicAttackPattern? CurrentPattern => basicAttackPatterns[currentPatternIndex];
-        private BasicAttackPattern? PreviousPattern
+        private RogueSkillPattern? CurrentPattern => rougeAttackPatterns[currentPatternIndex];
+        private RogueSkillPattern? PreviousPattern
         {
             get
             {
                 if (previousPatternIndex == -1) return null;
-                return basicAttackPatterns[previousPatternIndex];
+                return rougeAttackPatterns[previousPatternIndex];
             }
         }
 
-        private CharacterCriticalModule criticalModule;
+        private CharacterMovementModule movementModule;
+        private CharacterManaModule manaModule;
         private CharacterEnergyModule energyModule;
-        private Coroutine attackCoroutine;
+        private CharacterCriticalModule criticalModule;
+        private Coroutine skillCoroutine;
 
         public override void Initialize(CharacterHub characterHub)
         {
             base.Initialize(characterHub);
             currentPatternIndex = 0;
-            currentInterval = 0;
+            currentCooldown = CurrentPattern?.cooldown ?? 0;
             previousPatternIndex = -1;
-            basicAttackPatterns.ForEach(pattern =>
+            rougeAttackPatterns.ForEach(pattern =>
             {
                 pattern.damageArea.Initialize();
                 pattern.damageArea.SetActive(false);
                 pattern.damageArea.OnHitEvent += OnHit;
             });
         }
-        
+
         public override void PostInitialize()
         {
             base.PostInitialize();
             criticalModule = characterHub.FindModuleOfType<CharacterCriticalModule>();
+            manaModule = characterHub.FindModuleOfType<CharacterManaModule>();
+            movementModule = characterHub.FindModuleOfType<CharacterMovementModule>();
             energyModule = characterHub.FindModuleOfType<CharacterEnergyModule>();
         }
 
@@ -78,9 +86,9 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             base.Shutdown();
             currentPatternIndex = 0;
-            currentInterval = 0;
+            currentCooldown = 0;
             previousPatternIndex = -1;
-            basicAttackPatterns.ForEach(pattern =>
+            rougeAttackPatterns.ForEach(pattern =>
             {
                 pattern.damageArea.SetActive(false);
                 pattern.damageArea.OnHitEvent -= OnHit;
@@ -109,9 +117,9 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             if (characterHub.CharacterType is not CharacterType.Player) return;
             base.HandleInput();
-            if (PlayerInput.AttackButton.isDown)
+            if (PlayerInput.SkillButton.isDown)
             {
-                Attack();
+                CastSkill();
             }
         }
 
@@ -130,7 +138,7 @@ namespace DungeonTogether.Scripts.Character.Module
             UpdateCooldown();
             if (!ModulePermitted)
             {
-                UpdateBasicAttackActionIcon(false);
+                UpdateSkillActionIcon(false);
                 return;
             }
             base.UpdateModule();
@@ -140,7 +148,7 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             if (PreviousPattern != null)
             {
-                if (attackReady && currentComboTime < PreviousPattern.Value.resetComboTime)
+                if (skillReady && currentComboTime < PreviousPattern.Value.resetComboTime)
                 {
                     currentComboTime += Time.deltaTime;
                 }
@@ -153,46 +161,46 @@ namespace DungeonTogether.Scripts.Character.Module
             }
             var pattern = PreviousPattern ?? CurrentPattern;
             if (pattern == null) return;
-            if (!attackReady && currentInterval < pattern.Value.interval)
+            if (!skillReady && currentCooldown < pattern.Value.cooldown)
             {
-                currentInterval += Time.deltaTime;
+                currentCooldown += Time.deltaTime;
                 
             }
             else
             {
-                attackReady = true;
+                skillReady = true;
             }
-            bool available = !attackUsed;
-            UpdateBasicAttackActionIcon(available, pattern);
+            bool available = !skillUsed;
+            UpdateSkillActionIcon(available, pattern);
         }
         
-        private void UpdateBasicAttackActionIcon(bool available, BasicAttackPattern? pattern = null)
+        private void UpdateSkillActionIcon(bool available, RogueSkillPattern? pattern = null)
         {
             if (characterHub.CharacterType is not CharacterType.Player) return;
             if (pattern != null)
             {
-                float max = pattern.Value.interval;
-                PlayerCanvasManager.Instance.UpdateBasicAttackIcon(currentInterval, max);
+                float max = pattern.Value.cooldown;
+                PlayerCanvasManager.Instance.UpdateSkillIcon(currentCooldown, max);
             }
-            PlayerCanvasManager.Instance.SetAvailableBasicAttack(available);
+            PlayerCanvasManager.Instance.SetAvailableSkill(available);
         }
         
         /// <summary>
         /// Method that triggers the attack.
         /// </summary>
-        public virtual void Attack()
+        public virtual void CastSkill()
         {
             if (!ModulePermitted) return;
-            if (!attackReady) return;
-            if (attackCoroutine != null) return;
-            attackCoroutine = StartCoroutine(AttackCoroutine());
+            if (!skillReady) return;
+            if (skillCoroutine != null) return;
+            skillCoroutine = StartCoroutine(SkillCoroutine());
         }
         
         /// <summary>
-        /// Sets the direction of the attack.
+        /// Sets the direction of the skill.
         /// </summary>
         /// <param name="direction">Direction of the attack.</param>
-        public virtual void SetAttackDirection(Vector2 direction)
+        public virtual void SetSkillDirection(Vector2 direction)
         {
             if (!ModulePermitted) return;
             direction.Normalize();
@@ -200,26 +208,43 @@ namespace DungeonTogether.Scripts.Character.Module
         }
 
         /// <summary>
-        /// Coroutine that handles the timing of the attack.
+        /// Coroutine that handles the timing of the skill.
         /// </summary>
         /// <returns></returns>
-        protected IEnumerator AttackCoroutine()
+        protected IEnumerator SkillCoroutine()
         {
             if (CurrentPattern == null) yield break;
-            attackUsed = true;
+            if (!ConsumeMana(CurrentPattern.Value.mana) || 
+                characterHub.MovementState is CharacterMovementState.Dashing)
+            {
+                skillCoroutine = null;
+                yield break;
+            }
+            skillUsed = true;
             currentComboTime = 0;
-            characterHub.ChangeActionState(CharacterActionState.Basic);
+            characterHub.ChangeActionState(CharacterActionState.Skill);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
             CurrentPattern.Value.damageArea.SetActive(true);
+            movementModule.Dash(comboParent.right, CurrentPattern.Value.dashForce, 
+                CurrentPattern.Value.ignoreLayer, CurrentPattern.Value.duration);
+            criticalModule.SetCriticalChance(CurrentPattern.Value.increaseCriticalChance, CurrentPattern.Value.increaseDuration);
+            criticalModule.SetCriticalMultiplier(CurrentPattern.Value.increaseCriticalDamage, CurrentPattern.Value.increaseDuration);
             yield return new WaitForSeconds(CurrentPattern.Value.duration);
             CurrentPattern.Value.damageArea.SetActive(false);
             characterHub.ChangeActionState(CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
-            currentPatternIndex = (currentPatternIndex + 1) % basicAttackPatterns.Count;
-            currentInterval = 0;
-            attackReady = false;
-            attackUsed = false;
-            attackCoroutine = null;
+            currentPatternIndex = (currentPatternIndex + 1) % rougeAttackPatterns.Count;
+            currentCooldown = 0;
+            skillReady = false;
+            skillUsed = false;
+            skillCoroutine = null;
+        }
+        
+        private bool ConsumeMana(float amount)
+        {
+            if (!manaModule || !manaModule.HasEnoughMana(amount)) return false;
+            manaModule.ChangeMana(-amount);
+            return true;
         }
 
         protected virtual void GetEnergy(float amount)
