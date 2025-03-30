@@ -155,9 +155,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   moduleEnabled: 1
-  blockedMovementStates: 
+  blockedMovementStates: 02000000
   blockedActionStates: 
   blockedConditionStates: 0100000002000000
+  playerCollider: {fileID: 8779787673624174831}
   rb2d: {fileID: 2364346117521812172}
   spriteRenderer: {fileID: 6869794699041368331}
   animator: {fileID: 1634689036434382716}

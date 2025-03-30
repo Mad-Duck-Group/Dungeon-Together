@@ -55,6 +55,7 @@ namespace DungeonTogether.Scripts.Character.Module
         }
         
         private CharacterCriticalModule criticalModule;
+        private CharacterEnergyModule energyModule;
         private Coroutine attackCoroutine;
 
         public override void Initialize(CharacterHub characterHub)
@@ -63,7 +64,13 @@ namespace DungeonTogether.Scripts.Character.Module
             currentPatternIndex = 0;
             currentInterval = 0;
             previousPatternIndex = -1;
+        }
+
+        public override void PostInitialize()
+        {
+            base.PostInitialize();
             criticalModule = characterHub.FindModuleOfType<CharacterCriticalModule>();
+            energyModule = characterHub.FindModuleOfType<CharacterEnergyModule>();
         }
         
         public override void Shutdown()
@@ -243,8 +250,7 @@ namespace DungeonTogether.Scripts.Character.Module
         
         protected virtual void GetEnergy(float amount)
         {
-            var energyModule = characterHub.FindModuleOfType<CharacterEnergyModule>();
-            if (!energyModule || energyModule.energyData.Value.currentEnergy > energyModule.energyData.Value.maxEnergy) return;
+            if (!energyModule) return;
             energyModule.ChangeEnergy(+amount);
             return;
         }

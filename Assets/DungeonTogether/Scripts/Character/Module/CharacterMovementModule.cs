@@ -1,3 +1,4 @@
+using System.Collections;
 using DungeonTogether.Scripts.Utils;
 using TriInspector;
 using Unity.Netcode;
@@ -10,16 +11,20 @@ namespace DungeonTogether.Scripts.Character.Module
     /// </summary>
     public class CharacterMovementModule : CharacterModule
     {
-        [Title("References")]
+        [Title("Movement References")]
+        [SerializeField] private Collider2D playerCollider;
         [SerializeField] private Rigidbody2D rb2d;
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private Animator animator;
     
         [Title("Movement Settings")]
         [field: SerializeField] public float MovementSpeed { get; private set; } = 4f;
-        [SerializeField, ReadOnly] private Vector2 moveDirection;
 
+        [Title("Movement Debug")]
+        [SerializeField, ReadOnly] private Vector2 moveDirection;
+        
         private NetworkVariable<bool> isFlipped = new();
+        private Coroutine dashColliderCoroutine;
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
 
         public override void OnNetworkSpawn()
@@ -91,7 +96,8 @@ namespace DungeonTogether.Scripts.Character.Module
 
         protected override void LateUpdateModule()
         {
-            if (moveDirection.magnitude <= 0)
+            if (moveDirection.magnitude <= 0 
+                && characterHub.MovementState != CharacterMovementState.Dashing)
             {
                 rb2d.linearVelocity = Vector2.zero;
             }
@@ -108,6 +114,7 @@ namespace DungeonTogether.Scripts.Character.Module
             if (!ModulePermitted && !forceSet) return;
             moveDirection = direction;
             moveDirection.Normalize();
+            if (characterHub.MovementState == CharacterMovementState.Dashing) return;
             var state = moveDirection.magnitude > 0
                 ? CharacterMovementState.Walking
                 : CharacterMovementState.Idle;
@@ -118,6 +125,25 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             if (!ModulePermitted) return;
             rb2d.position = position;
+        }
+        
+        public void Dash(Vector2 direction, float dashForce, LayerMask ignoreLayer = default, float duration = 0.1f)
+        {
+            if (!ModulePermitted) return;
+            if (characterHub.MovementState == CharacterMovementState.Dashing) return;
+            characterHub.ChangeMovementState(CharacterMovementState.Dashing);
+            SetDirection(direction, true);
+            dashColliderCoroutine = StartCoroutine(DashColliderCoroutine(ignoreLayer, duration));
+            rb2d.AddForce(direction * dashForce, ForceMode2D.Impulse);
+        }
+        
+        private IEnumerator DashColliderCoroutine(LayerMask ignoreLayer, float duration)
+        {
+            var excludeLayers = playerCollider.excludeLayers;
+            playerCollider.excludeLayers = ignoreLayer;
+            yield return new WaitForSeconds(duration);
+            playerCollider.excludeLayers = excludeLayers;
+            characterHub.ChangeMovementState(CharacterMovementState.Idle);
         }
 
         protected override void HandleInput()

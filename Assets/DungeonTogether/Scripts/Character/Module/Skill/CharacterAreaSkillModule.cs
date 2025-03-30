@@ -19,6 +19,7 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         [Group("Cost"), Min(0)] public float mana;
         [Group("Energy"), Min(0)] public float getEnergy;
     }
+    
     public class CharacterAreaSkillModule : CharacterModule
     {
         [Title("Settings")]
@@ -48,6 +49,7 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         }
         protected Coroutine skillCoroutine;
         private CharacterManaModule manaModule;
+        private CharacterEnergyModule energyModule;
         
         public override void Initialize(CharacterHub characterHub)
         {
@@ -75,6 +77,7 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         {
             base.PostInitialize();
             manaModule = characterHub.FindModuleOfType<CharacterManaModule>();
+            energyModule = characterHub.FindModuleOfType<CharacterEnergyModule>();
         }
 
         public override void Shutdown()
@@ -215,7 +218,6 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         
         protected virtual void GetEnergy(float amount)
         {
-            var energyModule = characterHub.FindModuleOfType<CharacterEnergyModule>();
             if (!energyModule || energyModule.energyData.Value.currentEnergy > energyModule.energyData.Value.maxEnergy) return;
             energyModule.ChangeEnergy(+amount);
             return;

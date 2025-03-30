@@ -7,7 +7,8 @@ namespace DungeonTogether.Scripts.Character
     public enum CharacterMovementState
     {
         Idle,
-        Walking
+        Walking,
+        Dashing
     }
 
     public struct MovementStateEvent
