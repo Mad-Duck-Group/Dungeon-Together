@@ -96,6 +96,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  allowReentry: 0
   includeSelf: 0
   DOT: 0
 --- !u!212 &7289516327200132667
@@ -294,6 +295,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  allowReentry: 0
   includeSelf: 0
   DOT: 0
 --- !u!1 &2557288369049224955
@@ -675,8 +677,8 @@ MonoBehaviour:
     duration: 2
     cooldown: 10
     resetComboTime: 0
-    mana: 20
-    getEnergy: 0
+    mana: 50
+    getEnergy: 30
   currentPatternIndex: 0
   previousPatternIndex: -1
   skillReady: 0
