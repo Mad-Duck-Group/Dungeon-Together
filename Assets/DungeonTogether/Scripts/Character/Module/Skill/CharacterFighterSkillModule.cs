@@ -13,7 +13,6 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
     {
         [Group("Spawn Point"), Required] public Transform spawnPoint;
         [Group("Sword"), Required] public DamageArea damageArea;
-        [Group("Sword"), Min(0)] public float swingSpeed;
         [Group("Sword"), Min(0)] public float swingAngle;
         [Group("Damage"), Min(0)] public float damage;
         [Group("Damage"), Min(0)] public LayerMask passThroughLayer;
@@ -189,19 +188,16 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
                 CurrentPattern.Value.damageArea, 
                 CurrentPattern.Value.spawnPoint.position, 
                 Quaternion.identity);
-    
+            
             damageArea.transform.SetParent(comboParent); 
-            StartCoroutine(SwingSword(damageArea, CurrentPattern.Value.swingAngle, CurrentPattern.Value.swingSpeed));
+            StartCoroutine(SwingSword(damageArea, CurrentPattern.Value.swingAngle, CurrentPattern.Value.duration));
             damageArea.OnHitEvent += OnHit;
-            yield return new WaitForSeconds(CurrentPattern.Value.duration);
-            CurrentPattern.Value.damageArea.SetActive(false);
+            
             characterHub.ChangeActionState(CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
             currentPatternIndex = (currentPatternIndex + 1) % fighterSkillPatterns.Count;
             currentCooldown = 0;
             skillReady = false;
-            skillUsed = false;
-            skillCoroutine = null;
         }
 
         private IEnumerator SwingSword(DamageArea sword, float swingAngle, float swingSpeed)

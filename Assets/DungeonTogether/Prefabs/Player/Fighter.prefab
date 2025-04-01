@@ -619,7 +619,7 @@ MonoBehaviour:
   blockedMovementStates: 
   blockedActionStates: 
   blockedConditionStates: 0100000002000000
-  comboParent: {fileID: 0}
+  comboParent: {fileID: 828844200380633631}
   fighterSkillPatterns:
   - spawnPoint: {fileID: 8325179266954812462}
     damageArea: {fileID: 7180457438247107046, guid: bdf1832d8967a774cb3d5e24f1adb919,
@@ -633,7 +633,7 @@ MonoBehaviour:
     delay: 0
     duration: 2
     cooldown: 10
-    resetComboTime: 0
+    resetComboTime: 0.1
     mana: 30
     getEnergy: 30
   currentPatternIndex: 0
