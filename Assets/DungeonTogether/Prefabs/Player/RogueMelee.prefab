@@ -196,7 +196,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0.5}
     oldSize: {x: 0.02, y: 0.02}
     newSize: {x: 0.02, y: 0.02}
     adaptiveTilingThreshold: 0.5
@@ -279,6 +279,7 @@ MonoBehaviour:
   allowReentry: 0
   includeSelf: 0
   DOT: 0
+  DOTInterval: 0
 --- !u!1 &4720526613664024656
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +351,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0.5}
     oldSize: {x: 0.02, y: 0.02}
     newSize: {x: 0.02, y: 0.02}
     adaptiveTilingThreshold: 0.5
@@ -433,6 +434,7 @@ MonoBehaviour:
   allowReentry: 0
   includeSelf: 0
   DOT: 0
+  DOTInterval: 0
 --- !u!1 &5661009527329401129
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +506,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0.5}
     oldSize: {x: 0.02, y: 0.02}
     newSize: {x: 0.02, y: 0.02}
     adaptiveTilingThreshold: 0.5
@@ -587,6 +589,7 @@ MonoBehaviour:
   allowReentry: 0
   includeSelf: 0
   DOT: 0
+  DOTInterval: 0
 --- !u!1 &6627582979943794056
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,7 +661,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0.5}
     oldSize: {x: 0.02, y: 0.02}
     newSize: {x: 0.02, y: 0.02}
     adaptiveTilingThreshold: 0.5
@@ -741,6 +744,7 @@ MonoBehaviour:
   allowReentry: 0
   includeSelf: 0
   DOT: 0
+  DOTInterval: 0
 --- !u!1 &7387688737661270413
 GameObject:
   m_ObjectHideFlags: 0
