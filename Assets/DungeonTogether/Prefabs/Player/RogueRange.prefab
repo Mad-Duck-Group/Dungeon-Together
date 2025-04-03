@@ -1,5 +1,82 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2314210196011467513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8558392871144266929}
+  m_Layer: 6
+  m_Name: Aimposition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8558392871144266929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2314210196011467513}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: -0, z: 0}
+  m_LocalScale: {x: 0.06673609, y: 0.06673609, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4564780037160507617}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2380544861863460124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4564780037160507617}
+  - component: {fileID: 8698841273255055963}
+  m_Layer: 6
+  m_Name: ComboParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4564780037160507617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2380544861863460124}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8558392871144266929}
+  m_Father: {fileID: 1369908549300310774}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8698841273255055963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2380544861863460124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04a846bb3e16cce4b8524ea70248f244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &2557288369049224955
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +320,83 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &6841206132415231729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1369908549300310774}
+  - component: {fileID: 1984263839429061249}
+  m_Layer: 6
+  m_Name: SkillRanger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1369908549300310774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6841206132415231729}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4564780037160507617}
+  m_Father: {fileID: 3928723457554010161}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1984263839429061249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6841206132415231729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cec650652591c1488429a0a31cbb7e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  moduleEnabled: 1
+  blockedMovementStates: 
+  blockedActionStates: 0100000003000000
+  blockedConditionStates: 0100000002000000
+  comboParent: {fileID: 0}
+  rangerSkillPatterns:
+  - firePoint: {fileID: 8558392871144266929}
+    projectileDamageAreaPrefab: {fileID: 2744090027019428655, guid: 6d1baab797fa59b42846708cfb61a00b,
+      type: 3}
+    arrowCount: 3
+    damage: 20
+    passThroughLayer:
+      serializedVersion: 2
+      m_Bits: 192
+    projectileSpeed: 15
+    increaseCriticalChance: 1
+    increaseCriticalDamage: 2
+    increaseDuration: 2
+    delay: 0
+    hasDuration: 1
+    duration: 0.2
+    cooldown: 10
+    resetComboTime: 0
+    mana: 30
+    getEnergy: 30
+  currentPatternIndex: 0
+  previousPatternIndex: -1
+  skillReady: 0
+  skillUsed: 0
+  currentCooldown: 0
+  currentComboTime: 0
 --- !u!1001 &67624127998009060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -370,6 +524,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1856859918183094115}
+    - targetCorrespondingSourceObject: {fileID: 3924217345497714389, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1369908549300310774}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acffb8d00be5ba643a2c959e1f3a5299, type: 3}
 --- !u!4 &3928723457554010161 stripped
