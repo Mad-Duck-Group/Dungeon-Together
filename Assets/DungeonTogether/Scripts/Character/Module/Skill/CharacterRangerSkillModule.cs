@@ -64,7 +64,7 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         {
             base.Initialize(characterHub);
             currentPatternIndex = 0;
-            currentCooldown = 0;
+            currentCooldown = CurrentPattern?.cooldown ?? 0;
             previousPatternIndex = -1;
         }
         public override void PostInitialize()
@@ -228,7 +228,11 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
                     criticalModule.SetCriticalChance(CurrentPattern.Value.increaseCriticalChance, CurrentPattern.Value.increaseDuration);
                     criticalModule.SetCriticalMultiplier(CurrentPattern.Value.increaseCriticalDamage, CurrentPattern.Value.increaseDuration);
                     yield return new WaitForSeconds(CurrentPattern.Value.duration);
-                    projectileDamageArea.SetActive(false);
+                    if (projectileDamageArea)
+                    {
+                        projectileDamageArea.SetActive(false);
+                        projectileDamageArea.OnHitEvent -= OnRangeHit;
+                    }
                 }
                 yield return new WaitForSeconds(CurrentPattern.Value.duration);
             }
