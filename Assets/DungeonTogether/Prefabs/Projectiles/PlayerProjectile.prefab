@@ -8,6 +8,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4834336959574245418, guid: 7c9b7ecb849b3e246ba17305993aea8e,
+        type: 3}
+      propertyPath: targetLayer.m_Bits
+      value: 384
+      objectReference: {fileID: 0}
+    - target: {fileID: -4834336959574245418, guid: 7c9b7ecb849b3e246ba17305993aea8e,
+        type: 3}
+      propertyPath: passThroughLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 1988396623385068702, guid: 7c9b7ecb849b3e246ba17305993aea8e,
         type: 3}
       propertyPath: m_Color.b
@@ -76,7 +86,7 @@ PrefabInstance:
     - target: {fileID: 6223688861620892961, guid: 7c9b7ecb849b3e246ba17305993aea8e,
         type: 3}
       propertyPath: m_Name
-      value: PlayerProjectile Variant
+      value: PlayerProjectile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

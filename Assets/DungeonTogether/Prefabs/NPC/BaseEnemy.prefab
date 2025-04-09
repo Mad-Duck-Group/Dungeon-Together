@@ -477,7 +477,7 @@ MonoBehaviour:
   moduleEnabled: 1
   blockedMovementStates: 
   blockedActionStates: 
-  blockedConditionStates: 
+  blockedConditionStates: 0100000002000000
   detectionOrigin: {fileID: 0}
   detectionRadius: 10
   detectionLayer:
@@ -600,7 +600,7 @@ MonoBehaviour:
   moduleEnabled: 1
   blockedMovementStates: 
   blockedActionStates: 
-  blockedConditionStates: 
+  blockedConditionStates: 0100000002000000
   navMeshAgent: {fileID: 2475719692799302214}
   characterMovementModule: {fileID: 3314974482589927884}
   stopMovingDistance: 1

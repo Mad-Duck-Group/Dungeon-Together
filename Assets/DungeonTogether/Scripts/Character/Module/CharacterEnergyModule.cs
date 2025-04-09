@@ -22,7 +22,7 @@ namespace DungeonTogether.Scripts.Character.Module
     {
         [Title("Energy Settings")] 
         [SerializeField]
-        private NetworkVariable<EnergyData> energyData = new();
+        public NetworkVariable<EnergyData> energyData = new();
         [SerializeField] 
         private float startingEnergy = 0;
         [SerializeField]
@@ -63,6 +63,11 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             _previousChange = newvalue.currentEnergy - previousvalue.currentEnergy;
             UpdateEnergyBar();
+        }
+
+        public virtual bool HasEnoughEnergy(float amount)
+        {
+            return energyData.Value.currentEnergy >= amount;
         }
 
         public virtual void ChangeEnergy(float amount)

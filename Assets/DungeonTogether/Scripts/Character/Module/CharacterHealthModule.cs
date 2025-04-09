@@ -129,7 +129,11 @@ namespace DungeonTogether.Scripts.Character.Module
         [Rpc(SendTo.Owner, DeferLocal = true)]
         protected virtual void DieRpc()
         {
-            characterHub.ChangeConditionState(CharacterStates.CharacterConditionState.Dead);
+            characterHub.ChangeConditionState(CharacterConditionState.Dead);
+            if (characterHub.CharacterType is CharacterType.NPC)
+            {
+                characterHub.ShutdownInstant();
+            }
         }
     }
 }

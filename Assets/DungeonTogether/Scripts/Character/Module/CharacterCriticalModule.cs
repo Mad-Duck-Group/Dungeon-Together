@@ -72,7 +72,7 @@ namespace DungeonTogether.Scripts.Character.Module
             if (UnityEngine.Random.value < currentCriticalChance)
             {
                 damage *= currentCriticalMultiplier;
-                Debug.Log("Critical Hit!");
+                Debug.Log($"{characterHub.name} critical hit! Damage: {damage}");
                 return true;
             }
             return false;

@@ -23,10 +23,15 @@ public class PlayerInput : NetworkBehaviour
 
     [SerializeField, ReadOnly] private Vector2 movementInput;
     public Vector2 MovementInput => movementInput;
+    
     [SerializeField, ReadOnly] private InputButton attackButton;
     public InputButton AttackButton => attackButton;
+    
     [SerializeField, ReadOnly] private InputButton skillButton;
     public InputButton SkillButton => skillButton;
+    
+    [SerializeField, ReadOnly] private InputButton ultimateButton;
+    public InputButton UltimateButton => ultimateButton;
 
     #region Subscriptions
 
@@ -35,6 +40,7 @@ public class PlayerInput : NetworkBehaviour
         inputReader.MoveEvent += HandleMove;
         inputReader.AttackEvent += HandleAttack;
         inputReader.SkillEvent += HandleSkill;
+        inputReader.UltimateEvent += HandleUltimate;
     }
     
     private void Unsubscribe()
@@ -42,6 +48,7 @@ public class PlayerInput : NetworkBehaviour
         inputReader.MoveEvent -= HandleMove;
         inputReader.AttackEvent -= HandleAttack;
         inputReader.SkillEvent -= HandleSkill;
+        inputReader.UltimateEvent -= HandleUltimate;
     }
     private void OnEnable()
     {
@@ -76,6 +83,12 @@ public class PlayerInput : NetworkBehaviour
     {
         BindButton(skillButton, context);
     }
+    
+    private void HandleUltimate(InputAction.CallbackContext context)
+    {
+        BindButton(ultimateButton, context);
+    }
+    
     private void BindButton(InputButton button, InputAction.CallbackContext context)
     {
         button.isDown = context.performed;

@@ -18,13 +18,13 @@ namespace DungeonTogether.Scripts.Character.Module
         protected bool moduleEnabled = true;
         [SerializeField, PropertyOrder(0),
         PropertyTooltip("List of movement states that block this module")] 
-        protected List<CharacterStates.CharacterMovementState> blockedMovementStates = new();
+        protected List<CharacterMovementState> blockedMovementStates = new();
         [SerializeField, PropertyOrder(0),
         PropertyTooltip("List of action states that block this module")] 
-        protected List<CharacterStates.CharacterActionState> blockedActionStates = new();
+        protected List<CharacterActionState> blockedActionStates = new();
         [SerializeField, PropertyOrder(0),
         PropertyTooltip("List of condition states that block this module")] 
-        protected List<CharacterStates.CharacterConditionState> blockedConditionStates = new();
+        protected List<CharacterConditionState> blockedConditionStates = new();
         
         [Title("Debug")]
         [ShowInInspector, DisplayAsString, PropertyOrder(0),
@@ -92,6 +92,14 @@ namespace DungeonTogether.Scripts.Character.Module
             Debug.Log($"Initializing {GetType().Name} module for {characterHub.name}");
             this.characterHub = characterHub;
             Subscribe();
+        }
+        
+        /// <summary>
+        /// Post initialize module, useful for getting modules from the character hub
+        /// </summary>
+        public virtual void PostInitialize()
+        {
+            
         }
 
         /// <summary>

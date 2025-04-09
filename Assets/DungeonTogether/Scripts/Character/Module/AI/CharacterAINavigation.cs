@@ -92,8 +92,24 @@ namespace DungeonTogether.Scripts.Character.Module
         #endregion
 
         #region Updates
+        protected override void Update()
+        {
+            if (!IsOwner) return;
+            if (ModulePermitted)
+            {
+                HandleInput();
+            }
+            UpdateModule();
+        }
+        
         protected override void UpdateModule()
         {
+            if (!ModulePermitted)
+            {
+                characterMovementModule.SetDirection(Vector2.zero, true);
+                navMeshAgent.Warp(transform.position);
+                return;
+            }
             switch (navigationProtocol)
             {
                 case NavigationProtocol.Follow:
