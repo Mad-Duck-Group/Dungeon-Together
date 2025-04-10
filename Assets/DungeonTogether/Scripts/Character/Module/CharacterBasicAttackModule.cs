@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DungeonTogether.Scripts.Manangers;
 using TriInspector;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace DungeonTogether.Scripts.Character.Module
         [Group("Timing"), Min(0)] public float duration;
         [Group("Timing"), Min(0)] public float interval;
         [Group("Timing"), Min(0)] public float resetComboTime;
+        [Group("Energy"), Min(0)] public float getEnergy;
     }
     /// <summary>
     /// Module responsible for handling basic attacks.
@@ -33,6 +35,7 @@ namespace DungeonTogether.Scripts.Character.Module
         [SerializeField, DisplayAsString] private int currentPatternIndex;
         [SerializeField, DisplayAsString] private int previousPatternIndex = -1;
         [SerializeField, DisplayAsString] private bool attackReady;
+        [SerializeField, DisplayAsString] private bool attackUsed;
         [SerializeField, DisplayAsString] private float currentInterval;
         [SerializeField, DisplayAsString] private float currentComboTime;
         
@@ -47,6 +50,7 @@ namespace DungeonTogether.Scripts.Character.Module
         }
 
         private CharacterCriticalModule criticalModule;
+        private CharacterEnergyModule energyModule;
         private Coroutine attackCoroutine;
 
         public override void Initialize(CharacterHub characterHub)
@@ -57,10 +61,17 @@ namespace DungeonTogether.Scripts.Character.Module
             previousPatternIndex = -1;
             basicAttackPatterns.ForEach(pattern =>
             {
+                pattern.damageArea.Initialize();
                 pattern.damageArea.SetActive(false);
                 pattern.damageArea.OnHitEvent += OnHit;
             });
+        }
+        
+        public override void PostInitialize()
+        {
+            base.PostInitialize();
             criticalModule = characterHub.FindModuleOfType<CharacterCriticalModule>();
+            energyModule = characterHub.FindModuleOfType<CharacterEnergyModule>();
         }
 
         public override void Shutdown()
@@ -91,6 +102,7 @@ namespace DungeonTogether.Scripts.Character.Module
                 criticalModule.CalculateCritical(ref damage);
             }
             healthModule.ChangeHealth(damage);
+            GetEnergy(CurrentPattern.Value.getEnergy);
         }
         
         protected override void HandleInput()
@@ -103,10 +115,29 @@ namespace DungeonTogether.Scripts.Character.Module
             }
         }
 
+        protected override void Update()
+        {
+            if (!IsOwner) return;
+            if (ModulePermitted)
+            {
+                HandleInput();
+            }
+            UpdateModule();
+        }
+
         protected override void UpdateModule()
         {
-            if (!ModulePermitted) return;
+            UpdateCooldown();
+            if (!ModulePermitted)
+            {
+                UpdateBasicAttackActionIcon(false);
+                return;
+            }
             base.UpdateModule();
+        }
+
+        private void UpdateCooldown()
+        {
             if (PreviousPattern != null)
             {
                 if (attackReady && currentComboTime < PreviousPattern.Value.resetComboTime)
@@ -119,14 +150,31 @@ namespace DungeonTogether.Scripts.Character.Module
                     currentPatternIndex = 0;
                     previousPatternIndex = -1;
                 }
-                if (!attackReady && currentInterval < PreviousPattern.Value.interval)
-                {
-                    currentInterval += Time.deltaTime;
-                    return;
-                }
             }
-            attackReady = true;
-            currentInterval = 0;
+            var pattern = PreviousPattern ?? CurrentPattern;
+            if (pattern == null) return;
+            if (!attackReady && currentInterval < pattern.Value.interval)
+            {
+                currentInterval += Time.deltaTime;
+                
+            }
+            else
+            {
+                attackReady = true;
+            }
+            bool available = !attackUsed;
+            UpdateBasicAttackActionIcon(available, pattern);
+        }
+        
+        private void UpdateBasicAttackActionIcon(bool available, BasicAttackPattern? pattern = null)
+        {
+            if (characterHub.CharacterType is not CharacterType.Player) return;
+            if (pattern != null)
+            {
+                float max = pattern.Value.interval;
+                PlayerCanvasManager.Instance.UpdateBasicAttackIcon(currentInterval, max);
+            }
+            PlayerCanvasManager.Instance.SetAvailableBasicAttack(available);
         }
         
         /// <summary>
@@ -158,17 +206,27 @@ namespace DungeonTogether.Scripts.Character.Module
         protected IEnumerator AttackCoroutine()
         {
             if (CurrentPattern == null) yield break;
+            attackUsed = true;
             currentComboTime = 0;
-            characterHub.ChangeActionState(CharacterStates.CharacterActionState.Basic);
+            characterHub.ChangeActionState(CharacterActionState.Basic);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
             CurrentPattern.Value.damageArea.SetActive(true);
             yield return new WaitForSeconds(CurrentPattern.Value.duration);
             CurrentPattern.Value.damageArea.SetActive(false);
-            characterHub.ChangeActionState(CharacterStates.CharacterActionState.None);
+            characterHub.ChangeActionState(CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
             currentPatternIndex = (currentPatternIndex + 1) % basicAttackPatterns.Count;
+            currentInterval = 0;
             attackReady = false;
+            attackUsed = false;
             attackCoroutine = null;
+        }
+
+        protected virtual void GetEnergy(float amount)
+        {
+            if (!energyModule) return;
+            energyModule.ChangeEnergy(+amount);
+            return;
         }
     }
 }

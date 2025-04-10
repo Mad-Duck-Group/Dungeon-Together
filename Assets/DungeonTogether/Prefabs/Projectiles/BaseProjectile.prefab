@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1988396623385068702}
   - component: {fileID: 5075604195582822146}
   - component: {fileID: -4834336959574245418}
+  - component: {fileID: -2000539656980692695}
   m_Layer: 0
   m_Name: BaseProjectile
   m_TagString: Untagged
@@ -138,9 +139,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e6126c30b4b7c4e8dcdebd22f58380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visualizer: {fileID: 0}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
-  ignoreLayer:
+    m_Bits: 384
+  passThroughLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
+--- !u!50 &-2000539656980692695
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6223688861620892961}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

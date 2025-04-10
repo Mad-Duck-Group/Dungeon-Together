@@ -105,6 +105,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -112,10 +125,10 @@ TextureImporter:
       name: traxax_run_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 23
-        width: 89
-        height: 81
+        x: 0
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,10 +147,10 @@ TextureImporter:
       name: traxax_run_1
       rect:
         serializedVersion: 2
-        x: 144
-        y: 24
-        width: 87
-        height: 79
+        x: 128
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,10 +169,10 @@ TextureImporter:
       name: traxax_run_2
       rect:
         serializedVersion: 2
-        x: 282
-        y: 24
-        width: 77
-        height: 77
+        x: 256
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,10 +191,10 @@ TextureImporter:
       name: traxax_run_3
       rect:
         serializedVersion: 2
-        x: 414
-        y: 23
-        width: 74
-        height: 81
+        x: 384
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 8a6b799ba11a21d4a978a4022014b101
     internalID: 0
     vertices: []
     indices: 
@@ -209,7 +222,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      traxax_run_0: -6990101908659213585
+      traxax_run_1: 9199306029762957247
+      traxax_run_2: 504707906300293134
+      traxax_run_3: -1289066297667847020
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

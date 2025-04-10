@@ -12,7 +12,8 @@ namespace DungeonTogether.Scripts.Manangers
     {
         Fighter,
         Wizard,
-        Rogue,
+        RogueMelee,
+        RogueRange,
         Cleric
     }
     public class ClassSelector : NetworkBehaviour
