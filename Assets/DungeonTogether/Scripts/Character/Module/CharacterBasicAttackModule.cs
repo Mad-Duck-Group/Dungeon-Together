@@ -16,6 +16,9 @@ namespace DungeonTogether.Scripts.Character.Module
         [Group("Timing"), Min(0)] public float duration;
         [Group("Timing"), Min(0)] public float interval;
         [Group("Timing"), Min(0)] public float resetComboTime;
+        [Group("Critical")] public float increaseCriticalChance;
+        [Group("Critical")] public float increaseCriticalDamage;
+        [Group("Critical")] public float increaseDuration;
         [Group("Energy"), Min(0)] public float getEnergy;
     }
     /// <summary>
@@ -48,6 +51,7 @@ namespace DungeonTogether.Scripts.Character.Module
                 return basicAttackPatterns[previousPatternIndex];
             }
         }
+        
 
         private CharacterCriticalModule criticalModule;
         private CharacterEnergyModule energyModule;
@@ -227,6 +231,12 @@ namespace DungeonTogether.Scripts.Character.Module
             if (!energyModule) return;
             energyModule.ChangeEnergy(+amount);
             return;
+        }
+        public void ApplyCriticalBuff(float critChance, float critDamage, float duration)
+        {
+            if (criticalModule == null) return;
+            criticalModule.SetCriticalChance(critChance, duration);
+            criticalModule.SetCriticalMultiplier(critDamage, duration);
         }
     }
 }

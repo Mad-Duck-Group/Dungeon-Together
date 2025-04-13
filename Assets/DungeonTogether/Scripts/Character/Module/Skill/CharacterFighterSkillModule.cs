@@ -184,6 +184,7 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             characterHub.ChangeActionState(CharacterActionState.Skill);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
             
+            
             DamageArea damageArea = Instantiate(
                 CurrentPattern.Value.damageArea, 
                 CurrentPattern.Value.spawnPoint.position, 
@@ -228,6 +229,12 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             if (!energyModule) return;
             energyModule.ChangeEnergy(+amount);
             return;
+        }
+        public void ApplyCriticalBuff(float critChance, float critDamage, float duration)
+        {
+            if (criticalModule == null) return;
+            criticalModule.SetCriticalChance(critChance, duration);
+            criticalModule.SetCriticalMultiplier(critDamage, duration);
         }
     }
 }
