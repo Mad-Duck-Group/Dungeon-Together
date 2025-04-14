@@ -16,9 +16,6 @@ namespace DungeonTogether.Scripts.Character.Module
         [Group("Timing"), Min(0)] public float duration;
         [Group("Timing"), Min(0)] public float interval;
         [Group("Timing"), Min(0)] public float resetComboTime;
-        [Group("Critical")] public float increaseCriticalChance;
-        [Group("Critical")] public float increaseCriticalDamage;
-        [Group("Critical")] public float increaseDuration;
         [Group("Energy"), Min(0)] public float getEnergy;
     }
     /// <summary>
