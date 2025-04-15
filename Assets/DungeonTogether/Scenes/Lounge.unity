@@ -3458,7 +3458,7 @@ MonoBehaviour:
       Value:
         _sceneObject: {fileID: 102900000, guid: be2796813db133f46a4925cf6fef5ceb,
           type: 3}
-        _path: Assets/DungeonTogether/Scenes/Lobby.unity
+        _path: Assets/DungeonTogether/Scenes/Lounge.unity
     - Key: 2
       Value:
         _sceneObject: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02,
@@ -6875,7 +6875,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9310814, g: 1, b: 0.6839622, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -8686,7 +8686,7 @@ MonoBehaviour:
   m_BuildHeightMesh: 0
   m_MinRegionArea: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: 756ae0b8270a5c049a5ce8cebb6ff2dd, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 1445ed45644cb874fa326449ba62fa2c, type: 2}
 --- !u!1 &1453965100
 GameObject:
   m_ObjectHideFlags: 0
@@ -10771,7 +10771,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9248399, g: 0.9528302, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

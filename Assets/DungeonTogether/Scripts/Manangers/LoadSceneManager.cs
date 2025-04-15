@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AYellowpaper.SerializedCollections;
 using Redcode.Extensions;
 using TriInspector;
@@ -11,7 +12,7 @@ using UnityEngine.SceneManagement;
 public enum SceneType
 {
     MainMenu,
-    Lobby,
+    Lounge,
     Game
 }
 
@@ -21,6 +22,19 @@ public class LoadSceneManager : PersistentMonoSingleton<LoadSceneManager>
     public SerializedDictionary<SceneType, SceneReference> sceneAssets;
     
     public static SceneType CurrentSceneType { get; private set; }
+
+    private void Start()
+    {
+        if (sceneAssets == null || sceneAssets.Count == 0)
+        {
+            Debug.LogError("Scene assets are not set up correctly.");
+            return;
+        }
+
+        var activeScene = SceneManager.GetActiveScene().path;
+        CurrentSceneType = sceneAssets
+            .FirstOrDefault(x => x.Value.Path == activeScene).Key;
+    }
 
     public void LoadScene(string sceneName)
     {

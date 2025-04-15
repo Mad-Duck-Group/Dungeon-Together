@@ -18,19 +18,6 @@ namespace DungeonTogether.Scripts.Manangers
         RogueRange,
         Cleric
     }
-
-    public struct SpawnSelectedClassEvent
-    {
-        public ulong clientId;
-
-        private static SpawnSelectedClassEvent _event;
-        
-        public static void Invoke(ulong clientId)
-        {
-            _event.clientId = clientId;
-            EventBus<SpawnSelectedClassEvent>.Invoke(_event);
-        }
-    }
     public class ClassSelector : NetworkBehaviour
     {
         [SerializedDictionary("ClassType", "Character")] 
@@ -43,23 +30,9 @@ namespace DungeonTogether.Scripts.Manangers
         
         private static readonly Dictionary<ulong, ClassType> SelectedClasses = new();
 
+        public static event Action<ClassSelector> OnClassSelectorSpawned;
         public static event Action<ulong> OnPreCharacterSpawned;
         public static event Action<ulong> OnCharacterSpawned;
-        
-        private void OnEnable()
-        {
-            EventBus<SpawnSelectedClassEvent>.Event += SpawnSelectedClass;
-        }
-        
-        private void OnDisable()
-        {
-            EventBus<SpawnSelectedClassEvent>.Event -= SpawnSelectedClass;
-        }
-
-        private void SpawnSelectedClass(SpawnSelectedClassEvent eventData)
-        {
-            SpawnSelectedClass(eventData.clientId);
-        }
 
         private void Start()
         {
@@ -71,7 +44,13 @@ namespace DungeonTogether.Scripts.Manangers
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
-            //if (LoadSceneManager.CurrentSceneType is SceneType.Game) return;
+            if (IsServer) OnClassSelectorSpawned?.Invoke(this);
+            var localClientId = NetworkManager.LocalClient.ClientId;
+            if (SelectedClasses.TryGetValue(localClientId, out var classType))
+            {
+                SpawnCharacterRpc(localClientId, classType);
+                return;
+            }
             SetActive(true);
         }
 
@@ -94,7 +73,7 @@ namespace DungeonTogether.Scripts.Manangers
             SetActive(false);
         }
 
-        private void SpawnSelectedClass(ulong clientId)
+        public void SpawnSelectedClass(ulong clientId)
         {
             if (SelectedClasses.TryGetValue(clientId, out var selectedClass))
             {

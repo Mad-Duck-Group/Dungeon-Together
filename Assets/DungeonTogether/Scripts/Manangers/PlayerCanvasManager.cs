@@ -24,7 +24,7 @@ namespace DungeonTogether.Scripts.Manangers
         {
             ClassSelector.OnCharacterSpawned += OnCharacterSpawned;
         }
-        
+
         private void OnDisable()
         {
             ClassSelector.OnCharacterSpawned -= OnCharacterSpawned;
@@ -32,20 +32,22 @@ namespace DungeonTogether.Scripts.Manangers
 
         private void OnCharacterSpawned(ulong id)
         {
+            Debug.Log($"OnCharacterSpawned called with id: {id}");
             if (id == NetworkManager.Singleton.LocalClientId)
             {
                 SetActiveCanvas(true);
             }
         }
 
-        private void Start()
+        protected override void Awake()
         {
+            base.Awake();
             SetActiveCanvas(false);
             SetAvailableBasicAttack(false);
             SetAvailableSkill(false);
             SetAvailableUltimate(false);
         }
-        
+
         private void SetActiveCanvas(bool active)
         {
             playerCanvas.gameObject.SetActive(active);
