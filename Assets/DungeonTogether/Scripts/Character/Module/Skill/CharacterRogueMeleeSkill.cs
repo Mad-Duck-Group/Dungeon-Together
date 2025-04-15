@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DungeonTogether.Scripts.Manangers;
+using DungeonTogether.Scripts.Utils;
 using TriInspector;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -25,6 +27,20 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         [Group("Cost"), Min(0)] public float mana;
         [Group("Energy"), Min(0)] public float getEnergy;
     }
+
+    public struct RogueUltimateSkillEvent
+    {
+        public CharacterHub characterHub;
+        public float duration;
+
+        private static RogueUltimateSkillEvent _event;
+        public static void Invoke(CharacterHub characterHub, float duration)
+        {
+            _event.characterHub = characterHub;
+            _event.duration = duration;
+            EventBus<RogueUltimateSkillEvent>.Invoke(_event);
+        }
+    }
     public class CharacterRogueMeleeSkill : CharacterModule
     {
         [Title("Settings")]
@@ -34,6 +50,13 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             HideRemoveButton = false,
             AlwaysExpanded = false)]
         [SerializeField] private List<RogueSkillPattern> rougeAttackPatterns;
+
+        [TableList(Draggable = true,
+            HideAddButton = false,
+            HideRemoveButton = false,
+            AlwaysExpanded = false)]
+        [SerializeField]
+        private List<RogueSkillPattern> rougeUltimateSkillPatterns;
         
         [Title("Debug")]
         [SerializeField, DisplayAsString] private int currentPatternIndex;
@@ -43,29 +66,38 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         [SerializeField, DisplayAsString] private float currentCooldown;
         [SerializeField, DisplayAsString] private float currentComboTime;
         
-        private RogueSkillPattern? CurrentPattern => rougeAttackPatterns[currentPatternIndex];
+        private RogueSkillPattern? CurrentPattern => currentPatterns[currentPatternIndex];
         private RogueSkillPattern? PreviousPattern
         {
             get
             {
                 if (previousPatternIndex == -1) return null;
-                return rougeAttackPatterns[previousPatternIndex];
+                return currentPatterns[previousPatternIndex];
             }
         }
 
+        private List<RogueSkillPattern> currentPatterns = new();
         private CharacterMovementModule movementModule;
         private CharacterManaModule manaModule;
         private CharacterEnergyModule energyModule;
         private CharacterCriticalModule criticalModule;
         private Coroutine skillCoroutine;
+        private Coroutine ultimateSkillCoroutine;
 
         public override void Initialize(CharacterHub characterHub)
         {
             base.Initialize(characterHub);
+            currentPatterns = rougeAttackPatterns;
             currentPatternIndex = 0;
             currentCooldown = CurrentPattern?.cooldown ?? 0;
             previousPatternIndex = -1;
             rougeAttackPatterns.ForEach(pattern =>
+            {
+                pattern.damageArea.Initialize();
+                pattern.damageArea.SetActive(false);
+                pattern.damageArea.OnHitEvent += OnHit;
+            });
+            rougeUltimateSkillPatterns.ForEach(pattern =>
             {
                 pattern.damageArea.Initialize();
                 pattern.damageArea.SetActive(false);
@@ -85,6 +117,7 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         public override void Shutdown()
         {
             base.Shutdown();
+            currentPatterns = rougeAttackPatterns;
             currentPatternIndex = 0;
             currentCooldown = 0;
             previousPatternIndex = -1;
@@ -93,6 +126,44 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
                 pattern.damageArea.SetActive(false);
                 pattern.damageArea.OnHitEvent -= OnHit;
             });
+            rougeUltimateSkillPatterns.ForEach(pattern =>
+            {
+                pattern.damageArea.SetActive(false);
+                pattern.damageArea.OnHitEvent -= OnHit;
+            });
+        }
+
+        protected override void Subscribe()
+        {
+            base.Subscribe();
+            EventBus<RogueUltimateSkillEvent>.Event += OnRogueUltimateSkillEvent;
+        }
+
+        protected override void Unsubscribe()
+        {
+            base.Unsubscribe();
+            EventBus<RogueUltimateSkillEvent>.Event -= OnRogueUltimateSkillEvent;
+        }
+
+        private void OnRogueUltimateSkillEvent(RogueUltimateSkillEvent eventData)
+        {
+            if (eventData.characterHub != characterHub) return;
+            if (ultimateSkillCoroutine != null) return;
+            ultimateSkillCoroutine = StartCoroutine(UltimateSkillCoroutine(eventData.duration));
+        }
+
+        private IEnumerator UltimateSkillCoroutine(float duration)
+        {
+            currentPatterns = rougeUltimateSkillPatterns;
+            currentPatternIndex = 0;
+            currentCooldown = CurrentPattern?.cooldown ?? 0;
+            previousPatternIndex = -1;
+            yield return new WaitForSeconds(duration);
+            currentPatterns = rougeAttackPatterns;
+            currentPatternIndex = 0;
+            currentCooldown = CurrentPattern?.cooldown ?? 0;
+            previousPatternIndex = -1;
+            ultimateSkillCoroutine = null;
         }
 
         /// <summary>

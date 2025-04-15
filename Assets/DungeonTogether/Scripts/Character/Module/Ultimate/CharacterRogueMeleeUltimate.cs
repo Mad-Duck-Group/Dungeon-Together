@@ -1,37 +1,35 @@
-using UnityEngine;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using DungeonTogether.Scripts.Character.Module.Skill;
 using DungeonTogether.Scripts.Manangers;
 using TriInspector;
-
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DungeonTogether.Scripts.Character.Module.Ultimate
 {
-    [Serializable]
-    public struct FighterUltimatePattern
+    public class CharacterRogueMeleeUltimate : CharacterModule
     {
-        [Group("Critical")] public float increaseCriticalChance;
-        [Group("Critical")] public float increaseCriticalDamage;
-        [Group("Critical")] public float increaseDuration;
-        [Group("Timing"), Min(0)] public float delay;
-        [Group("Timing"), Min(0)] public float duration;
-        [Group("Timing"), Min(0)] public float cooldown;
-        [Group("Timing"), Min(0)] public float resetComboTime;
-        [Group("Cost"), Min(0)] public float energy;
+        [Serializable]
+        public struct RogueUltimatePattern
+        {
+            [Group("Duration")] public float ultimateSkillDuration;
+            [Group("Timing"), Min(0)] public float delay;
+            [Group("Timing"), Min(0)] public float duration;
+            [Group("Timing"), Min(0)] public float cooldown;
+            [Group("Timing"), Min(0)] public float resetComboTime;
+            [Group("Cost"), Min(0)] public float energy;
+        }
         
-    }
-    public class CharacterFighterUltimateModule : CharacterModule
-    {
         [Title("Settings")]
         [SerializeField] private Transform comboParent;
-
+         
         [TableList(Draggable = true,
             HideAddButton = false,
             HideRemoveButton = false,
             AlwaysExpanded = false)]
-        [SerializeField] private List<FighterUltimatePattern> fighterUltimatePatterns;
+        [SerializeField] private List<RogueUltimatePattern> rogueUltimatePatterns;
 
         [Title("Debug")]
         [SerializeField, DisplayAsString] protected int currentPatternIndex;
@@ -41,18 +39,17 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
         [SerializeField, DisplayAsString] protected float currentCooldown;
         [SerializeField, DisplayAsString] protected float currentComboTime;
         
-        protected FighterUltimatePattern? CurrentPattern => fighterUltimatePatterns[currentPatternIndex];
-        protected FighterUltimatePattern? PreviousPattern
+        protected RogueUltimatePattern? CurrentPattern => rogueUltimatePatterns[currentPatternIndex];
+        protected RogueUltimatePattern? PreviousPattern
         {
             get
             {
                 if (previousPatternIndex == -1) return null;
-                return fighterUltimatePatterns[previousPatternIndex];
+                return rogueUltimatePatterns[previousPatternIndex];
             }
         }
         
         private CharacterEnergyModule energyModule;
-        private CharacterCriticalModule criticalModule;
         private Coroutine ultimateCoroutine;
 
         public override void Initialize(CharacterHub characterHub)
@@ -74,7 +71,6 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
         {
             base.PostInitialize();
             energyModule = characterHub.FindModuleOfType<CharacterEnergyModule>();
-            criticalModule = characterHub.FindModuleOfType<CharacterCriticalModule>();
         }
         public override void Shutdown()
         {
@@ -145,7 +141,7 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             UpdateUltimateActionIcon(available, pattern);
         }
         
-        private void UpdateUltimateActionIcon(bool available, FighterUltimatePattern? pattern = null)
+        private void UpdateUltimateActionIcon(bool available, RogueUltimatePattern? pattern = null)
         {
             if (characterHub.CharacterType is not CharacterType.Player) return;
             if (pattern != null)
@@ -177,14 +173,11 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             characterHub.ChangeActionState(CharacterActionState.Ultimate);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
             //change color
-            criticalModule.SetCriticalChance(CurrentPattern.Value.increaseCriticalChance,
-                CurrentPattern.Value.increaseDuration);
-            criticalModule.SetCriticalMultiplier(CurrentPattern.Value.increaseCriticalDamage,
-                CurrentPattern.Value.increaseDuration);
+            RogueUltimateSkillEvent.Invoke(characterHub, CurrentPattern.Value.ultimateSkillDuration);
             yield return new WaitForSeconds(CurrentPattern.Value.duration);
             characterHub.ChangeActionState(CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
-            currentPatternIndex = (currentPatternIndex + 1) % fighterUltimatePatterns.Count;
+            currentPatternIndex = (currentPatternIndex + 1) % rogueUltimatePatterns.Count;
             currentCooldown = 0;
             ultimateReady = false;
             ultimateUsed = false;
@@ -197,8 +190,5 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             energyModule.ChangeEnergy(-amount);
             return true;
         }
-        
     }
 }
-
-

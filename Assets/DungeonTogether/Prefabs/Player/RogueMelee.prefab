@@ -280,6 +280,69 @@ MonoBehaviour:
   includeSelf: 0
   DOT: 0
   DOTInterval: 0
+--- !u!1 &4712089544039844018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2476613607025926229}
+  - component: {fileID: 5466363459710346379}
+  m_Layer: 0
+  m_Name: RogueMeleeUltimate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2476613607025926229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4712089544039844018}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7950634394602387492}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5466363459710346379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4712089544039844018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 184e66e0babb40c4a898c7069aefbc5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  moduleEnabled: 1
+  blockedMovementStates: 
+  blockedActionStates: 0100000002000000
+  blockedConditionStates: 0100000002000000
+  comboParent: {fileID: 0}
+  rogueUltimatePatterns:
+  - ultimateSkillDuration: 10
+    delay: 0
+    duration: 0
+    cooldown: 20
+    resetComboTime: 0
+    energy: 100
+  currentPatternIndex: 0
+  previousPatternIndex: -1
+  ultimateReady: 0
+  ultimateUsed: 0
+  currentCooldown: 0
+  currentComboTime: 0
 --- !u!1 &4720526613664024656
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,6 +923,22 @@ MonoBehaviour:
     increaseDuration: 2
     mana: 25
     getEnergy: 25
+  rougeUltimateSkillPatterns:
+  - damageArea: {fileID: 8991907462433850559}
+    damage: 20
+    delay: 0
+    duration: 0.2
+    cooldown: 0.5
+    resetComboTime: 0
+    dashForce: 10
+    ignoreLayer:
+      serializedVersion: 2
+      m_Bits: 128
+    increaseCriticalChance: 1
+    increaseCriticalDamage: 2
+    increaseDuration: 2
+    mana: 0
+    getEnergy: 0
   currentPatternIndex: 0
   previousPatternIndex: -1
   skillReady: 0
@@ -982,6 +1061,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3691135109174136517}
+    - targetCorrespondingSourceObject: {fileID: 3924217345497714389, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2476613607025926229}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acffb8d00be5ba643a2c959e1f3a5299, type: 3}
 --- !u!4 &7950634394602387492 stripped

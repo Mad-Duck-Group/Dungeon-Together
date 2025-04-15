@@ -230,11 +230,5 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             energyModule.ChangeEnergy(+amount);
             return;
         }
-        public void ApplyCriticalBuff(float critChance, float critDamage, float duration)
-        {
-            if (criticalModule == null) return;
-            criticalModule.SetCriticalChance(critChance, duration);
-            criticalModule.SetCriticalMultiplier(critDamage, duration);
-        }
     }
 }
