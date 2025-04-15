@@ -182,6 +182,71 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!1 &1746257613323518907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1542828492355461509}
+  - component: {fileID: 1222521408082901837}
+  m_Layer: 0
+  m_Name: UltimateFighter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1542828492355461509
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746257613323518907}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7950634394602387492}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1222521408082901837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746257613323518907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6d7bd4f5b531f44af712c34023b741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  moduleEnabled: 1
+  blockedMovementStates: 
+  blockedActionStates: 
+  blockedConditionStates: 
+  comboParent: {fileID: 0}
+  fighterUltimatePatterns:
+  - increaseCriticalChance: 1
+    increaseCriticalDamage: 2
+    increaseDuration: 10
+    delay: 0
+    duration: 10
+    cooldown: 20
+    resetComboTime: 0
+    energy: 100
+  currentPatternIndex: 0
+  previousPatternIndex: -1
+  ultimateReady: 0
+  ultimateUsed: 0
+  currentCooldown: 0
+  currentComboTime: 0
 --- !u!1 &1861370698120176094
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +401,7 @@ MonoBehaviour:
   allowReentry: 0
   includeSelf: 0
   DOT: 0
+  DOTInterval: 0
 --- !u!1 &3451670464015168193
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,6 +460,9 @@ MonoBehaviour:
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
+    increaseCriticalChance: 0
+    increaseCriticalDamage: 0
+    increaseDuration: 0
     getEnergy: 10
   - damageArea: {fileID: 388050585779726240}
     damage: 5
@@ -401,6 +470,9 @@ MonoBehaviour:
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
+    increaseCriticalChance: 0
+    increaseCriticalDamage: 0
+    increaseDuration: 0
     getEnergy: 10
   - damageArea: {fileID: 540551778150867667}
     damage: 10
@@ -408,6 +480,9 @@ MonoBehaviour:
     duration: 0.1
     interval: 0.5
     resetComboTime: 2
+    increaseCriticalChance: 0
+    increaseCriticalDamage: 0
+    increaseDuration: 0
     getEnergy: 10
   currentPatternIndex: 0
   previousPatternIndex: -1
@@ -569,6 +644,7 @@ MonoBehaviour:
   allowReentry: 0
   includeSelf: 0
   DOT: 0
+  DOTInterval: 0
 --- !u!1 &4402936758592768089
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +700,6 @@ MonoBehaviour:
   - spawnPoint: {fileID: 8325179266954812462}
     damageArea: {fileID: 7180457438247107046, guid: bdf1832d8967a774cb3d5e24f1adb919,
       type: 3}
-    swingSpeed: 2
     swingAngle: 180
     damage: 40
     passThroughLayer:
@@ -796,6 +871,7 @@ MonoBehaviour:
   allowReentry: 0
   includeSelf: 0
   DOT: 0
+  DOTInterval: 0
 --- !u!1001 &6351145548222199537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -819,6 +895,21 @@ PrefabInstance:
         type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 3085853322
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869794699041368331, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869794699041368331, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869794699041368331, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7207912155587763137, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
@@ -906,6 +997,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8826259993756140445}
+    - targetCorrespondingSourceObject: {fileID: 3924217345497714389, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1542828492355461509}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acffb8d00be5ba643a2c959e1f3a5299, type: 3}
 --- !u!4 &7950634394602387492 stripped
