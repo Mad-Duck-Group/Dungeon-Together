@@ -1,34 +1,47 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DungeonTogether.Scripts.Utils;
 using TriInspector;
 using Unity.Netcode;
+using UnityCommunity.UnitySingleton;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DungeonTogether.Scripts.Manangers
 {
     public class GameManager : NetworkBehaviour
     {
-        private static GameManager _instance;
-        public static GameManager Instance
+        private void OnEnable()
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = FindFirstObjectByType<GameManager>();
-                }
-                return _instance;
-            }
-        }
-
-        private void Awake()
-        {
-            _instance = this;
+            SceneManager.activeSceneChanged += OnActiveSceneChanged;
         }
         
-        public NetworkObject GetLocalPlayer()
+        private void OnDisable()
         {
-            return NetworkManager.Singleton.LocalClient.PlayerObject;
+            SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+        }
+
+        public override void OnNetworkSpawn()
+        {
+        }
+
+        protected override void OnNetworkPostSpawn()
+        {
+        }
+        
+        public override void OnNetworkDespawn()
+        {
+        }
+
+        private void OnActiveSceneChanged(Scene before, Scene after)
+        {
+            var gameScene = LoadSceneManager.Instance.sceneAssets[SceneType.Game];
+            Debug.Log($"After scene path: {after.name}");
+            if (after.path != gameScene.Path) return;
+            var localClientId = NetworkManager.Singleton.LocalClient.ClientId;
+            Debug.Log($"Local client ID: {localClientId}");
+            SpawnSelectedClassEvent.Invoke(localClientId);
         }
     }
 }

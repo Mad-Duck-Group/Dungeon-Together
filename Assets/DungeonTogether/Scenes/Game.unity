@@ -2782,7 +2782,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b253579195d3fa44819809639162bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!114 &461944567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7067,6 +7066,8 @@ MonoBehaviour:
   - {fileID: 1493403771}
   - {fileID: 770384001}
   spawnEnabled: 1
+  randomSpawnPoint: 1
+  uniqueSpawnPoint: 1
   maxActiveCharacterCount: 10
   startLevelDelay: 5
   spawnInterval: 10
@@ -10562,7 +10563,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1568649684
 MonoBehaviour:
   m_ObjectHideFlags: 0

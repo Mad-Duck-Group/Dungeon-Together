@@ -49,6 +49,7 @@ MonoBehaviour:
   blockedMovementStates: 
   blockedActionStates: 
   blockedConditionStates: 0200000001000000
+  playerCollider: {fileID: 0}
   rb2d: {fileID: 2364346117521812172}
   spriteRenderer: {fileID: 6520975532950072968}
   animator: {fileID: 7866843109088977041}

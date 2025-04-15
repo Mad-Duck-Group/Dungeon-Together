@@ -89,6 +89,7 @@ namespace DungeonTogether.Scripts.Utils
                     : availableSpawnPoints[spawnIndex];
                 character.transform.position = selectedSpawn.position;
                 character.NetworkObject.Spawn();
+                character.NetworkObject.DestroyWithScene = true;
                 character.CharacterPool = this;
                 charactersInPool.Remove(character);
                 activeCharacters.Add(character);

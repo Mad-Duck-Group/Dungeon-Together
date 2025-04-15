@@ -17,9 +17,9 @@ public class DamageArea : MonoBehaviour
     protected Collider2D damageCollider;
     protected Transform parent;
     protected bool detached;
-    protected Dictionary<Collider2D, float> lastDamageTime = new Dictionary<Collider2D, float>();
+    protected Dictionary<Collider2D, float> lastDamageTime = new();
     
-    protected HashSet<Collider2D> hitList = new HashSet<Collider2D>();
+    protected HashSet<Collider2D> hitList = new();
     public delegate void OnHit(Collider2D collider);
     public event OnHit OnHitEvent;
 
@@ -52,37 +52,39 @@ public class DamageArea : MonoBehaviour
     }
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        if (DOT) { return; }
         if (!allowReentry && hitList.Contains(other)) { return; }
-        if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer))
-        {
-            hitList.Add(other);
-            OnHitEvent?.Invoke(other);
-        }
+        if (!LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer)) return;
+        hitList.Add(other);
+        lastDamageTime.TryAdd(other, 0f);
+        OnHitEvent?.Invoke(other);
+        Debug.Log("Hit: " + other.name);
     }
-    protected virtual void OnTriggerStay2D(Collider2D other)
+
+    protected virtual void FixedUpdate()
     {
         if (!DOT) { return; }
-        if (!allowReentry && hitList.Contains(other)) { return; }
-        if (LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer))
+        if (lastDamageTime.Count == 0) { return; }
+        List<Collider2D> toModify = new();
+        float currentTime = Time.time;
+        foreach (var pair in lastDamageTime)
         {
-            float currentTime = Time.time;
-            
-            if (!lastDamageTime.ContainsKey(other))
-            {
-                lastDamageTime[other] = 0f;
-            }
-
+            var other = pair.Key;
+            if (!allowReentry && hitList.Contains(other)) { return; }
+            if (!LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer)) continue;
             if (currentTime >= lastDamageTime[other] + DOTInterval)
             {
                 Debug.Log("DOT applied to: " + other.name);
-                lastDamageTime[other] = currentTime;
+                toModify.Add(other);
                 hitList.Add(other);
                 OnHitEvent?.Invoke(other);
             }
         }
+        toModify.ForEach(other =>
+        {
+            lastDamageTime[other] = currentTime;
+        });
     }
-    
+
     protected virtual void OnTriggerExit2D(Collider2D other)
     {
         if (lastDamageTime.ContainsKey(other))

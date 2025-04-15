@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DungeonTogether.Scripts.Character.Module;
+using DungeonTogether.Scripts.Manangers;
 using DungeonTogether.Scripts.Utils;
 using TriInspector;
 using Unity.Netcode;
@@ -108,6 +109,7 @@ namespace DungeonTogether.Scripts.Character
         protected virtual void Subscribe()
         {
             if (!IsOwner) return;
+            ClassSelector.OnPreCharacterSpawned += OnPreCharacterSpawned;
         }
         
         /// <summary>
@@ -141,8 +143,17 @@ namespace DungeonTogether.Scripts.Character
         protected virtual void Unsubscribe()
         {
             if (!IsOwner) return;
+            ClassSelector.OnPreCharacterSpawned -= OnPreCharacterSpawned;
         }
-        
+
+        private void OnPreCharacterSpawned(ulong id)
+        {
+            if (id == NetworkManager.Singleton.LocalClientId)
+            {
+                ShutdownProcedure();
+            }
+        }
+
         public override void OnNetworkDespawn()
         {
             base.OnNetworkDespawn();
@@ -172,8 +183,15 @@ namespace DungeonTogether.Scripts.Character
             shutdown = true;
             Shutdown();
             Unsubscribe();
-            if (CharacterPool) CharacterPool.BackToPool(this);
-            CharacterPool = null;
+            if (CharacterPool)
+            {
+                CharacterPool.BackToPool(this);
+                CharacterPool = null;
+            }
+            else
+            {
+                NetworkObject.Despawn(true);
+            }
         }
         #endregion
         
