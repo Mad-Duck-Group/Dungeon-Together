@@ -189,7 +189,7 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             if (ultimateCoroutine != null) return;
             ultimateCoroutine = StartCoroutine(CastUltimateCoroutine());
         }
-        protected IEnumerator CastUltimateCoroutine()
+        protected virtual IEnumerator CastUltimateCoroutine()
         {
             if (CurrentPattern == null) yield break;
             if (!ConsumeEnergy(CurrentPattern.Value.energy))
@@ -213,7 +213,7 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             ultimateCoroutine = null;
             
         }
-        private bool ConsumeEnergy(float amount)
+        protected bool ConsumeEnergy(float amount)
         {
             if (!energyModule || !energyModule.HasEnoughEnergy(amount)) return false;
             energyModule.ChangeEnergy(-amount);

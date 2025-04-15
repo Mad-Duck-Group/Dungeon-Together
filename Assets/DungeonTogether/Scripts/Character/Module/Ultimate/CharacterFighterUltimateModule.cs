@@ -55,7 +55,7 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
         private CharacterBasicAttackModule basicAttackModule;
         private CharacterFighterSkillModule skillModule;
         private Coroutine ultimateCoroutine;
-        
+
         public override void Initialize(CharacterHub characterHub)
         {
             base.Initialize(characterHub);
@@ -178,6 +178,7 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             ultimateUsed = true;
             characterHub.ChangeActionState(CharacterActionState.Ultimate);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
+            //change color
             basicAttackModule.ApplyCriticalBuff(CurrentPattern.Value.increaseCriticalChance, CurrentPattern.Value.increaseCriticalDamage,CurrentPattern.Value.increaseDuration);
             skillModule.ApplyCriticalBuff(CurrentPattern.Value.increaseCriticalChance, CurrentPattern.Value.increaseCriticalDamage,CurrentPattern.Value.increaseDuration);
             yield return new WaitForSeconds(CurrentPattern.Value.duration);
