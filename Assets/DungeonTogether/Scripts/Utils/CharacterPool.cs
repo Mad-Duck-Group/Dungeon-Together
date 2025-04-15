@@ -25,6 +25,8 @@ namespace DungeonTogether.Scripts.Utils
         
         [Title("Settings")]
         [SerializeField] private bool spawnEnabled = true;
+        [SerializeField] private bool randomSpawnPoint = true;
+        [SerializeField] private bool uniqueSpawnPoint = true;
         [SerializeField] private int maxActiveCharacterCount = 10;
         [SerializeField] private float startLevelDelay = 5f;
         [SerializeField] private float spawnInterval = 10f;
@@ -36,10 +38,14 @@ namespace DungeonTogether.Scripts.Utils
         [ShowInInspector, DisplayAsString] private int ActiveCharacterCount => activeCharacters.Count;
         [SerializeField, DisplayAsString] private float currentSpawnInterval;
 
+        private List<Transform> availableSpawnPoints = new();
+        private Dictionary<CharacterHub, Transform> slots = new();
+
         public override void OnNetworkSpawn()
         {
             if (IsServer)
             {
+                availableSpawnPoints = new List<Transform>(spawnPoints);
                 currentSpawnInterval = spawnInterval - startLevelDelay;
                 SpawnInPool();
             }
@@ -76,14 +82,22 @@ namespace DungeonTogether.Scripts.Utils
                 if (charactersInPool.Count == 0) return;
                 var character = charactersInPool.GetRandomElement();
                 character.gameObject.SetActive(true);
-                character.transform.position = spawnPoints.GetRandomElement().position;
+                var spawnPointCount = availableSpawnPoints.Count;
+                var spawnIndex = i % spawnPointCount;
+                var selectedSpawn = randomSpawnPoint
+                    ? availableSpawnPoints.GetRandomElement()
+                    : availableSpawnPoints[spawnIndex];
+                character.transform.position = selectedSpawn.position;
                 character.NetworkObject.Spawn();
                 character.CharacterPool = this;
                 charactersInPool.Remove(character);
                 activeCharacters.Add(character);
+                if (!uniqueSpawnPoint) continue;
+                slots.Add(character, selectedSpawn);
+                availableSpawnPoints.Remove(selectedSpawn);
             }
         }
-        
+
         public void BackToPool(CharacterHub characterHub)
         {
             if (!activeCharacters.Contains(characterHub))
@@ -94,6 +108,11 @@ namespace DungeonTogether.Scripts.Utils
             characterHub.gameObject.SetActive(false);
             activeCharacters.Remove(characterHub);
             charactersInPool.Add(characterHub);
+            if (slots.TryGetValue(characterHub, out var spawnPoint))
+            {
+                availableSpawnPoints.Add(spawnPoint);
+                slots.Remove(characterHub);
+            }
             DespawnRpc(characterHub.NetworkObject);
         }
 
