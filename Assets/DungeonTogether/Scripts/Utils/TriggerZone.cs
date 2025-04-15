@@ -9,23 +9,23 @@ using UnityEngine.Events;
 
 public class TriggerZone : MonoBehaviour
 {
-    private record StayData
+    protected record StayData
     {
         public float time;
         public bool triggered;
     }
     
-    [SerializeField] private float stayDuration = 1f;
-    [SerializeField] private LayerMask targetLayer;
-    [SerializeField] private bool requireAllClients;
-    [SerializeField] private UnityEvent onEnterEvent;
-    [SerializeField] private UnityEvent onStayEvent;
-    [SerializeField] private UnityEvent onStayAllClientsEvent;
-    [SerializeField] private UnityEvent onExitEvent;
+    [SerializeField] protected float stayDuration = 1f;
+    [SerializeField] protected LayerMask targetLayer;
+    [SerializeField] protected bool requireAllClients;
+    [SerializeField] private UnityEvent<ulong> onEnterEvent;
+    [SerializeField] protected UnityEvent<ulong> onStayEvent;
+    [SerializeField] protected UnityEvent onStayAllClientsEvent;
+    [SerializeField] protected UnityEvent<ulong> onExitEvent;
+
+    protected readonly Dictionary<CharacterHub, StayData> characterStayData = new();
     
-    private readonly Dictionary<CharacterHub, StayData> characterStayData = new();
-    
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (!LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer)) return;
         var character = other.GetComponent<CharacterHub>();
@@ -33,10 +33,12 @@ public class TriggerZone : MonoBehaviour
         if (characterStayData.ContainsKey(character)) return;
         characterStayData.Add(character, new StayData());
         characterStayData[character].time = 0f;
-        onEnterEvent?.Invoke();
+        if (!character.NetworkObject.IsOwner) return;
+        var clientId = character.OwnerClientId;
+        onEnterEvent?.Invoke(clientId);
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (characterStayData.Count == 0) return;
         foreach (var character in characterStayData.Keys)
@@ -45,12 +47,14 @@ public class TriggerZone : MonoBehaviour
             if (characterStayData[character].time < stayDuration)
             {
                 characterStayData[character].time += Time.fixedDeltaTime;
+                continue;
             }
-            else
+            if (character.NetworkObject.IsOwner)
             {
-                onStayEvent?.Invoke();
-                characterStayData[character].triggered = true;
+                var clientId = character.OwnerClientId;
+                onStayEvent?.Invoke(clientId);
             }
+            characterStayData[character].triggered = true;
            
         }
         switch (requireAllClients)
@@ -62,13 +66,15 @@ public class TriggerZone : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    protected virtual void OnTriggerExit2D(Collider2D other)
     {
         if (!LayerMaskUtils.IsInLayerMask(other.gameObject.layer, targetLayer)) return;
         var character = other.GetComponent<CharacterHub>();
         if (character == null) return;
         if (!characterStayData.ContainsKey(character)) return;
         characterStayData.Remove(character);
-        onExitEvent?.Invoke();
+        if (!character.NetworkObject.IsOwner) return;
+        var clientId = character.OwnerClientId;
+        onExitEvent?.Invoke(clientId);
     }
 }

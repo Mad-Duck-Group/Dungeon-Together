@@ -104,15 +104,6 @@ namespace DungeonTogether.Scripts.Character
         }
 
         /// <summary>
-        /// Subscribes to the events that the character hub needs to listen to.
-        /// </summary>
-        protected virtual void Subscribe()
-        {
-            if (!IsOwner) return;
-            ClassSelector.OnPreCharacterSpawned += OnPreCharacterSpawned;
-        }
-        
-        /// <summary>
         /// Shuts down the character hub and its modules.
         /// </summary>
         protected virtual void Shutdown()
@@ -135,23 +126,6 @@ namespace DungeonTogether.Scripts.Character
                 StopCoroutine(changeMovementStateCoroutine);
             }
             initialized = false;
-        }
-
-        /// <summary>
-        /// Unsubscribes from the events that the character hub was listening to.
-        /// </summary>
-        protected virtual void Unsubscribe()
-        {
-            if (!IsOwner) return;
-            ClassSelector.OnPreCharacterSpawned -= OnPreCharacterSpawned;
-        }
-
-        private void OnPreCharacterSpawned(ulong id)
-        {
-            if (id == NetworkManager.Singleton.LocalClientId)
-            {
-                ShutdownProcedure();
-            }
         }
 
         public override void OnNetworkDespawn()
@@ -190,13 +164,45 @@ namespace DungeonTogether.Scripts.Character
             }
             else
             {
-                NetworkObject.Despawn(true);
+                DespawnRpc();
             }
+        }
+
+        [Rpc(SendTo.Server)]
+        private void DespawnRpc()
+        {
+            NetworkObject.Despawn(true);
         }
         #endregion
         
         #region Event Handlers
+        /// <summary>
+        /// Subscribes to the events that the character hub needs to listen to.
+        /// </summary>
+        protected virtual void Subscribe()
+        {
+            //if (!IsOwner) return;
+            ClassSelector.OnPreCharacterSpawned += OnPreCharacterSpawned;
+        }
         
+        /// <summary>
+        /// Unsubscribes from the events that the character hub was listening to.
+        /// </summary>
+        protected virtual void Unsubscribe()
+        {
+            //if (!IsOwner) return;
+            ClassSelector.OnPreCharacterSpawned -= OnPreCharacterSpawned;
+        }
+
+        /// <summary>
+        /// Shutdown this player character when the new player character is spawned.
+        /// </summary>
+        /// <param name="id"></param>
+        private void OnPreCharacterSpawned(ulong id)
+        {
+            if (id != NetworkObject.OwnerClientId) return;
+            ShutdownProcedure();
+        }
         #endregion
         
         #region States

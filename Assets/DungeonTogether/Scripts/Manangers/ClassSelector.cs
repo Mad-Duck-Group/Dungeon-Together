@@ -29,8 +29,6 @@ namespace DungeonTogether.Scripts.Manangers
         //[SerializeField, ReadOnly] private CharacterHub currentCharacter;
         
         private static readonly Dictionary<ulong, ClassType> SelectedClasses = new();
-
-        public static event Action<ClassSelector> OnClassSelectorSpawned;
         public static event Action<ulong> OnPreCharacterSpawned;
         public static event Action<ulong> OnCharacterSpawned;
 
@@ -44,7 +42,6 @@ namespace DungeonTogether.Scripts.Manangers
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
-            if (IsServer) OnClassSelectorSpawned?.Invoke(this);
             var localClientId = NetworkManager.LocalClient.ClientId;
             if (SelectedClasses.TryGetValue(localClientId, out var classType))
             {
@@ -54,12 +51,6 @@ namespace DungeonTogether.Scripts.Manangers
             SetActive(true);
         }
 
-        public override void OnNetworkDespawn()
-        {
-            base.OnNetworkDespawn();
-            
-        }
-        
         public void SetActive(bool active)
         {
             classSelectionCanvas.gameObject.SetActive(active);
@@ -73,18 +64,6 @@ namespace DungeonTogether.Scripts.Manangers
             SetActive(false);
         }
 
-        public void SpawnSelectedClass(ulong clientId)
-        {
-            if (SelectedClasses.TryGetValue(clientId, out var selectedClass))
-            {
-                SpawnCharacterRpc(clientId, selectedClass);
-            }
-            else
-            {
-                Debug.LogError($"No class selected for client ID: {clientId}");
-            }
-        }
-
         [Rpc(SendTo.Server, RequireOwnership = false)]
         private void SpawnCharacterRpc(ulong clientId, ClassType selectedClass)
         {
@@ -94,14 +73,14 @@ namespace DungeonTogether.Scripts.Manangers
             character.NetworkObject.SpawnAsPlayerObject(clientId);
             character.NetworkObject.ChangeOwnership(clientId);
             character.NetworkObject.DestroyWithScene = true;
-            OnCharacterSpawnRpc(clientId);
-            SelectedClasses.TryAdd(clientId, selectedClass);
-            SelectedClasses[clientId] = selectedClass;
+            OnCharacterSpawnRpc(clientId, selectedClass);
         }
 
         [Rpc(SendTo.ClientsAndHost)]
-        private void OnCharacterSpawnRpc(ulong clientId)
+        private void OnCharacterSpawnRpc(ulong clientId, ClassType selectedClass)
         {
+            SelectedClasses.TryAdd(clientId, selectedClass);
+            SelectedClasses[clientId] = selectedClass;
             OnCharacterSpawned?.Invoke(clientId);
         }
     }
