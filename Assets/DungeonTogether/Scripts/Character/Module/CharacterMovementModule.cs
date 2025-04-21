@@ -84,6 +84,7 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             if (!IsOwner) return;
             base.UpdateModule();
+            if (characterHub.MovementState == CharacterMovementState.Dashing) return;
             rb2d.linearVelocity = moveDirection * MovementSpeed;
             Flip();
         }

@@ -27,6 +27,8 @@ namespace DungeonTogether.Scripts.Manangers
         [SerializeField] private CanvasGroup classSelectionCanvas;
         [SerializeField] private Transform spawnPoint;
         //[SerializeField, ReadOnly] private CharacterHub currentCharacter;
+
+        private static ClassSelector _instance;
         
         private static readonly Dictionary<ulong, ClassType> SelectedClasses = new();
         public static event Action<ulong> OnPreCharacterSpawned;
@@ -34,6 +36,7 @@ namespace DungeonTogether.Scripts.Manangers
 
         private void Start()
         {
+            _instance = this;
             foreach (var (button, classType) in classButtons)
             {
                 button.onClick.AddListener(() => SelectClass(classType));
@@ -62,6 +65,18 @@ namespace DungeonTogether.Scripts.Manangers
             Debug.Log($"Local client ID: {localClientID}");
             SpawnCharacterRpc(localClientID, classType);
             SetActive(false);
+        }
+
+        public static void SpawnSelectedClass(ulong clientId)
+        {
+            if (SelectedClasses.TryGetValue(clientId, out var classType))
+            {
+                _instance.SpawnCharacterRpc(clientId, classType);
+            }
+            else
+            {
+                Debug.LogError($"No class selected for client ID: {clientId}");
+            }
         }
 
         [Rpc(SendTo.Server, RequireOwnership = false)]

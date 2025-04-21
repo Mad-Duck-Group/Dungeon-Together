@@ -104,6 +104,11 @@ namespace DungeonTogether.Scripts.Character.Module
         
         protected override void UpdateModule()
         {
+            if (characterHub.MovementState is CharacterMovementState.Dashing)
+            {
+                navMeshAgent.Warp(transform.position);
+                return;
+            }
             if (!ModulePermitted)
             {
                 characterMovementModule.SetDirection(Vector2.zero, true);

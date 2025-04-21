@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DungeonTogether.Scripts.Character;
+using DungeonTogether.Scripts.Manangers;
 using Redcode.Extensions;
 using TriInspector;
 using Unity.Netcode;
@@ -40,6 +41,21 @@ namespace DungeonTogether.Scripts.Utils
 
         private List<Transform> availableSpawnPoints = new();
         private Dictionary<CharacterHub, Transform> slots = new();
+
+        private void OnEnable()
+        {
+            GameManager.OnGameEnd += OnGameEnd;
+        }
+
+        private void OnDisable()
+        {
+            GameManager.OnGameEnd -= OnGameEnd;
+        }
+
+        private void OnGameEnd()
+        {
+            spawnEnabled = false;
+        }
 
         public override void OnNetworkSpawn()
         {

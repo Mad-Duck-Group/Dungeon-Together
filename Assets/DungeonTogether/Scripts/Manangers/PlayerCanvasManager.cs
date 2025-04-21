@@ -1,25 +1,41 @@
 using System;
+using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using DungeonTogether.Scripts.UI;
 using MoreMountains.Tools;
+using TMPro;
 using TriInspector;
 using Unity.Netcode;
 using UnityCommunity.UnitySingleton;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DungeonTogether.Scripts.Manangers
 {
-    public class PlayerCanvasManager : MonoSingleton<PlayerCanvasManager>
+    [Serializable]
+    public struct LoadSceneButton
+    {
+        public Button button;
+        public SceneType sceneType;
+    }
+    public class PlayerCanvasManager : NetworkSingleton<PlayerCanvasManager>
     {
         [Title("References")]
         [SerializeField, Required] private CanvasGroup playerCanvas;
+        [SerializeField] private CanvasGroup loseCanvas;
+        [SerializeField] private CanvasGroup winCanvas;
+        [SerializeField] private TMP_Text completionTimeText;
+        [SerializeField] private CanvasGroup respawnCanvas;
+        [SerializeField] private List<LoadSceneButton> loadSceneButtons = new();
+        [SerializeField] private List<Button> disconnectButtons = new();
+        [SerializeField] private TMP_Text respawningTimerText;
         [SerializeField, Required] private MMHealthBar healthBar;
         [SerializeField, Required] private MMHealthBar manaBar;
         [SerializeField, Required] private MMHealthBar energyBar;
         [SerializeField, Required] private ActionIcon basicAttackIcon;
         [SerializeField, Required] private ActionIcon skillIcon;
         [SerializeField, Required] private ActionIcon ultimateIcon;
-
-
+        
         private void OnEnable()
         {
             ClassSelector.OnCharacterSpawned += OnCharacterSpawned;
@@ -46,6 +62,27 @@ namespace DungeonTogether.Scripts.Manangers
             SetAvailableBasicAttack(false);
             SetAvailableSkill(false);
             SetAvailableUltimate(false);
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+            foreach (var button in loadSceneButtons)
+            {
+                button.button.onClick.AddListener(() => LoadSceneManager.Instance.LoadScene(button.sceneType));
+                if (!IsHost)
+                {
+                    button.button.interactable = false;
+                }
+            }
+            foreach (var button in disconnectButtons)
+            {
+                button.onClick.AddListener(() =>
+                {
+                    Debug.Log("Disconnecting from server...");
+                    NetworkManager.Singleton.Shutdown();
+                });
+            }
         }
 
         private void SetActiveCanvas(bool active)
@@ -84,7 +121,42 @@ namespace DungeonTogether.Scripts.Manangers
             targetProgressBar.LerpIncreasingDelayedBar = bump;
             energyBar.UpdateBar(currentEnergy, 0, maxEnergy, true);
         }
+
+        #region Respawning
+        public void SetActiveRespawnCanvas(bool active)
+        {
+            respawnCanvas.gameObject.SetActive(active);
+        }
         
+        public void SetRespawningTimer(float time)
+        {
+            respawningTimerText.text = $"Respawning in: {GetTimeString(time)}";
+        }
+        #endregion
+
+
+        #region Win
+        public void SetActiveWinCanvas(bool active)
+        {
+            winCanvas.gameObject.SetActive(active);
+        }
+        
+        public void SetCompletionTimeText(float time)
+        {
+            completionTimeText.text =
+                $"Completion time: {GetTimeString(time)}";
+        }
+
+        #endregion
+
+        #region Lose
+        public void SetActiveLoseCanvas(bool active)
+        {
+            loseCanvas.gameObject.SetActive(active);
+        }
+        #endregion
+
+        #region GUI
         public void SetAvailableBasicAttack(bool available)
         {
             basicAttackIcon.SetAvailable(available);
@@ -117,5 +189,17 @@ namespace DungeonTogether.Scripts.Manangers
             ultimateIcon.SetProgress(current, max);
             ultimateIcon.SetTimer(max - current);
         }
+        #endregion
+
+        #region Utils
+
+        private string GetTimeString(float time)
+        {
+            var minutes = Mathf.FloorToInt(time / 60);
+            var seconds = Mathf.FloorToInt(time % 60);
+            var milliseconds = Mathf.FloorToInt((time - Mathf.Floor(time)) * 1000);
+            return $"{minutes:00}:{seconds:00}.{milliseconds:000}";
+        }
+        #endregion
     }
 }

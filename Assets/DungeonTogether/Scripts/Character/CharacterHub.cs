@@ -164,6 +164,7 @@ namespace DungeonTogether.Scripts.Character
             }
             else
             {
+                DisableRpc();
                 DespawnRpc();
             }
         }
@@ -171,7 +172,13 @@ namespace DungeonTogether.Scripts.Character
         [Rpc(SendTo.Server)]
         private void DespawnRpc()
         {
-            NetworkObject.Despawn(true);
+            //NetworkObject.Despawn(true);
+        }
+
+        [Rpc(SendTo.Everyone)]
+        private void DisableRpc()
+        {
+            gameObject.SetActive(false);
         }
         #endregion
         
@@ -183,6 +190,7 @@ namespace DungeonTogether.Scripts.Character
         {
             //if (!IsOwner) return;
             ClassSelector.OnPreCharacterSpawned += OnPreCharacterSpawned;
+            GameManager.OnGameEnd += OnGameEnd;
         }
         
         /// <summary>
@@ -192,6 +200,13 @@ namespace DungeonTogether.Scripts.Character
         {
             //if (!IsOwner) return;
             ClassSelector.OnPreCharacterSpawned -= OnPreCharacterSpawned;
+            GameManager.OnGameEnd -= OnGameEnd;
+        }
+
+        private void OnGameEnd()
+        {
+            if (CharacterType is CharacterType.NPC)
+                ShutdownInstant();
         }
 
         /// <summary>

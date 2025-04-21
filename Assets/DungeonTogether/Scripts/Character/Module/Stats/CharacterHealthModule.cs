@@ -21,6 +21,20 @@ namespace DungeonTogether.Scripts.Character.Module
             serializer.SerializeValue(ref invincible);
         }
     }
+
+    public struct CharacterDeathEvent
+    {
+        public CharacterHub characterHub;
+        public bool endLevelWhenDead;
+        private static CharacterDeathEvent _event;
+        
+        public static void Invoke(CharacterHub characterHub, bool endLevelWhenDead)
+        {
+            _event.characterHub = characterHub;
+            _event.endLevelWhenDead = endLevelWhenDead;
+            EventBus<CharacterDeathEvent>.Invoke(_event);
+        }
+    }
     /// <summary>
     /// Module responsible for handling character health.
     /// </summary>
@@ -29,6 +43,8 @@ namespace DungeonTogether.Scripts.Character.Module
         [Title("Health Settings")] 
         [SerializeField]
         private NetworkVariable<HealthData> healthData = new();
+        [SerializeField] 
+        private bool endLevelWhenDead;
         [SerializeField] 
         private float startingHealth = 100;
         [SerializeField]
@@ -89,6 +105,10 @@ namespace DungeonTogether.Scripts.Character.Module
         {
             healthData.Value.currentHealth += amount;
             healthData.Value.currentHealth = Mathf.Clamp(healthData.Value.currentHealth, 0, healthData.Value.maxHealth);
+            if (healthData.Value.currentHealth <= 0)
+            {
+                CharacterDeathEvent.Invoke(characterHub, endLevelWhenDead);
+            }
             healthData.CheckDirtyState();
         }
 
@@ -130,10 +150,7 @@ namespace DungeonTogether.Scripts.Character.Module
         protected virtual void DieRpc()
         {
             characterHub.ChangeConditionState(CharacterConditionState.Dead);
-            if (characterHub.CharacterType is CharacterType.NPC)
-            {
-                characterHub.ShutdownInstant();
-            }
+            characterHub.ShutdownInstant();
         }
     }
 }

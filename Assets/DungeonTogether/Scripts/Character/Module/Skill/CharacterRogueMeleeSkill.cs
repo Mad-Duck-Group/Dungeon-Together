@@ -285,8 +285,9 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         protected IEnumerator SkillCoroutine()
         {
             if (CurrentPattern == null) yield break;
-            if (!ConsumeMana(CurrentPattern.Value.mana) || 
-                characterHub.MovementState is CharacterMovementState.Dashing)
+            if (characterHub.CharacterType == CharacterType.Player && 
+                (!ConsumeMana(CurrentPattern.Value.mana) || 
+                characterHub.MovementState is CharacterMovementState.Dashing))
             {
                 skillCoroutine = null;
                 yield break;

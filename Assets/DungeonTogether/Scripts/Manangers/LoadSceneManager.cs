@@ -46,11 +46,14 @@ public class LoadSceneManager : PersistentMonoSingleton<LoadSceneManager>
         LoadScene(parsedSceneType);
     }
     
-    private void LoadScene(SceneType sceneType)
+    public void LoadScene(SceneType sceneType, bool network = true)
     {
         if (sceneAssets.TryGetValue(sceneType, out var sceneReference))
         {
-            NetworkManager.Singleton.SceneManager.LoadScene(sceneReference.Path, LoadSceneMode.Single);
+            if (network)
+                NetworkManager.Singleton.SceneManager.LoadScene(sceneReference.Path, LoadSceneMode.Single);
+            else 
+                SceneManager.LoadScene(sceneReference.Path);
             CurrentSceneType = sceneType;
         }
         else
