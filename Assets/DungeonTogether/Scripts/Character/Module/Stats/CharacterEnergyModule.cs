@@ -44,6 +44,7 @@ namespace DungeonTogether.Scripts.Character.Module
             energyData.OnValueChanged += OnEnergyDataChanged;
             base.OnNetworkSpawn();
             EnergyDataInitServerRpc();
+            UpdateEnergyBar();
         }
         
         [Rpc(SendTo.Server)]

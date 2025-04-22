@@ -66,6 +66,7 @@ namespace DungeonTogether.Scripts.Character.Module
             healthData.OnValueChanged += OnHealthDataChanged;
             base.OnNetworkSpawn();
             HealthDataInitServerRpc();
+            UpdateHealthBar();
         }
         
         [Rpc(SendTo.Server)]

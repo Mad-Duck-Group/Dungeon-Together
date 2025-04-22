@@ -241,8 +241,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1472146885
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &6971451894303823501
 MonoBehaviour:
@@ -1009,6 +1009,7 @@ MonoBehaviour:
       currentHealth: 0
       maxHealth: 100
       invincible: 0
+  endLevelWhenDead: 0
   startingHealth: 100
   bumpThreshold: 10
   useMMHealthBar: 1

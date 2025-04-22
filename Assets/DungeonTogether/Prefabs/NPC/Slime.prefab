@@ -92,21 +92,25 @@ MonoBehaviour:
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
+    getEnergy: 0
   - damageArea: {fileID: 5347480221249682614}
     damage: 1
     delay: 0
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
+    getEnergy: 0
   - damageArea: {fileID: 5370180848577232972}
     damage: 2
     delay: 0
     duration: 0.1
     interval: 0.5
     resetComboTime: 2
+    getEnergy: 0
   currentPatternIndex: 0
   previousPatternIndex: -1
   attackReady: 0
+  attackUsed: 0
   currentInterval: 0
   currentComboTime: 0
 --- !u!1 &6966830598771678109
@@ -180,7 +184,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0.5}
     oldSize: {x: 0.02, y: 0.02}
     newSize: {x: 0.02, y: 0.02}
     adaptiveTilingThreshold: 0.5
@@ -260,6 +264,10 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
+  allowReentry: 0
+  includeSelf: 0
+  DOT: 0
+  DOTInterval: 0
 --- !u!1 &7124335298330087769
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +339,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0.5}
     oldSize: {x: 0.02, y: 0.02}
     newSize: {x: 0.02, y: 0.02}
     adaptiveTilingThreshold: 0.5
@@ -411,6 +419,10 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
+  allowReentry: 0
+  includeSelf: 0
+  DOT: 0
+  DOTInterval: 0
 --- !u!1 &7635326706081503226
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,7 +494,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0.5}
     oldSize: {x: 0.02, y: 0.02}
     newSize: {x: 0.02, y: 0.02}
     adaptiveTilingThreshold: 0.5
@@ -562,6 +574,10 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
+  allowReentry: 0
+  includeSelf: 0
+  DOT: 0
+  DOTInterval: 0
 --- !u!1001 &5224532868254018807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -570,6 +586,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 931953990400229114, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.226
+      objectReference: {fileID: 0}
     - target: {fileID: 5746934870074196237, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
         type: 3}
       propertyPath: GlobalObjectIdHash
@@ -715,10 +736,72 @@ PrefabInstance:
       propertyPath: managedReferences[894351793421025411].GUID.m_Value1
       value: 8641377911214341971
       objectReference: {fileID: 0}
+    - target: {fileID: 6520975532950072968, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1928298814, guid: bf35e54a6210ab1428c6cbb762c89167,
+        type: 3}
+    - target: {fileID: 6520975532950072968, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520975532950072968, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520975532950072968, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520975532950072968, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7207912155587763137, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
         type: 3}
       propertyPath: m_Name
-      value: MeleeEnemy
+      value: Slime
+      objectReference: {fileID: 0}
+    - target: {fileID: 7866843109088977041, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 912825ac9930ba94ca9c6037f2d412be,
+        type: 2}
+    - target: {fileID: 7911456806851216294, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7911456806851216294, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.587
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779787673624174831, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.1497651
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779787673624174831, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.8377044
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779787673624174831, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0012239814
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779787673624174831, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.0916599
       objectReference: {fileID: 0}
     - target: {fileID: 8881605798776199879, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
         type: 3}

@@ -46,6 +46,7 @@ namespace DungeonTogether.Scripts.Character.Module
             manaData.OnValueChanged += OnManaDataChanged;
             base.OnNetworkSpawn();
             ManaDataInitServerRpc();
+            UpdateManaBar();
         }
         
         [Rpc(SendTo.Server)]

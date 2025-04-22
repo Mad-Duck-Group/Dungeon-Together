@@ -29,9 +29,9 @@ namespace DungeonTogether.Scripts.Manangers
         [SerializeField] private List<LoadSceneButton> loadSceneButtons = new();
         [SerializeField] private List<Button> disconnectButtons = new();
         [SerializeField] private TMP_Text respawningTimerText;
-        [SerializeField, Required] private MMHealthBar healthBar;
-        [SerializeField, Required] private MMHealthBar manaBar;
-        [SerializeField, Required] private MMHealthBar energyBar;
+        [SerializeField, Required] private MMProgressBar healthBar;
+        [SerializeField, Required] private MMProgressBar manaBar;
+        [SerializeField, Required] private MMProgressBar energyBar;
         [SerializeField, Required] private ActionIcon basicAttackIcon;
         [SerializeField, Required] private ActionIcon skillIcon;
         [SerializeField, Required] private ActionIcon ultimateIcon;
@@ -93,33 +93,33 @@ namespace DungeonTogether.Scripts.Manangers
         public void UpdateManaBar(float currentMana, float maxMana, bool bump = false)
         {
             //Debug.Log($"Updating mana bar with current mana: {currentMana}, max mana: {maxMana}");
-            var targetProgressBar = manaBar.TargetProgressBar;
+            var targetProgressBar = manaBar;
             targetProgressBar.BumpScaleOnChange = bump;
             targetProgressBar.LerpForegroundBar = bump;
             targetProgressBar.LerpDecreasingDelayedBar = bump;
             targetProgressBar.LerpIncreasingDelayedBar = bump;
-            manaBar.UpdateBar(currentMana, 0, maxMana, true);
+            manaBar.UpdateBar(currentMana, 0, maxMana);
         }
         
         public void UpdateHealthBar(float currentHealth, float maxHealth, bool bump = false)
         {
-            var targetProgressBar = healthBar.TargetProgressBar;
+            var targetProgressBar = healthBar;
             targetProgressBar.BumpScaleOnChange = bump;
             targetProgressBar.LerpForegroundBar = bump;
             targetProgressBar.LerpDecreasingDelayedBar = bump;
             targetProgressBar.LerpIncreasingDelayedBar = bump;
-            healthBar.UpdateBar(currentHealth, 0, maxHealth, true);
+            healthBar.UpdateBar(currentHealth, 0, maxHealth);
         }
         
         public void UpdateEnergyBar(float currentEnergy, float maxEnergy, bool bump = false)
         {
             Debug.Log($"Updating energy bar with current energy: {currentEnergy}, max energy: {maxEnergy}");
-            var targetProgressBar = energyBar.TargetProgressBar;
+            var targetProgressBar = energyBar;
             targetProgressBar.BumpScaleOnChange = bump;
             targetProgressBar.LerpForegroundBar = bump;
             targetProgressBar.LerpDecreasingDelayedBar = bump;
             targetProgressBar.LerpIncreasingDelayedBar = bump;
-            energyBar.UpdateBar(currentEnergy, 0, maxEnergy, true);
+            energyBar.UpdateBar(currentEnergy, 0, maxEnergy);
         }
 
         #region Respawning
