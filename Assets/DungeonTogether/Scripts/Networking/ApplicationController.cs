@@ -21,12 +21,9 @@ public class ApplicationController : MonoBehaviour
             
         }
         else
-        {
-            
-            /*
+        { 
             HostSingleton hostSingleton = Instantiate(hostPrefab);
-            hostSingleton.CreateHost(playerPrefab);
-            */
+            hostSingleton.CreateHost();
             
             
             ClientSingleton clientSingleton = Instantiate(clientPrefab);

@@ -17,22 +17,21 @@ using UnityEngine.SceneManagement;
 public class HostGameManager : IDisposable
 {
     private Allocation allocation;
-    private NetworkObject playerPrefab;
+    //private NetworkObject playerPrefab;
     
     private string lobbyId;
     public string JoinCode { get; private set; }
 
     public NetworkServer NetworkServer { get; private set; }
     
-    private const int MaxConnections = 20;
-    private const string GameSceneName = "Game";
+    private const int MaxConnections = 5;
+    private const string LoungeScene = "Lounge";
 
-    public HostGameManager(NetworkObject playerPrefab)
+    public HostGameManager()
     {
-        this.playerPrefab = playerPrefab;
+        
     }
-
-
+    
     public void Dispose()
     {
         Shutdown();
@@ -62,6 +61,8 @@ public class HostGameManager : IDisposable
     
     public async Task StartHostAsync()
     {
+        Debug.Log($"can load");
+        
         try
         {
             allocation = await RelayService.Instance.CreateAllocationAsync(MaxConnections);
@@ -128,7 +129,9 @@ public class HostGameManager : IDisposable
         
         NetworkServer.OnClientLeft += HandleClientLeft;
         
-        NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
+        Debug.Log(NetworkManager.Singleton == null ? "NetworkManager is null" : "NetworkManager is ready");
+        
+        NetworkManager.Singleton.SceneManager.LoadScene(LoungeScene, LoadSceneMode.Single);
     }
 
     private async void HandleClientLeft(string authID)
