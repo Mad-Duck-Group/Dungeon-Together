@@ -73,6 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4564780037160507617}
   - component: {fileID: 8698841273255055963}
+  - component: {fileID: 2004006656234103549}
   m_Layer: 6
   m_Name: ComboParent
   m_TagString: Untagged
@@ -109,6 +110,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &2004006656234103549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2380544861863460124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 0
+  AuthorityMode: 1
+  TickSyncChildren: 0
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 0
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
+  SyncRotAngleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  SwitchTransformSpaceWhenParented: 0
+  Interpolate: 0
+  SlerpPosition: 0
 --- !u!1 &2429418756501372071
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,11 +284,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05c91e27c661754a9fd11c78f97aafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   visualizer: {fileID: 3976399225274063361}
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
   allowReentry: 1
+  detach: 1
+  followParent: 0
   includeSelf: 0
   DOT: 1
   DOTInterval: 1
@@ -336,7 +376,7 @@ MonoBehaviour:
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
   SwitchTransformSpaceWhenParented: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!1 &3861034430161017137
 GameObject:

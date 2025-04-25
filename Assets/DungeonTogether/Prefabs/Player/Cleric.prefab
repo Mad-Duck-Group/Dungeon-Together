@@ -200,9 +200,9 @@ MonoBehaviour:
   SyncRotAngleX: 0
   SyncRotAngleY: 0
   SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
@@ -211,7 +211,7 @@ MonoBehaviour:
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
   SwitchTransformSpaceWhenParented: 0
-  Interpolate: 1
+  Interpolate: 0
   SlerpPosition: 0
 --- !u!1 &3464070660693477610
 GameObject:
@@ -577,11 +577,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05c91e27c661754a9fd11c78f97aafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   visualizer: {fileID: 2613349058630022638}
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
   allowReentry: 1
+  detach: 0
+  followParent: 1
   includeSelf: 1
   DOT: 1
   DOTInterval: 1
@@ -722,11 +725,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05c91e27c661754a9fd11c78f97aafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   visualizer: {fileID: 7408671366197600869}
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
   allowReentry: 0
+  detach: 0
+  followParent: 1
   includeSelf: 0
   DOT: 0
   DOTInterval: 0

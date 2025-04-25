@@ -53,6 +53,7 @@ namespace DungeonTogether.Scripts.Manangers
         private void OnSceneLoaded(ulong id, string sceneName, LoadSceneMode loadSceneMode)
         {
             if (!IsHost) return;
+            if (!HostSingleton.Instance) return;
             var joinCode = HostSingleton.Instance.GameManager.JoinCode;
             SetJoinCodeRpc(joinCode, RpcTarget.Single(id, RpcTargetUse.Temp));
         }
@@ -103,6 +104,7 @@ namespace DungeonTogether.Scripts.Manangers
             }
 
             if (!IsHost) return;
+            if (!HostSingleton.Instance) return;
             var joinCode = HostSingleton.Instance.GameManager.JoinCode;
             joinCodeText.text = $"Join code: {joinCode}";
         }

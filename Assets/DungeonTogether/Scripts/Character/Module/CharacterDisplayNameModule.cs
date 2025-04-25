@@ -35,6 +35,7 @@ namespace DungeonTogether.Scripts.Character.Module
         [Rpc(SendTo.Server)]
         private void NameRequestRpc(ulong clientId)
         {
+            if (!HostSingleton.Instance) return;
             var userData = HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(clientId);
             var displayName = userData?.userName ?? "Unknown";
             SetDisplayNameRpc(displayName);

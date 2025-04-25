@@ -2,17 +2,20 @@ using System;
 using System.Collections.Generic;
 using DungeonTogether.Scripts.Utils;
 using TriInspector;
+using Unity.Netcode;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class DamageArea : MonoBehaviour
+public class DamageArea : NetworkBehaviour
 {
     [SerializeField] protected SpriteRenderer visualizer;
     [SerializeField] protected LayerMask targetLayer;
     [SerializeField] protected bool allowReentry;
+    [SerializeField] protected bool detach;
+    [SerializeField] protected bool followParent = true;
     [SerializeField] protected bool includeSelf;
     [SerializeField] protected bool DOT;
-    [SerializeField, ShowIf("DOT")] protected float DOTInterval;
+    [SerializeField, ShowIf(nameof(DOT))] protected float DOTInterval;
 
     protected Collider2D damageCollider;
     protected Transform parent;
@@ -24,6 +27,12 @@ public class DamageArea : MonoBehaviour
     public event OnHit OnHitEvent;
 
     public void Initialize()
+    {
+        InitializeRpc();
+    }
+
+    [Rpc(SendTo.Everyone)]
+    private void InitializeRpc()
     {
         damageCollider = GetComponent<Collider2D>();
         damageCollider.isTrigger = true;
@@ -37,19 +46,37 @@ public class DamageArea : MonoBehaviour
 
     public virtual void SetActive(bool active)
     {
+        SetActiveRpc(active);
+    }
+
+    [Rpc(SendTo.Everyone)]
+    private void SetActiveRpc(bool active)
+    {
         if (visualizer) visualizer.enabled = active;
         switch (active)
         {
-            case true when includeSelf:
+            case true when detach || includeSelf:
                 Detach();
                 break;
-            case false when includeSelf:
+            case false when detached:
                 Reattach();
                 break;
         }
         if (!active) { hitList.Clear(); }
         damageCollider.enabled = active;
     }
+    
+    public void SetPosition(Vector3 position)
+    {
+        SetPositionRpc(position);
+    }
+    
+    [Rpc(SendTo.Everyone)]
+    private void SetPositionRpc(Vector3 position)
+    {
+        transform.position = position;
+    }
+    
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (!allowReentry && hitList.Contains(other)) { return; }
@@ -95,7 +122,7 @@ public class DamageArea : MonoBehaviour
 
     private void Update()
     {
-        if (detached)
+        if (detached && followParent)
         {
             transform.position = parent.position;
         }

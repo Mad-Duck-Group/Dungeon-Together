@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Redcode.Extensions;
 using TriInspector;
 using Unity.Behavior;
 using Unity.Behavior.GraphFramework;
@@ -20,8 +21,10 @@ namespace DungeonTogether.Scripts.Character.Module.AI
         [SerializeField] private LayerMask detectionLayer;
 
         [Title("Debug")]
-        [ShowInInspector, ReadOnly] public Collider2D ClosestCollider => detectedColliders.Count > 0 ? detectedColliders[0] : null;
-        [SerializeField, ReadOnly] private List<Collider2D> detectedColliders = new();
+        [ShowInInspector, TriInspector.ReadOnly] public Collider2D ClosestCollider => detectedColliders.Count > 0 ? detectedColliders[0] : null;
+        [ShowInInspector, TriInspector.ReadOnly] public Collider2D FarthestCollider => detectedColliders.Count > 0 ? detectedColliders[^1] : null;
+        [ShowInInspector, TriInspector.ReadOnly] public Collider2D RandomCollider => detectedColliders.Count > 0 ? detectedColliders.GetRandomElement() : null;
+        [SerializeField, TriInspector.ReadOnly] private List<Collider2D> detectedColliders = new();
 
         protected override void UpdateModule()
         {

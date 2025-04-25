@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DungeonTogether.Scripts.Manangers;
+using DungeonTogether.Scripts.Utils;
 using TriInspector;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -25,6 +27,9 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
     }
     public class CharacterFighterSkillModule : CharacterModule
     {
+        [Title("References")]
+        [SerializeField] private RotateToMouse rotateToMouse;
+        
         [Title("Settings")]
         [SerializeField] private Transform comboParent;
         [TableList(Draggable = true,
@@ -62,6 +67,12 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             currentPatternIndex = 0;
             currentCooldown = CurrentPattern?.cooldown ?? 0;
             previousPatternIndex = -1;
+            fighterSkillPatterns.ForEach(pattern =>
+            {
+                pattern.damageArea.Initialize();
+                pattern.damageArea.SetActive(false);
+                pattern.damageArea.OnHitEvent += OnHit;
+            });
         }
         public override void PostInitialize()
         {
@@ -77,6 +88,11 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             currentPatternIndex = 0;
             currentCooldown = 0;
             previousPatternIndex = -1;
+            fighterSkillPatterns.ForEach(pattern =>
+            {
+                pattern.damageArea.SetActive(false);
+                pattern.damageArea.OnHitEvent -= OnHit;
+            });
         }
         protected virtual void OnHit(Collider2D collider)
         {
@@ -183,41 +199,47 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             currentComboTime = 0;
             characterHub.ChangeActionState(CharacterActionState.Skill);
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
-            
-            
-            DamageArea damageArea = Instantiate(
-                CurrentPattern.Value.damageArea, 
-                CurrentPattern.Value.spawnPoint.position, 
-                Quaternion.identity);
-            
-            damageArea.transform.SetParent(comboParent); 
-            StartCoroutine(SwingSword(damageArea, CurrentPattern.Value.swingAngle, CurrentPattern.Value.duration));
-            damageArea.OnHitEvent += OnHit;
-            
+            var damageArea = CurrentPattern.Value.damageArea;
+            damageArea.SetActive(true);
+            rotateToMouse.SetActive(false);
+            SwingSwordRpc(CurrentPattern.Value.swingAngle, CurrentPattern.Value.duration);
+            yield return new WaitForSeconds(CurrentPattern.Value.duration);
             characterHub.ChangeActionState(CharacterActionState.None);
+            rotateToMouse.SetActive(true);
+            damageArea.SetActive(false);
             previousPatternIndex = currentPatternIndex;
             currentPatternIndex = (currentPatternIndex + 1) % fighterSkillPatterns.Count;
             currentCooldown = 0;
             skillReady = false;
-        }
-
-        private IEnumerator SwingSword(DamageArea sword, float swingAngle, float swingSpeed)
-        {
-            float timer = 0f;
-            float startAngle = swingAngle / 2; 
-            float endAngle = -swingAngle / 2; 
-
-            while (timer < 1f)
-            {
-                timer += Time.deltaTime * swingSpeed;
-                float angle = Mathf.Lerp(startAngle, endAngle, timer); 
-                sword.transform.localRotation = Quaternion.Euler(0, 0, angle);
-                yield return null;
-            }
-            Destroy(sword.gameObject);
             skillUsed = false;
             skillCoroutine = null;
         }
+
+        [Rpc(SendTo.Everyone)]
+        private void SwingSwordRpc(float swingAngle, float duration)
+        {
+            if (CurrentPattern == null) return;
+            var swordObj = CurrentPattern.Value.damageArea;
+            StartCoroutine(SwingSword(swordObj.transform, swingAngle, duration));
+        }
+
+        private IEnumerator SwingSword(Transform sword, float swingAngle, float duration)
+        {
+            float timer = 0f;
+            float startAngle = swingAngle / 2; 
+            float endAngle = -swingAngle / 2;
+            float angle;
+            while (timer < duration)
+            {
+                angle = Mathf.Lerp(startAngle, endAngle, timer / duration); 
+                sword.localRotation = Quaternion.Euler(0, 0, angle);
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            angle = Mathf.Lerp(startAngle, endAngle, 1f); 
+            sword.localRotation = Quaternion.Euler(0, 0, angle);
+        }
+        
         private bool ConsumeMana(float amount)
         {
             if (!manaModule || !manaModule.HasEnoughMana(amount)) return false;

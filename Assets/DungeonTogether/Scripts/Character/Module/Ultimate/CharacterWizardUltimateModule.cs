@@ -1,10 +1,12 @@
+using DungeonTogether.Scripts.Utils;
+using TriInspector;
 using UnityEngine;
 
 namespace DungeonTogether.Scripts.Character.Module.Ultimate
 {
     public class CharacterWizardUltimateModule : CharacterAreaUltimateModule
     {
-        public virtual void SetAttackDirection(Vector2 direction)
+        public virtual void SetUltimateDirection(Vector2 direction)
         {
             if (!ModulePermitted) return;
             direction.Normalize();

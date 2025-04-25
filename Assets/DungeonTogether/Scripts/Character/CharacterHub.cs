@@ -217,6 +217,7 @@ namespace DungeonTogether.Scripts.Character
         private void OnPreCharacterSpawned(ulong id)
         {
             if (id != NetworkObject.OwnerClientId) return;
+            if (CharacterType is CharacterType.NPC) return;
             ShutdownProcedure();
         }
         #endregion

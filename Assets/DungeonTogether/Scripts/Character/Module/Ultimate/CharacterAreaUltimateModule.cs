@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DungeonTogether.Scripts.Manangers;
+using DungeonTogether.Scripts.Utils;
 using TriInspector;
 using Unity.Netcode;
 using Unity.VisualScripting;
@@ -14,6 +15,7 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
     public struct AreaUltimatePattern
     {
         [Group("Area"), Required] public DamageArea areaUltimate;
+        [Group("Area")] public bool disableRotateToMouse;
         [Group("Value"), Min(0)] public float value;
         [Group("Timing"), Min(0)] public float delay;
         [Group("Timing"), Min(0)] public float duration;
@@ -25,6 +27,9 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
     }
     public class CharacterAreaUltimateModule : CharacterModule
     {
+        [Title("References")]
+        [SerializeField] private RotateToMouse rotateToMouse;
+        
         [Title("Settings")]
         [SerializeField] protected Transform comboParent;
         [TableList(Draggable = true,
@@ -181,18 +186,19 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             }
             PlayerCanvasManager.Instance.SetAvailableUltimate(available);
         }
-        
-        private void CastUltimate()
+
+        public virtual void CastUltimate()
         {
             if (!ModulePermitted) return;
             if (!ultimateReady) return;
             if (ultimateCoroutine != null) return;
             ultimateCoroutine = StartCoroutine(CastUltimateCoroutine());
         }
-        protected virtual IEnumerator CastUltimateCoroutine()
+        protected virtual IEnumerator CastUltimateCoroutine(Vector3? spawnPosition = null)
         {
             if (CurrentPattern == null) yield break;
-            if (!ConsumeEnergy(CurrentPattern.Value.energy))
+            if (characterHub.CharacterType is CharacterType.Player && 
+                !ConsumeEnergy(CurrentPattern.Value.energy))
             {
                 ultimateCoroutine = null;
                 yield break;
@@ -200,10 +206,17 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             currentComboTime = 0;
             ultimateUsed = true;
             characterHub.ChangeActionState(CharacterActionState.Ultimate);
+            var area = CurrentPattern.Value.areaUltimate;
             yield return new WaitForSeconds(CurrentPattern.Value.delay);
-            CurrentPattern.Value.areaUltimate.SetActive(true);
+            area.SetActive(true);
+            if (spawnPosition != null)
+            {
+                area.SetPosition(spawnPosition.Value);
+            }
+            if (CurrentPattern.Value.disableRotateToMouse && rotateToMouse) rotateToMouse.SetActive(false);
             yield return new WaitForSeconds(CurrentPattern.Value.duration);
-            CurrentPattern.Value.areaUltimate.SetActive(false);
+            if (CurrentPattern.Value.disableRotateToMouse && rotateToMouse) rotateToMouse.SetActive(true);
+            area.SetActive(false);
             characterHub.ChangeActionState(CharacterActionState.None);
             previousPatternIndex = currentPatternIndex;
             currentPatternIndex = (currentPatternIndex + 1) % areaUltimatePattern.Count;

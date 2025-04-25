@@ -176,8 +176,8 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             }
             PlayerCanvasManager.Instance.SetAvailableSkill(available);
         }
-        
-        private void CastSkill()
+
+        public void CastSkill()
         {
             if (!ModulePermitted) return;
             if (!skillReady) return;
@@ -187,7 +187,7 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         protected IEnumerator CastSkillCoroutine()
         {
             if (CurrentPattern == null) yield break;
-            if (!ConsumeMana(CurrentPattern.Value.mana))
+            if (characterHub.CharacterType == CharacterType.Player && !ConsumeMana(CurrentPattern.Value.mana))
             {
                 skillCoroutine = null;
                 yield break;
@@ -207,7 +207,6 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             currentCooldown = 0;
             skillReady = false;
             skillCoroutine = null;
-            
         }
         private bool ConsumeMana(float amount)
         {

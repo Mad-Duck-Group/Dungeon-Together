@@ -14,14 +14,15 @@ public partial class AiBasicMeleeAttackAction : Action
 
     protected override Status OnStart()
     {
+        var direction = Target.Value.position - BasicMeleeAttack.Value.transform.position;
+        BasicMeleeAttack.Value.SetAttackDirection(direction);
+        BasicMeleeAttack.Value.Attack();
         return Status.Running;
     }
 
     protected override Status OnUpdate()
     {
-        var direction = Target.Value.position - BasicMeleeAttack.Value.transform.position;
-        BasicMeleeAttack.Value.SetAttackDirection(direction);
-        BasicMeleeAttack.Value.Attack();
+        
         return Status.Success;
     }
 

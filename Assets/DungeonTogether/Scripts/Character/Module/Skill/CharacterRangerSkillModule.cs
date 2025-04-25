@@ -173,7 +173,7 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
             skillCoroutine = StartCoroutine(SkillCoroutine());
         }
         
-        public virtual void SetAttackDirection(Vector2 direction)
+        public virtual void SetSkillDirection(Vector2 direction)
         {
             if (!ModulePermitted) return;
             direction.Normalize();
@@ -199,8 +199,9 @@ namespace DungeonTogether.Scripts.Character.Module.Skill
         protected IEnumerator SkillCoroutine()
         {
             if (CurrentPattern == null) yield break;
-            if (!ConsumeMana(CurrentPattern.Value.mana) || 
-                characterHub.MovementState is CharacterMovementState.Dashing)
+            if (characterHub.CharacterType is CharacterType.Player &&
+                (!ConsumeMana(CurrentPattern.Value.mana) || 
+                characterHub.MovementState is CharacterMovementState.Dashing))
             {
                 skillCoroutine = null;
                 yield break;

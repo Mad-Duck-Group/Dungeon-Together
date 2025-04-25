@@ -222,9 +222,11 @@ MonoBehaviour:
     duration: 0
     interval: 1
     resetComboTime: 0.1
+    getEnergy: 0
   currentPatternIndex: 0
   previousPatternIndex: -1
   attackReady: 0
+  attackUsed: 0
   currentInterval: 0
   currentComboTime: 0
 --- !u!1001 &8678096323233244772

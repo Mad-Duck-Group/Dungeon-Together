@@ -14,14 +14,14 @@ public partial class RangeAttackTargetAction : Action
 
     protected override Status OnStart()
     {
+        var direction = Target.Value.position - RangeAttack.Value.transform.position;
+        RangeAttack.Value.SetAttackDirection(direction);
+        RangeAttack.Value.Attack();
         return Status.Running;
     }
 
     protected override Status OnUpdate()
     {
-        var direction = Target.Value.position - RangeAttack.Value.transform.position;
-        RangeAttack.Value.SetAttackDirection(direction);
-        RangeAttack.Value.Attack();
         return Status.Success;
     }
 
