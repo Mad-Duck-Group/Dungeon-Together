@@ -8,6 +8,7 @@ using TriInspector;
 using Unity.Netcode;
 using UnityCommunity.UnitySingleton;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace DungeonTogether.Scripts.Manangers
@@ -21,6 +22,7 @@ namespace DungeonTogether.Scripts.Manangers
     public class PlayerCanvasManager : NetworkSingleton<PlayerCanvasManager>
     {
         [Title("References")]
+        [SerializeField] private TMP_Text joinCodeText;
         [SerializeField, Required] private CanvasGroup playerCanvas;
         [SerializeField] private CanvasGroup loseCanvas;
         [SerializeField] private CanvasGroup winCanvas;
@@ -39,11 +41,20 @@ namespace DungeonTogether.Scripts.Manangers
         private void OnEnable()
         {
             ClassSelector.OnCharacterSpawned += OnCharacterSpawned;
+            NetworkManager.SceneManager.OnLoadComplete += OnSceneLoaded;
         }
 
         private void OnDisable()
         {
             ClassSelector.OnCharacterSpawned -= OnCharacterSpawned;
+            NetworkManager.SceneManager.OnLoadComplete -= OnSceneLoaded;
+        }
+
+        private void OnSceneLoaded(ulong id, string sceneName, LoadSceneMode loadSceneMode)
+        {
+            if (!IsHost) return;
+            var joinCode = HostSingleton.Instance.GameManager.JoinCode;
+            SetJoinCodeRpc(joinCode, RpcTarget.Single(id, RpcTargetUse.Temp));
         }
 
         private void OnCharacterSpawned(ulong id)
@@ -90,6 +101,16 @@ namespace DungeonTogether.Scripts.Manangers
                     }
                 });
             }
+
+            if (!IsHost) return;
+            var joinCode = HostSingleton.Instance.GameManager.JoinCode;
+            joinCodeText.text = $"Join code: {joinCode}";
+        }
+
+        [Rpc(SendTo.SpecifiedInParams)]
+        private void SetJoinCodeRpc(string joinCode, RpcParams rpcParams = default)
+        {
+            joinCodeText.text = $"Join code: {joinCode}";
         }
 
         private void SetActiveCanvas(bool active)
