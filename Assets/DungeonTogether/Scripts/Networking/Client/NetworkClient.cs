@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class NetworkClient : IDisposable
 {
     private  NetworkManager networkManager;
-    private const string MenuSceneName = "Menu";
-    
+
     public void Dispose()
     {
         networkManager.OnClientDisconnectCallback -= OnClientDisconnect;
@@ -29,11 +28,7 @@ public class NetworkClient : IDisposable
 
     public void Disconnect()
     {
-        if (SceneManager.GetActiveScene().name != MenuSceneName)
-        {
-            SceneManager.LoadScene(MenuSceneName);
-        }
-
+        LoadSceneManager.Instance.LoadScene(SceneType.MainMenu, false);
         if (networkManager.IsConnectedClient)
         {
             networkManager.Shutdown();

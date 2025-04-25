@@ -46,13 +46,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneAssets:
     _serializedList:
+    - Key: 0
+      Value:
+        _sceneObject: {fileID: 102900000, guid: 9a85259215fd7294ea40c578dc9b5f35,
+          type: 3}
+        _path: Assets/DungeonTogether/Scenes/MainMenu.unity
     - Key: 1
       Value:
         _sceneObject: {fileID: 102900000, guid: be2796813db133f46a4925cf6fef5ceb,
           type: 3}
-        _path: Assets/DungeonTogether/Scenes/Lounge.unity
+        _path: Assets/DungeonTogether/Scenes/Lounge/Lounge.unity
     - Key: 2
       Value:
         _sceneObject: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02,
           type: 3}
-        _path: Assets/DungeonTogether/Scenes/Game.unity
+        _path: Assets/DungeonTogether/Scenes/Game/Game.unity

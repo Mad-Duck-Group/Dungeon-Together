@@ -80,7 +80,14 @@ namespace DungeonTogether.Scripts.Manangers
                 button.onClick.AddListener(() =>
                 {
                     Debug.Log("Disconnecting from server...");
-                    NetworkManager.Singleton.Shutdown();
+                    if (NetworkManager.IsHost)
+                    {
+                        HostSingleton.Instance.GameManager.Shutdown();
+                    }
+                    else
+                    {
+                        ClientSingleton.Instance.GameManager.Disconnect();
+                    }
                 });
             }
         }

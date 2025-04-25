@@ -84,10 +84,10 @@ public class NetworkServer : IDisposable
     {
         string payload = System.Text.Encoding.UTF8.GetString(request.Payload);
         UserData userData = JsonUtility.FromJson<UserData>(payload);
-
-        clientIdToAuth[request.ClientNetworkId] = userData.userAuthId;
-        authIdToUserData[userData.userAuthId] = userData;
         
+        clientIdToAuth.TryAdd(request.ClientNetworkId, userData.userAuthId);
+        authIdToUserData.TryAdd(userData.userAuthId, userData);
+
         //_ = SpawnPlayerDelayed(request.ClientNetworkId);
         
         response.Approved = true;

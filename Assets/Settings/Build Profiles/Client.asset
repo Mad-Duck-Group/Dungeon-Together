@@ -21,9 +21,15 @@ MonoBehaviour:
   m_OverrideGlobalSceneList: 1
   m_Scenes:
   - m_enabled: 1
-    m_path: Assets/DungeonTogether/Scenes/Lounge.unity
+    m_path: Assets/DungeonTogether/Scenes/Bootstrap.unity
   - m_enabled: 1
-    m_path: Assets/DungeonTogether/Scenes/Game.unity
+    m_path: Assets/DungeonTogether/Scenes/NetBootstrap.unity
+  - m_enabled: 1
+    m_path: Assets/DungeonTogether/Scenes/MainMenu.unity
+  - m_enabled: 1
+    m_path: Assets/DungeonTogether/Scenes/Lounge/Lounge.unity
+  - m_enabled: 1
+    m_path: Assets/DungeonTogether/Scenes/Game/Game.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings: []

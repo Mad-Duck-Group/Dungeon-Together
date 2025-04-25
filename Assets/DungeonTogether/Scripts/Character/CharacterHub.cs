@@ -164,6 +164,7 @@ namespace DungeonTogether.Scripts.Character
             }
             else
             {
+                if (NetworkManager.ShutdownInProgress) return;
                 DisableRpc();
                 DespawnRpc();
             }

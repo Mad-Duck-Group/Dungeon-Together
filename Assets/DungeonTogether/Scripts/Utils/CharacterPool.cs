@@ -119,7 +119,7 @@ namespace DungeonTogether.Scripts.Utils
         {
             if (!activeCharacters.Contains(characterHub))
             {
-                Debug.LogError("Character is not active.or not in the pool.");
+                Debug.LogError("Character is not active or not in the pool.");
                 return;
             }
             characterHub.gameObject.SetActive(false);
@@ -130,6 +130,7 @@ namespace DungeonTogether.Scripts.Utils
                 availableSpawnPoints.Add(spawnPoint);
                 slots.Remove(characterHub);
             }
+            if (NetworkManager.ShutdownInProgress) return;
             DespawnRpc(characterHub.NetworkObject);
         }
 
