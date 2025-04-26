@@ -28,16 +28,19 @@ public class DamageArea : NetworkBehaviour
 
     public void Initialize()
     {
-        InitializeRpc();
+        if (!TryGetComponent(out damageCollider))
+        {
+            Debug.LogError("No Collider2D found on DamageArea");
+            return;
+        }
+        damageCollider.isTrigger = true;
+        parent = transform.parent;
     }
 
     [Rpc(SendTo.Everyone)]
     private void InitializeRpc()
     {
-        if (!TryGetComponent<Collider2D>(out damageCollider)) 
-            return;
-        damageCollider.isTrigger = true;
-        parent = transform.parent;
+        
     }
 
     protected virtual void OnDisable()
