@@ -192,7 +192,8 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             if (!ModulePermitted) return;
             if (!ultimateReady) return;
             if (ultimateCoroutine != null) return;
-            ultimateCoroutine = StartCoroutine(CastUltimateCoroutine());
+            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            ultimateCoroutine = StartCoroutine(CastUltimateCoroutine(mousePos));
         }
         protected virtual IEnumerator CastUltimateCoroutine(Vector3? spawnPosition = null)
         {
