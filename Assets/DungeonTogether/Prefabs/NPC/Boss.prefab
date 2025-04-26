@@ -833,7 +833,7 @@ MonoBehaviour:
   areaUltimatePattern:
   - areaUltimate: {fileID: 5568747291997379688}
     disableRotateToMouse: 0
-    value: 40
+    value: 30
     delay: 0
     duration: 0.5
     cooldown: 0

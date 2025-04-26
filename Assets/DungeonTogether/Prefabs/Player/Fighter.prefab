@@ -312,9 +312,9 @@ MonoBehaviour:
   fighterUltimatePatterns:
   - increaseCriticalChance: 1
     increaseCriticalDamage: 2
-    increaseDuration: 10
+    increaseDuration: 16
     delay: 0
-    duration: 10
+    duration: 16
     cooldown: 20
     resetComboTime: 0
     energy: 120
@@ -540,21 +540,21 @@ MonoBehaviour:
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
-    getEnergy: 6
+    getEnergy: 2
   - damageArea: {fileID: 388050585779726240}
     damage: 10
     delay: 0
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
-    getEnergy: 6
+    getEnergy: 2
   - damageArea: {fileID: 540551778150867667}
     damage: 20
     delay: 0
     duration: 0.1
     interval: 0.5
     resetComboTime: 2
-    getEnergy: 12
+    getEnergy: 8
   currentPatternIndex: 0
   previousPatternIndex: -1
   attackReady: 0
@@ -781,10 +781,10 @@ MonoBehaviour:
       m_Bits: 0
     delay: 0
     duration: 0.5
-    cooldown: 10
+    cooldown: 7
     resetComboTime: 0.1
-    mana: 70
-    getEnergy: 30
+    mana: 50
+    getEnergy: 10
   currentPatternIndex: 0
   previousPatternIndex: -1
   skillReady: 0
@@ -1193,7 +1193,12 @@ PrefabInstance:
     - target: {fileID: 9028006332427386842, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
       propertyPath: startingHealth
-      value: 140
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028006332427386842, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: healthData.m_InternalValue.maxHealth
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

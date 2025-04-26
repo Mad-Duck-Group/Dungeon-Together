@@ -859,6 +859,16 @@ PrefabInstance:
       propertyPath: energyData.m_InternalValue.maxEnergy
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 9028006332427386842, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: startingHealth
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028006332427386842, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: healthData.m_InternalValue.maxHealth
+      value: 160
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
