@@ -276,7 +276,7 @@ MonoBehaviour:
     resetComboTime: 0
     energy: 120
     hasEffect: 1
-    effectDuration: 10
+    effectDuration: 5
   currentPatternIndex: 0
   previousPatternIndex: -1
   ultimateReady: 0

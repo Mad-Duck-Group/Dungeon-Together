@@ -460,7 +460,7 @@ MonoBehaviour:
   comboParent: {fileID: 7401273481019952812}
   areaSkillPattern:
   - areaSkill: {fileID: 1181858332202521567}
-    value: 30
+    value: 35
     delay: 2
     duration: 2
     cooldown: 0
@@ -528,7 +528,7 @@ MonoBehaviour:
   areaUltimatePattern:
   - areaUltimate: {fileID: 6164558622627671040}
     disableRotateToMouse: 0
-    value: 10
+    value: 20
     delay: 0
     duration: 10
     cooldown: 0
@@ -833,7 +833,7 @@ MonoBehaviour:
   areaUltimatePattern:
   - areaUltimate: {fileID: 5568747291997379688}
     disableRotateToMouse: 0
-    value: 30
+    value: 50
     delay: 0
     duration: 0.5
     cooldown: 0
@@ -1376,7 +1376,7 @@ MonoBehaviour:
   comboParent: {fileID: 7005507623972248652}
   rougeAttackPatterns:
   - damageArea: {fileID: 2291616671254848506}
-    damage: 15
+    damage: 20
     delay: 0
     duration: 0.2
     cooldown: 3
@@ -1581,7 +1581,7 @@ PrefabInstance:
     - target: {fileID: 2052331660261803709, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
         type: 3}
       propertyPath: startingHealth
-      value: 1000
+      value: 4000
       objectReference: {fileID: 0}
     - target: {fileID: 2052331660261803709, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
         type: 3}
@@ -1591,13 +1591,18 @@ PrefabInstance:
     - target: {fileID: 2052331660261803709, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
         type: 3}
       propertyPath: healthData.m_InternalValue.maxHealth
-      value: 1000
+      value: 4000
       objectReference: {fileID: 0}
     - target: {fileID: 3314974482589927884, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
         type: 3}
       propertyPath: playerCollider
       value: 
       objectReference: {fileID: 123524631964944011}
+    - target: {fileID: 3314974482589927884, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: <MovementSpeed>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5746934870074196237, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
         type: 3}
       propertyPath: GlobalObjectIdHash
