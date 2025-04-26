@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DungeonTogether.Scripts.Manangers;
 using DungeonTogether.Scripts.Utils;
+using Redcode.Extensions;
 using TriInspector;
 using Unity.Netcode;
 using Unity.VisualScripting;
@@ -192,7 +193,7 @@ namespace DungeonTogether.Scripts.Character.Module.Ultimate
             if (!ModulePermitted) return;
             if (!ultimateReady) return;
             if (ultimateCoroutine != null) return;
-            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition).WithZ(0f);
             ultimateCoroutine = StartCoroutine(CastUltimateCoroutine(mousePos));
         }
         protected virtual IEnumerator CastUltimateCoroutine(Vector3? spawnPosition = null)
