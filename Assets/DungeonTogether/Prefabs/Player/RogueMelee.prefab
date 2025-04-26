@@ -1055,7 +1055,12 @@ PrefabInstance:
     - target: {fileID: 5652118729501535472, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
       propertyPath: startingMana
-      value: 120
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652118729501535472, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: manaData.m_InternalValue.maxMana
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5746934870074196237, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}

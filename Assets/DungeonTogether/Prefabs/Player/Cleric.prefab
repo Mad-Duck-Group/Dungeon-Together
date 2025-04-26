@@ -117,13 +117,13 @@ MonoBehaviour:
   comboParent: {fileID: 0}
   areaSkillPattern:
   - areaSkill: {fileID: 3843576515461266439}
-    value: 5
+    value: 7
     delay: 0
-    duration: 20
-    cooldown: 0.1
+    duration: 10
+    cooldown: 20
     resetComboTime: 0.1
-    mana: 10
-    getEnergy: 10
+    mana: 70
+    getEnergy: 30
   currentPatternIndex: 0
   previousPatternIndex: -1
   skillReady: 0
@@ -271,12 +271,12 @@ MonoBehaviour:
     disableRotateToMouse: 0
     value: 50
     delay: 1
-    duration: 0.1
-    cooldown: 10
+    duration: 0.5
+    cooldown: 20
     resetComboTime: 0
-    energy: 100
+    energy: 120
     hasEffect: 1
-    effectDuration: 5
+    effectDuration: 10
   currentPatternIndex: 0
   previousPatternIndex: -1
   ultimateReady: 0
@@ -338,11 +338,11 @@ MonoBehaviour:
   - firePoint: {fileID: 6185186844496633676}
     projectileDamageAreaPrefab: {fileID: 2744090027019428655, guid: 6d1baab797fa59b42846708cfb61a00b,
       type: 3}
-    damage: 10
+    damage: 8
     passThroughLayer:
       serializedVersion: 2
       m_Bits: 64
-    projectileSpeed: 5
+    projectileSpeed: 7
     delay: 0
     hasDuration: 0
     duration: 0
@@ -761,7 +761,7 @@ PrefabInstance:
     - target: {fileID: 5652118729501535472, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
       propertyPath: startingMana
-      value: 140
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5746934870074196237, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}

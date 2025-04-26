@@ -449,7 +449,7 @@ MonoBehaviour:
     passThroughLayer:
       serializedVersion: 2
       m_Bits: 64
-    projectileSpeed: 5
+    projectileSpeed: 7
     delay: 0
     hasDuration: 0
     duration: 0
@@ -720,11 +720,11 @@ MonoBehaviour:
   areaSkillPattern:
   - areaSkill: {fileID: 617604612202765585}
     value: 50
-    delay: 2
+    delay: 0
     duration: 2
     cooldown: 10
     resetComboTime: 0
-    mana: 50
+    mana: 70
     getEnergy: 30
   currentPatternIndex: 0
   previousPatternIndex: -1
@@ -790,9 +790,9 @@ MonoBehaviour:
     value: 80
     delay: 0
     duration: 0.5
-    cooldown: 10
+    cooldown: 20
     resetComboTime: 0
-    energy: 100
+    energy: 140
     hasEffect: 0
     effectDuration: 0
   currentPatternIndex: 0
@@ -823,7 +823,17 @@ PrefabInstance:
     - target: {fileID: 5652118729501535472, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
       propertyPath: startingMana
-      value: 140
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652118729501535472, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: manaData.m_InternalValue.maxMana
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652118729501535472, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: manaData.m_InternalValue.regenRate
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5746934870074196237, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
