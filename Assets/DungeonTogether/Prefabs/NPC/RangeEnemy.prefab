@@ -212,7 +212,7 @@ MonoBehaviour:
   - firePoint: {fileID: 687556617816823674}
     projectileDamageAreaPrefab: {fileID: 7616597127810121746, guid: 0158c6fe27cc8854f8ada7e93a99d09b,
       type: 3}
-    damage: 1
+    damage: 7
     passThroughLayer:
       serializedVersion: 2
       m_Bits: 128
@@ -237,6 +237,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2052331660261803709, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: startingHealth
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2052331660261803709, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: healthData.m_InternalValue.maxHealth
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314974482589927884, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: <MovementSpeed>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5746934870074196237, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
         type: 3}
       propertyPath: GlobalObjectIdHash

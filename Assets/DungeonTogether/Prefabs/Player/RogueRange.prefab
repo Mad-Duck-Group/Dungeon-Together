@@ -439,7 +439,7 @@ MonoBehaviour:
     passThroughLayer:
       serializedVersion: 2
       m_Bits: 64
-    projectileSpeed: 15
+    projectileSpeed: 14
     delay: 0
     hasDuration: 0
     duration: 0
@@ -609,7 +609,7 @@ MonoBehaviour:
     duration: 0.2
     cooldown: 10
     resetComboTime: 0
-    mana: 30
+    mana: 70
     getEnergy: 10
   currentPatternIndex: 0
   previousPatternIndex: -1
@@ -672,7 +672,7 @@ MonoBehaviour:
   areaUltimatePattern:
   - areaUltimate: {fileID: 7680217529338860365}
     disableRotateToMouse: 0
-    value: 10
+    value: 20
     delay: 0
     duration: 10
     cooldown: 20

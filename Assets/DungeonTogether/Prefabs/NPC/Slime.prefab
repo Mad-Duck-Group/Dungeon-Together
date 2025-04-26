@@ -124,21 +124,21 @@ MonoBehaviour:
   comboParent: {fileID: 3937958793838325839}
   basicAttackPatterns:
   - damageArea: {fileID: 588250374315043128}
-    damage: 1
+    damage: 2
     delay: 0
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
     getEnergy: 0
   - damageArea: {fileID: 5347480221249682614}
-    damage: 1
+    damage: 2
     delay: 0
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
     getEnergy: 0
   - damageArea: {fileID: 5370180848577232972}
-    damage: 2
+    damage: 5
     delay: 0
     duration: 0.1
     interval: 0.5
@@ -636,6 +636,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.226
+      objectReference: {fileID: 0}
+    - target: {fileID: 2052331660261803709, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: startingHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2052331660261803709, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: healthData.m_InternalValue.maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314974482589927884, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
+        type: 3}
+      propertyPath: <MovementSpeed>k__BackingField
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5746934870074196237, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
         type: 3}

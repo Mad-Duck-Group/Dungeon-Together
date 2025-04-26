@@ -535,21 +535,21 @@ MonoBehaviour:
   comboParent: {fileID: 0}
   basicAttackPatterns:
   - damageArea: {fileID: 1690298698063037514}
-    damage: 5
+    damage: 10
     delay: 0
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
     getEnergy: 6
   - damageArea: {fileID: 388050585779726240}
-    damage: 5
+    damage: 10
     delay: 0
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
     getEnergy: 6
   - damageArea: {fileID: 540551778150867667}
-    damage: 10
+    damage: 20
     delay: 0
     duration: 0.1
     interval: 0.5
@@ -780,7 +780,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 0
     delay: 0
-    duration: 1
+    duration: 0.5
     cooldown: 10
     resetComboTime: 0.1
     mana: 70
@@ -1078,7 +1078,7 @@ PrefabInstance:
     - target: {fileID: 3314974482589927884, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
       propertyPath: <MovementSpeed>k__BackingField
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5652118729501535472, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
