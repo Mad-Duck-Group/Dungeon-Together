@@ -34,7 +34,8 @@ public class DamageArea : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     private void InitializeRpc()
     {
-        damageCollider = GetComponent<Collider2D>();
+        if (!TryGetComponent<Collider2D>(out damageCollider)) 
+            return;
         damageCollider.isTrigger = true;
         parent = transform.parent;
     }

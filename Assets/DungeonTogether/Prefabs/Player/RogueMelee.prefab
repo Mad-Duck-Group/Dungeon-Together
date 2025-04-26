@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  active: 1
 --- !u!114 &5274388885166709264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,21 +142,21 @@ MonoBehaviour:
     duration: 0.1
     interval: 0.1
     resetComboTime: 2
-    getEnergy: 0
+    getEnergy: 6
   - damageArea: {fileID: 7441971951104627759}
     damage: 5
     delay: 0
     duration: 0.1
     interval: 0.1
     resetComboTime: 2
-    getEnergy: 0
+    getEnergy: 6
   - damageArea: {fileID: 3197672963707457870}
     damage: 10
     delay: 0
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
-    getEnergy: 0
+    getEnergy: 12
   currentPatternIndex: 0
   previousPatternIndex: -1
   attackReady: 0
@@ -376,7 +377,7 @@ MonoBehaviour:
     duration: 0
     cooldown: 20
     resetComboTime: 0
-    energy: 100
+    energy: 120
   currentPatternIndex: 0
   previousPatternIndex: -1
   ultimateReady: 0
@@ -906,6 +907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  active: 1
 --- !u!114 &6394803751844595209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1007,8 +1009,8 @@ MonoBehaviour:
     increaseCriticalChance: 1
     increaseCriticalDamage: 2
     increaseDuration: 2
-    mana: 25
-    getEnergy: 25
+    mana: 70
+    getEnergy: 10
   rougeUltimateSkillPatterns:
   - damageArea: {fileID: 8991907462433850559}
     damage: 20
@@ -1045,6 +1047,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22100000, guid: c148a56c4285dab41bb5964094900c26,
         type: 2}
+    - target: {fileID: 3314974482589927884, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: <MovementSpeed>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652118729501535472, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: startingMana
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 5746934870074196237, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
       propertyPath: GlobalObjectIdHash
@@ -1058,7 +1070,7 @@ PrefabInstance:
     - target: {fileID: 5800074124058005647, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
       propertyPath: baseCriticalChance
-      value: 0.5
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6869794699041368331, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
@@ -1135,6 +1147,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011816507531725563, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: energyData.m_InternalValue.maxEnergy
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028006332427386842, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: startingHealth
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

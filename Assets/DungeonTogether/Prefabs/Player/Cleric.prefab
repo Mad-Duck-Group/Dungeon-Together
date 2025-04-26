@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  active: 1
 --- !u!114 &6565445739282040643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,9 +264,11 @@ MonoBehaviour:
   blockedMovementStates: 
   blockedActionStates: 0100000002000000
   blockedConditionStates: 0100000002000000
+  rotateToMouse: {fileID: 0}
   comboParent: {fileID: 5095687283668352447}
   areaUltimatePattern:
   - areaUltimate: {fileID: 2419459662766918646}
+    disableRotateToMouse: 0
     value: 50
     delay: 1
     duration: 0.1
@@ -750,10 +753,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22100000, guid: 13f6543f4d021024a8818808a7140502,
         type: 2}
+    - target: {fileID: 3314974482589927884, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: <MovementSpeed>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5652118729501535472, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
       propertyPath: startingMana
-      value: 100
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 5746934870074196237, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
@@ -845,6 +853,11 @@ PrefabInstance:
         type: 3}
       propertyPath: startingEnergy
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011816507531725563, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: energyData.m_InternalValue.maxEnergy
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

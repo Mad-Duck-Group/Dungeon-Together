@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  active: 1
 --- !u!114 &2004006656234103549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  active: 1
 --- !u!114 &6565445739282040643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,9 +667,11 @@ MonoBehaviour:
   blockedMovementStates: 
   blockedActionStates: 
   blockedConditionStates: 0100000002000000
+  rotateToMouse: {fileID: 0}
   comboParent: {fileID: 0}
   areaUltimatePattern:
   - areaUltimate: {fileID: 7680217529338860365}
+    disableRotateToMouse: 0
     value: 10
     delay: 0
     duration: 10
@@ -698,6 +702,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 3314974482589927884, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
+      propertyPath: <MovementSpeed>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314974482589927884, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
       propertyPath: blockedMovementStates.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -709,7 +718,7 @@ PrefabInstance:
     - target: {fileID: 5652118729501535472, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
       propertyPath: startingMana
-      value: 100
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 5746934870074196237, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
@@ -720,6 +729,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 3085853322
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800074124058005647, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: baseCriticalChance
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6869794699041368331, guid: acffb8d00be5ba643a2c959e1f3a5299,
         type: 3}
@@ -801,6 +815,16 @@ PrefabInstance:
         type: 3}
       propertyPath: startingEnergy
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011816507531725563, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: energyData.m_InternalValue.maxEnergy
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028006332427386842, guid: acffb8d00be5ba643a2c959e1f3a5299,
+        type: 3}
+      propertyPath: startingHealth
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
