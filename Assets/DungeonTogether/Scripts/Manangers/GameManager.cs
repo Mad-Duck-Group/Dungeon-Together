@@ -57,6 +57,7 @@ namespace DungeonTogether.Scripts.Manangers
                 SetActiveWinCanvasRpc(true);
                 SetCompletionTimeTextRpc(_gameTimer);
                 _isGameEnd = true;
+                if (IsServer) AnalyticManager.Instance.OnLevelCompletionTime(_gameTimer);
                 OnGameEnd?.Invoke();
             }
         }

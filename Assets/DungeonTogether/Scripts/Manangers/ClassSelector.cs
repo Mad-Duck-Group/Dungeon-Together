@@ -64,6 +64,7 @@ namespace DungeonTogether.Scripts.Manangers
             var localClientID = NetworkManager.LocalClient.ClientId;
             Debug.Log($"Local client ID: {localClientID}");
             SpawnCharacterRpc(localClientID, classType);
+            AnalyticManager.Instance.OnClassSelected(classType);
             SetActive(false);
         }
 

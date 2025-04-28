@@ -48,13 +48,13 @@ MonoBehaviour:
     _serializedList:
     - Key: 0
       Value:
-        eventName: 
-        parameterName: 
+        eventName: OnClassSelectedEvent
+        parameterName: classSelected
     - Key: 1
       Value:
-        eventName: 
-        parameterName: 
+        eventName: OnPlayerCountEvent
+        parameterName: playerCount
     - Key: 2
       Value:
-        eventName: 
-        parameterName: 
+        eventName: OnLevelCompletedEvent
+        parameterName: levelCompletionTime

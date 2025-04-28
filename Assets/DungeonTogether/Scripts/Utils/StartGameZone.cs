@@ -28,6 +28,8 @@ public class StartGameZone : TriggerZone
             case true when characterStayData.Count == NetworkManager.Singleton.ConnectedClients.Count &&
                            characterStayData.Values.All(data => data.triggered):
                 onStayAllClientsEvent?.Invoke();
+                var isServer = NetworkManager.Singleton.IsServer;
+                if (isServer) AnalyticManager.Instance.OnPlayerCount(characterStayData.Count);
                 LoadSceneManager.Instance.LoadScene(SceneType.Game);
                 break;
         }
