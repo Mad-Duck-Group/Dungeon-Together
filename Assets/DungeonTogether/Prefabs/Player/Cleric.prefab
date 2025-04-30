@@ -112,12 +112,12 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   moduleEnabled: 1
   blockedMovementStates: 
-  blockedActionStates: 0100000003000000
+  blockedActionStates: 
   blockedConditionStates: 0100000002000000
   comboParent: {fileID: 0}
   areaSkillPattern:
   - areaSkill: {fileID: 3843576515461266439}
-    value: 7
+    value: 10
     delay: 0
     duration: 10
     cooldown: 20
@@ -269,7 +269,7 @@ MonoBehaviour:
   areaUltimatePattern:
   - areaUltimate: {fileID: 2419459662766918646}
     disableRotateToMouse: 0
-    value: 50
+    value: 100
     delay: 1
     duration: 0.5
     cooldown: 20
@@ -338,11 +338,11 @@ MonoBehaviour:
   - firePoint: {fileID: 6185186844496633676}
     projectileDamageAreaPrefab: {fileID: 2744090027019428655, guid: 6d1baab797fa59b42846708cfb61a00b,
       type: 3}
-    damage: 8
+    damage: 16
     passThroughLayer:
       serializedVersion: 2
       m_Bits: 64
-    projectileSpeed: 7
+    projectileSpeed: 10
     delay: 0
     hasDuration: 0
     duration: 0

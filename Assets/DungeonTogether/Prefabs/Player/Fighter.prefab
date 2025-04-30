@@ -535,21 +535,21 @@ MonoBehaviour:
   comboParent: {fileID: 0}
   basicAttackPatterns:
   - damageArea: {fileID: 1690298698063037514}
-    damage: 10
+    damage: 20
     delay: 0
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
     getEnergy: 2
   - damageArea: {fileID: 388050585779726240}
-    damage: 10
+    damage: 20
     delay: 0
     duration: 0.1
     interval: 0.2
     resetComboTime: 2
     getEnergy: 2
   - damageArea: {fileID: 540551778150867667}
-    damage: 20
+    damage: 40
     delay: 0
     duration: 0.1
     interval: 0.5
@@ -775,15 +775,15 @@ MonoBehaviour:
   - spawnPoint: {fileID: 8325179266954812462}
     damageArea: {fileID: 4926762995734787179}
     swingAngle: 180
-    damage: 40
+    damage: 60
     passThroughLayer:
       serializedVersion: 2
       m_Bits: 0
     delay: 0
     duration: 0.5
-    cooldown: 7
+    cooldown: 4
     resetComboTime: 0.1
-    mana: 50
+    mana: 40
     getEnergy: 10
   currentPatternIndex: 0
   previousPatternIndex: -1
