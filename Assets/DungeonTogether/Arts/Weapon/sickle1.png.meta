@@ -122,10 +122,10 @@ TextureImporter:
       name: sickle1_0
       rect:
         serializedVersion: 2
-        x: 89
-        y: 281
-        width: 26
-        height: 50
+        x: 87
+        y: 51
+        width: 151
+        height: 281
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,55 +140,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: sickle1_1
-      rect:
-        serializedVersion: 2
-        x: 119
-        y: 257
-        width: 116
-        height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d2ca9f9517592c570800000000000000
-      internalID: 8485508961992813613
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sickle1_2
-      rect:
-        serializedVersion: 2
-        x: 119
-        y: 53
-        width: 32
-        height: 230
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6a8f7ea1a82ac0290800000000000000
-      internalID: -7922778930410948442
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c9ab5464183ca564ab5c139ae85f7321
     internalID: 0
     vertices: []
     indices: 
@@ -199,8 +155,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       sickle1_0: -9034353859733136803
-      sickle1_1: 8485508961992813613
-      sickle1_2: -7922778930410948442
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
