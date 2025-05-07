@@ -18206,11 +18206,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2646793517280239985, guid: 8fb530efab26667479f6efc8e97ac19c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 19.389893
-      objectReference: {fileID: 0}
     - target: {fileID: 2790179103380097646, guid: 8fb530efab26667479f6efc8e97ac19c,
         type: 3}
       propertyPath: m_IsActive
@@ -18365,6 +18360,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 2588662485
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935078606692367490, guid: 8fb530efab26667479f6efc8e97ac19c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5983900918204426852, guid: 8fb530efab26667479f6efc8e97ac19c,
         type: 3}
