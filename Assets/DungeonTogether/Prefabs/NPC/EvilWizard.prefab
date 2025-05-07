@@ -1407,7 +1407,7 @@ MonoBehaviour:
   comboParent: {fileID: 7005507623972248652}
   rougeAttackPatterns:
   - damageArea: {fileID: 2291616671254848506}
-    damage: 20
+    damage: 30
     delay: 0
     duration: 0.2
     cooldown: 3
@@ -1627,7 +1627,7 @@ PrefabInstance:
     - target: {fileID: 2052331660261803709, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
         type: 3}
       propertyPath: healthData.m_InternalValue.maxHealth
-      value: 3500
+      value: 4000
       objectReference: {fileID: 0}
     - target: {fileID: 3314974482589927884, guid: a6906e0ecd1b77c42a18d64c414dd4b9,
         type: 3}

@@ -137,21 +137,21 @@ MonoBehaviour:
   comboParent: {fileID: 0}
   basicAttackPatterns:
   - damageArea: {fileID: 5335643069627769004}
-    damage: 10
+    damage: 8
     delay: 0
     duration: 0.1
     interval: 0.1
     resetComboTime: 2
     getEnergy: 6
   - damageArea: {fileID: 7441971951104627759}
-    damage: 10
+    damage: 8
     delay: 0
     duration: 0.1
     interval: 0.1
     resetComboTime: 2
     getEnergy: 6
   - damageArea: {fileID: 3197672963707457870}
-    damage: 20
+    damage: 16
     delay: 0
     duration: 0.1
     interval: 0.2
@@ -1086,7 +1086,7 @@ MonoBehaviour:
   comboParent: {fileID: 61792631703692360}
   rougeAttackPatterns:
   - damageArea: {fileID: 8991907462433850559}
-    damage: 40
+    damage: 30
     delay: 0
     duration: 0.2
     cooldown: 3

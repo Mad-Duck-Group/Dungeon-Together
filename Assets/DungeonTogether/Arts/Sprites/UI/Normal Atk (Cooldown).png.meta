@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Normal Atk (Cooldown)_0: 4913902377551400820
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
