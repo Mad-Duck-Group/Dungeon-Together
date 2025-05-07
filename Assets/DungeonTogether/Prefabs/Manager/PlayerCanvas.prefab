@@ -1988,8 +1988,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<u>SPD</u>: Fast\n<u>ATK</u>: Strong\n<u>HP</u>: Average\n \n<u>Basic</u>:
-    Light melee attack\n<u>Skill</u>: Dash attack\n<u>Ult</u>: Reduce dash cooldown\n"
+  m_text: "<u>SPD</u>: <color=green>Fast</color>\n<u>ATK</u>: <color=yellow>Average</color>\n<u>HP</u>:
+    <color=yellow>Average</color>\n \n<u>Basic</u>: <color=white>Light melee attack</color>\n<u>Skill</u>:
+    <color=white><color=green>Dash</color> attack</color>\n<u>Ult</u>: <color=white><color=green>Reduce</color>
+    dash cooldown</color>\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38a06a2fc5dceff42bc512d130418391, type: 2}
   m_sharedMaterial: {fileID: -443369021037029833, guid: 38a06a2fc5dceff42bc512d130418391,
@@ -3122,7 +3124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8784314, g: 0.8784314, b: 0.8784314, a: 0.42745098}
+  m_Color: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 0.42745098}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4319,9 +4321,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<u>SPD</u>: Fast\n<u>ATK</u>: Weak\n<u>HP</u>: Average\n \n<u>Basic</u>:
-    Light range attack\n<u>Skill</u>: Fire 3 arrows in succession\n<u>Ult</u>: AoE
-    area at mouse position\n"
+  m_text: "<u>SPD</u>: <color=green>Fast</color>\n<u>ATK</u>: <color=orange>Weak</color>\n<u>HP</u>:
+    <color=yellow>Average</color>\n \n<u>Basic</u>: <color=white>Light range attack</color>\n<u>Skill</u>:
+    <color=white>Fire <color=green>3</color> arrows in succession</color>\n<u>Ult</u>:
+    <color=white><color=green>AoE</color> area at mouse position</color>\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38a06a2fc5dceff42bc512d130418391, type: 2}
   m_sharedMaterial: {fileID: -443369021037029833, guid: 38a06a2fc5dceff42bc512d130418391,
@@ -4458,9 +4461,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<u>SPD</u>: Slow\n<u>ATK</u>: Strong\n<u>HP</u>: Average\n \n<u>Basic</u>:
-    Light melee attack\n<u>Skill</u>: Sweep attack\n<u>Ult</u>: Gurantee Crit for
-    a duration\n"
+  m_text: "<u>SPD</u>: <color=orange>Slow</color>\n<u>ATK</u>: <color=green>Strong</color>\n<u>HP</u>:
+    <color=green>High</color>\n \n<u>Basic</u>: <color=white>Light melee attack</color>\n<u>Skill</u>:
+    <color=white><color=green>Sweep</color> attack</color>\n<u>Ult</u>: <color=white><color=green>Gurantee
+    Crit</color> for a duration</color>\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38a06a2fc5dceff42bc512d130418391, type: 2}
   m_sharedMaterial: {fileID: -443369021037029833, guid: 38a06a2fc5dceff42bc512d130418391,
@@ -4734,8 +4738,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<u>SPD</u>: Average\n<u>ATK</u>: Weak\n<u>HP</u>: Average\n \n<u>Basic</u>:
-    Light range attack\n<u>Skill</u>: Healing circle\n<u>Ult</u>: Flash to stun enemy\n"
+  m_text: "<u>SPD</u>: <color=orange>Slow</color>\n<u>ATK</u>: <color=orange>Weak</color>\n<u>HP</u>:
+    <color=orange>Low</color>\n \n<u>Basic</u>: <color=white>Light range attack</color>\n<u>Skill</u>:
+    <color=white><color=green>Healing</color> circle</color>\n<u>Ult</u>: <color=white><color=green>Flash</color>
+    to stun enemy</color>\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38a06a2fc5dceff42bc512d130418391, type: 2}
   m_sharedMaterial: {fileID: -443369021037029833, guid: 38a06a2fc5dceff42bc512d130418391,
@@ -6184,8 +6190,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<u>SPD</u>: Slow\n<u>ATK</u>: Weak\n<u>HP</u>: Average\n \n<u>Basic</u>:
-    Light range attack\n<u>Skill</u>: Magic circle AOE\n<u>Ult</u>: Lightning beam\n"
+  m_text: "<u>SPD</u>: <color=orange>Slow</color>\n<u>ATK</u>: <color=yellow>Average</color>\n<u>HP</u>:
+    <color=orange>Low</color>\n \n<u>Basic</u>: <color=white>Light range attack</color>\n<u>Skill</u>:
+    <color=white>Magic circle <color=green>AOE</color>\n<u>Ult</u>: <color=white>Lightning
+    <color=green>beam</color>\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 38a06a2fc5dceff42bc512d130418391, type: 2}
   m_sharedMaterial: {fileID: -443369021037029833, guid: 38a06a2fc5dceff42bc512d130418391,
