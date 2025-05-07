@@ -728,8 +728,8 @@ Transform:
   m_GameObject: {fileID: 6627582979943794056}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6337, y: -0.0177, z: 0}
-  m_LocalScale: {x: 37.129192, y: 29.875702, z: 1}
+  m_LocalPosition: {x: 0.3369, y: -0.0177, z: 0}
+  m_LocalScale: {x: 33.723156, y: 29.875702, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 61792631703692360}
@@ -1086,7 +1086,7 @@ MonoBehaviour:
   comboParent: {fileID: 61792631703692360}
   rougeAttackPatterns:
   - damageArea: {fileID: 8991907462433850559}
-    damage: 30
+    damage: 20
     delay: 0
     duration: 0.2
     cooldown: 3

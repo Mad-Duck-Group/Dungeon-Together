@@ -116,10 +116,10 @@ TextureImporter:
       name: Bush_0
       rect:
         serializedVersion: 2
-        x: 317
-        y: 389
-        width: 152
-        height: 146
+        x: 318
+        y: 390
+        width: 150
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: bcf5281c726fc1e4b83ded6712b7281b
     internalID: 0
     vertices: []
     indices: 

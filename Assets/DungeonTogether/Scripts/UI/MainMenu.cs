@@ -23,4 +23,13 @@ public class MainMenu : MonoBehaviour
     {
         await ClientSingleton.Instance.GameManager.StartClientAsync(joinCodeField.text);
     }
+
+    public void QuitGame()
+    {
+    #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+    #else
+        Application.Quit();
+    #endif
+    }
 }

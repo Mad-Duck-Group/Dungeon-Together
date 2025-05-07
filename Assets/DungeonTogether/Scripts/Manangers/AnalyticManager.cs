@@ -92,12 +92,12 @@ public class AnalyticManager : PersistentMonoSingleton<AnalyticManager>
 
     private void SendEvent(EventData eventData)
     {
-        CustomEvent customEvent = new CustomEvent(eventData.eventName);
-        eventData.eventParameters.ForEach(parameter =>
-        {
-            customEvent.Add(parameter.parameterName, parameter.parameterValue);
-        });
-        AnalyticsService.Instance.RecordEvent(customEvent);
-        Debug.Log($"Event sent: {eventData.eventName}");
+        // CustomEvent customEvent = new CustomEvent(eventData.eventName);
+        // eventData.eventParameters.ForEach(parameter =>
+        // {
+        //     customEvent.Add(parameter.parameterName, parameter.parameterValue);
+        // });
+        // AnalyticsService.Instance.RecordEvent(customEvent);
+        // Debug.Log($"Event sent: {eventData.eventName}");
     }
 }

@@ -353,8 +353,8 @@ Transform:
   m_GameObject: {fileID: 1861370698120176094}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7377, y: -0.0083, z: 0}
-  m_LocalScale: {x: 47.52908, y: 47.3652, z: 1}
+  m_LocalPosition: {x: 0.2155, y: 0.0607, z: 0}
+  m_LocalScale: {x: 50.510742, y: 40.464092, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 626392080879372097}
@@ -393,7 +393,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.01, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0.5}
@@ -590,8 +590,8 @@ Transform:
   m_GameObject: {fileID: 4147687166143858495}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6337, y: -0.0177, z: 0}
-  m_LocalScale: {x: 37.129192, y: 29.875702, z: 1}
+  m_LocalPosition: {x: 0.2346, y: 0.0756, z: 0}
+  m_LocalScale: {x: 36.19832, y: 39.19991, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 626392080879372097}
@@ -630,7 +630,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.01, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0.5}
@@ -820,8 +820,8 @@ Transform:
   m_GameObject: {fileID: 6919397449590378388}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6337, y: -0.0177, z: 0}
-  m_LocalScale: {x: 37.129192, y: 29.875702, z: 1}
+  m_LocalPosition: {x: 0.2234, y: 0.0812, z: 0}
+  m_LocalScale: {x: 36.945827, y: 39.76157, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 626392080879372097}
@@ -860,7 +860,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.01, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0.5}
