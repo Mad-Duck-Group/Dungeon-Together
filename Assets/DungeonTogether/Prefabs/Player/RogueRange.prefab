@@ -520,7 +520,7 @@ MonoBehaviour:
   comboParent: {fileID: 7287208877223472281}
   rangeAttackPatterns:
   - firePoint: {fileID: 6185186844496633676}
-    projectileDamageAreaPrefab: {fileID: 2744090027019428655, guid: 6d1baab797fa59b42846708cfb61a00b,
+    projectileDamageAreaPrefab: {fileID: 2744090027019428655, guid: 0cadef50858623142a564aed2c0ba3e9,
       type: 3}
     damage: 14
     passThroughLayer:
@@ -624,7 +624,7 @@ MonoBehaviour:
   comboParent: {fileID: 0}
   rangerSkillPatterns:
   - firePoint: {fileID: 8558392871144266929}
-    projectileDamageAreaPrefab: {fileID: 2744090027019428655, guid: 6d1baab797fa59b42846708cfb61a00b,
+    projectileDamageAreaPrefab: {fileID: 2744090027019428655, guid: 0cadef50858623142a564aed2c0ba3e9,
       type: 3}
     arrowCount: 3
     damage: 20

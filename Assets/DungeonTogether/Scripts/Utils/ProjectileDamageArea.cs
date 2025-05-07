@@ -14,6 +14,10 @@ public class ProjectileDamageArea : DamageArea
     private void Update()
     {
         transform.position += direction * (speed * Time.deltaTime); 
+        //rotate to the direction
+        if (direction == Vector3.zero) return;
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     public override void SetActive(bool active)
